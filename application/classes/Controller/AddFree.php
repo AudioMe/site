@@ -1,0 +1,671 @@
+<?php defined('SYSPATH') or die('No direct script access.');
+
+class Controller_AddFree extends Controller
+{
+
+    public function action_index()
+    {
+        $this->response->body('audiome.ru');
+        $this->redirect('/');
+    }
+
+    public function action_like()
+    {
+        $comments = new Model_Comments();
+        $id = Arr::get($_POST, 'id', -1);
+        $ok = true;
+        if ($id != -1) {
+            $like_cook = Cookie::get('studio_comments_like' . $id, -1);
+
+            $comment = $comments->where('id', '=', $id)->find();
+            if (isset($comment->id)) {
+                $like = $comment->like;
+                if ($like_cook == -1) {
+                    $like++;
+                    $comment->set('like', $like)->save();
+                    $this->response->body('(' . $like . ')');
+                    Cookie::set('studio_comments_like' . $id, 1);
+                } else {
+                    $this->response->body('(' . $like . ')');
+                }
+
+            } else {
+                $ok = false;
+            }
+        } else {
+            $ok = false;
+        }
+        if ($ok == false) {
+            $this->response->body('(0)');
+        }
+
+    }
+
+    public function action_dlike()
+    {
+        $comments = new Model_Comments();
+        $id = Arr::get($_POST, 'id', -1);
+        $ok = true;
+        if ($id != -1) {
+            $like_cook = Cookie::get('studio_comments_dlike' . $id, -1);
+
+            $comment = $comments->where('id', '=', $id)->find();
+            if (isset($comment->id)) {
+                $dlike = $comment->dlike;
+                if ($like_cook == -1) {
+                    $dlike++;
+                    $comment->set('dlike', $dlike)->save();
+                    $this->response->body('(' . $dlike . ')');
+                    Cookie::set('studio_comments_dlike' . $id, 1);
+                } else {
+                    $this->response->body('(' . $dlike . ')');
+                }
+            } else {
+                $ok = false;
+            }
+
+        } else {
+            $ok = false;
+        }
+        if ($ok == false) {
+            $this->response->body('(0)');
+        }
+    }
+
+
+    public function action_likeArticle()
+    {
+        $comments = new Model_ArticlesComments();
+        $id = Arr::get($_POST, 'id', -1);
+        $ok = true;
+        if ($id != -1) {
+            $like_cook = Cookie::get('article_comments_like' . $id, -1);
+
+            $comment = $comments->where('id', '=', $id)->find();
+            if (isset($comment->id)) {
+                $like = $comment->like;
+                if ($like_cook == -1) {
+                    $like++;
+                    $comment->set('like', $like)->save();
+                    $this->response->body('(' . $like . ')');
+                    Cookie::set('article_comments_like' . $id, 1);
+                } else {
+                    $this->response->body('(' . $like . ')');
+                }
+
+            } else {
+                $ok = false;
+            }
+        } else {
+            $ok = false;
+        }
+        if ($ok == false) {
+            $this->response->body('(0)');
+        }
+
+    }
+
+    public function action_dlikeArticle()
+    {
+        $comments = new Model_ArticlesComments();
+        $id = Arr::get($_POST, 'id', -1);
+        $ok = true;
+        if ($id != -1) {
+            $like_cook = Cookie::get('article_comments_dlike' . $id, -1);
+
+            $comment = $comments->where('id', '=', $id)->find();
+            if (isset($comment->id)) {
+                $dlike = $comment->dlike;
+                if ($like_cook == -1) {
+                    $dlike++;
+                    $comment->set('dlike', $dlike)->save();
+                    $this->response->body('(' . $dlike . ')');
+                    Cookie::set('article_comments_dlike' . $id, 1);
+                } else {
+                    $this->response->body('(' . $dlike . ')');
+                }
+            } else {
+                $ok = false;
+            }
+
+        } else {
+            $ok = false;
+        }
+        if ($ok == false) {
+            $this->response->body('(0)');
+        }
+    }
+
+
+    public function action_likeBuy()
+    {
+        $comments = new Model_BuyComments();
+        $id = Arr::get($_POST, 'id', -1);
+        $ok = true;
+        if ($id != -1) {
+            $like_cook = Cookie::get('buy_comments_like' . $id, -1);
+
+            $comment = $comments->where('id', '=', $id)->find();
+            if (isset($comment->id)) {
+                $like = $comment->like;
+                if ($like_cook == -1) {
+                    $like++;
+                    $comment->set('like', $like)->save();
+                    $this->response->body('(' . $like . ')');
+                    Cookie::set('buy_comments_like' . $id, 1);
+                } else {
+                    $this->response->body('(' . $like . ')');
+                }
+
+            } else {
+                $ok = false;
+            }
+        } else {
+            $ok = false;
+        }
+        if ($ok == false) {
+            $this->response->body('(0)');
+        }
+
+    }
+
+    public function action_dlikeBuy()
+    {
+        $comments = new Model_BuyComments();
+        $id = Arr::get($_POST, 'id', -1);
+        $ok = true;
+        if ($id != -1) {
+            $like_cook = Cookie::get('buy_comments_dlike' . $id, -1);
+
+            $comment = $comments->where('id', '=', $id)->find();
+            if (isset($comment->id)) {
+                $dlike = $comment->dlike;
+                if ($like_cook == -1) {
+                    $dlike++;
+                    $comment->set('dlike', $dlike)->save();
+                    $this->response->body('(' . $dlike . ')');
+                    Cookie::set('buy_comments_dlike' . $id, 1);
+                } else {
+                    $this->response->body('(' . $dlike . ')');
+                }
+            } else {
+                $ok = false;
+            }
+
+        } else {
+            $ok = false;
+        }
+        if ($ok == false) {
+            $this->response->body('(0)');
+        }
+    }
+
+
+    public function action_likeNews()
+    {
+        $comments = new Model_NewsComments();
+        $id = Arr::get($_POST, 'id', -1);
+        $ok = true;
+        if ($id != -1) {
+            $like_cook = Cookie::get('news_comments_like' . $id, -1);
+
+            $comment = $comments->where('id', '=', $id)->find();
+            if (isset($comment->id)) {
+                $like = $comment->like;
+                if ($like_cook == -1) {
+                    $like++;
+                    $comment->set('like', $like)->save();
+                    $this->response->body('(' . $like . ')');
+                    Cookie::set('news_comments_like' . $id, 1);
+                } else {
+                    $this->response->body('(' . $like . ')');
+                }
+
+            } else {
+                $ok = false;
+            }
+        } else {
+            $ok = false;
+        }
+        if ($ok == false) {
+            $this->response->body('(0)');
+        }
+
+    }
+
+    public function action_dlikeNews()
+    {
+        $comments = new Model_NewsComments();
+        $id = Arr::get($_POST, 'id', -1);
+        $ok = true;
+        if ($id != -1) {
+            $like_cook = Cookie::get('news_comments_dlike' . $id, -1);
+
+            $comment = $comments->where('id', '=', $id)->find();
+            if (isset($comment->id)) {
+                $dlike = $comment->dlike;
+                if ($like_cook == -1) {
+                    $dlike++;
+                    $comment->set('dlike', $dlike)->save();
+                    $this->response->body('(' . $dlike . ')');
+                    Cookie::set('news_comments_dlike' . $id, 1);
+                } else {
+                    $this->response->body('(' . $dlike . ')');
+                }
+            } else {
+                $ok = false;
+            }
+
+        } else {
+            $ok = false;
+        }
+        if ($ok == false) {
+            $this->response->body('(0)');
+        }
+    }
+
+    public function action_likeConference()
+    {
+        $comments = new Model_ConferenceComments();
+        $id = Arr::get($_POST, 'id', -1);
+        $ok = true;
+        if ($id != -1) {
+            $like_cook = Cookie::get('conference_comments_like' . $id, -1);
+
+            $comment = $comments->where('id', '=', $id)->find();
+            if (isset($comment->id)) {
+                $like = $comment->like;
+                if ($like_cook == -1) {
+                    $like++;
+                    $comment->set('like', $like)->save();
+                    $this->response->body('(' . $like . ')');
+                    Cookie::set('conference_comments_like' . $id, 1);
+                } else {
+                    $this->response->body('(' . $like . ')');
+                }
+
+            } else {
+                $ok = false;
+            }
+        } else {
+            $ok = false;
+        }
+        if ($ok == false) {
+            $this->response->body('(0)');
+        }
+
+    }
+
+    public function action_dlikeConference()
+    {
+        $comments = new Model_ConferenceComments();
+        $id = Arr::get($_POST, 'id', -1);
+        $ok = true;
+        if ($id != -1) {
+            $like_cook = Cookie::get('news_comments_dlike' . $id, -1);
+
+            $comment = $comments->where('id', '=', $id)->find();
+            if (isset($comment->id)) {
+                $dlike = $comment->dlike;
+                if ($like_cook == -1) {
+                    $dlike++;
+                    $comment->set('dlike', $dlike)->save();
+                    $this->response->body('(' . $dlike . ')');
+                    Cookie::set('news_comments_dlike' . $id, 1);
+                } else {
+                    $this->response->body('(' . $dlike . ')');
+                }
+            } else {
+                $ok = false;
+            }
+
+        } else {
+            $ok = false;
+        }
+        if ($ok == false) {
+            $this->response->body('(0)');
+        }
+    }
+
+
+    public function action_search()
+    {
+        $studios = new Model_Studios();
+        $studios_temp = $studios->where('public', '=', '1')->find_all();
+        try {
+            //Если был передан запрос
+                $region_id = (int) $_GET['region_id'];
+                $metro = empty($_GET['metro']) ? false : (string) $_GET['metro'];
+                $city_id = empty($_GET['city_id']) ? false : (int) $_GET['city_id'];
+                $works = new Model_Work();
+                $w_all = $works->find_all();
+                $w_count = $w_all->count();
+                $temp_array = array();
+                $s_works = new Model_StudioWorks();
+                //Новый массив со студиями
+                $new_array = array();
+
+
+
+                //Если в поиске ТОП-студия
+                if (isset($_GET['studio_top'])) {
+                    $new_array = array();
+                    $class = $_GET['studio_top'];
+                    $temp = $studios_temp = $studios->where('class', '=', $class)->where('public', '=', 1)->find_all();
+                    foreach ($temp as $t) {
+                        array_push($new_array, $t);
+                    }
+                    $studios_temp = $new_array;
+                }
+                //Если эконом студия
+                if (isset($_GET['studio_price'])) {
+                    $new_array = array();
+                    $class = $_GET['studio_price'];
+                    $temp = $studios_temp = $studios->where('class', '=', $class)->where('public', '=', 1)->find_all();
+                    foreach ($temp as $t) {
+                        array_push($new_array, $t);
+                    }
+                    $studios_temp = $new_array;
+                }
+                //Если фрилансер
+                if (isset($_GET['studio_freel'])) {
+                    $new_array = array();
+                    $class = $_GET['studio_freel'];
+                    $temp = $studios_temp = $studios->where('class', '=', $class)->where('public', '=', 1)->find_all();
+                    foreach ($temp as $t) {
+                        array_push($new_array, $t);
+                    }
+                    $studios_temp = $new_array;
+                }
+                //Если нашлись студии совпадающие с классами
+                if (count($new_array) > 0) {
+                    //Новый массив
+                    //$studios_temp = $new_array;
+                }
+                //Были ли найдены студии по типам работ
+                $search_z = false;
+                //Проход по студиям найденным на этапе отсева по классу
+                $str_temp = "";
+                $str = "";
+                $array_search = array();
+                if(isset($_GET['find_check']) && is_array($_GET['find_check'])) {
+                    foreach($_GET['find_check'] as $i) {
+                        //for ($i = 1; $i <= $w_count; $i++) {
+                        //Если был передан тип работ
+                        //echo $w->id . '*';
+                        //Были найдены студии с типами работ
+                        $search_z = true;
+                        //echo __LINE__;exit;
+                        array_push($array_search, $i);
+                    }
+                }
+                //Если были переданы параметры по работам
+                if ($search_z) {
+                    foreach ($studios_temp as $st) {
+                        //Количество работ в студии
+                        $in_count = 0;
+                        foreach ($array_search as $ars) {
+                            $count = $s_works->where('user_id', '=', $st->user_id)->where('work', '=', $ars)->find_all()->count();
+                            if ($count > 0) {
+                                $in_count++;
+                            }
+                        }
+                        //Если количество работ совпадает с количеством переданных работ
+                        if ($in_count == count($array_search)) {
+                            array_push($temp_array, $st);
+                        }
+                    }
+                }
+                //Если количество студий в новом массиве >0 или же были переданы поисковые работы...
+                if (count($temp_array) > 0 || $search_z) {
+                    $studios_temp = $temp_array;
+                }
+
+                if (0 < $region_id) {
+                    $newValues = array();
+                    foreach ($studios_temp as $st) {
+                        if ($st->region_id == $region_id) {
+                            array_push($newValues, $st);
+                        }
+                    }
+                    $studios_temp = $newValues;
+                    if (0 < $city_id) {
+                        $newValues = array();
+                        foreach ($studios_temp as $st) {
+                            if ($st->city_id == $city_id) {
+                                array_push($newValues, $st);
+                            }
+                        }
+                        $studios_temp = $newValues;
+                        if (strlen($metro)) {
+                            $newValues = array();
+                            $m2 = trim(mb_convert_case($metro, MB_CASE_UPPER, "UTF-8"));
+                            foreach ($studios_temp as $st) {
+                                $m1 = trim(mb_convert_case($st->metro, MB_CASE_UPPER, "UTF-8"));
+                                //echo $m1 . ':' . $m2 . '   ';
+                                if (false !== mb_strpos($m1, $m2, 0, 'UTF-8')) {
+                                    array_push($newValues, $st);
+                                }
+                            }
+                            $studios_temp = $newValues;
+                        }
+                    }
+                }
+
+            $this->response->body(count($studios_temp));
+        } catch (Exception $e) {
+            $this->response->body($studios->where('public', '=', '1')->find_all()->count());
+        }
+
+    }
+
+    public function action_comments()
+    {
+        try {
+            $next_operation = false;
+            $id = $this->request->param('id', -1);
+            if ($id != -1) {
+                if (isset($_POST['btnsubmincomments'])) {
+                    try {
+
+                        if (isset($_POST['name']) && isset($_POST['phone']) && isset($_POST['comment'])) {
+                            if (strlen($_POST['name']) >= 3 && strlen($_POST['comment']) >= 3) {
+                                $next_operation = true;
+                                $name = strip_tags($_POST['name']);
+                                $phone = strip_tags($_POST['phone']);
+                                $comment = strip_tags($_POST['comment']);
+                                $root = strip_tags(Arr::get($_POST, 'root', 0));
+                                $sDate = date("Y-m-d G:i:s");
+                                $comments = new Model_Comments();
+                                $user_id = 0;
+                                $auth = Auth::instance();
+                                if ($auth->logged_in()) {
+                                    $user_temp = $auth->get_user();
+                                    $user_id = $user_temp->id;
+                                }
+                                $comments->values(array('user_id' => $id,'add_user_id'=>$user_id, 'root' => $root, 'date' => $sDate, 'name' => $name, 'phone' => $phone, 'text' => $comment))->save();
+                            }
+                        } else {
+                            $next_operation = false;
+                        }
+                    } catch (Exception $e) {
+                        $next_operation = false;
+                    }
+                }
+                $this->redirect($_SERVER['HTTP_REFERER']);
+            }
+        } catch (Exception $e) {
+
+        }
+        $this->redirect($_SERVER['HTTP_REFERER']);
+    }
+
+
+    public function action_commentsNews()
+    {
+        try {
+            $next_operation = false;
+            $id = $this->request->param('id', -1);
+            if ($id != -1) {
+                if (isset($_POST['btnsubmincomments'])) {
+                    try {
+
+                        if (isset($_POST['name'])  && isset($_POST['comment'])) {
+                            if (strlen($_POST['name']) >= 3 && strlen($_POST['comment']) >= 3) {
+                                $next_operation = true;
+                                $name = strip_tags($_POST['name']);
+                                $phone = strip_tags($_POST['phone']);
+                                $comment = strip_tags($_POST['comment']);
+                                $root = strip_tags(Arr::get($_POST, 'root', 0));
+                                $sDate = date("Y-m-d G:i:s");
+                                $comments = new Model_NewsComments();
+                                $user_id = 0;
+                                $auth = Auth::instance();
+                                if ($auth->logged_in()) {
+                                    $user_temp = $auth->get_user();
+                                    $user_id = $user_temp->id;
+                                }
+                                $comments->values(array('news_id' => $id,'add_user_id'=>$user_id,'root' => $root, 'date' => $sDate, 'name' => $name, 'phone' => $phone, 'text' => $comment))->save();
+                            }
+                        } else {
+                            $next_operation = false;
+                        }
+                    } catch (Exception $e) {
+                        $next_operation = false;
+                    }
+                }
+                $this->redirect($_SERVER['HTTP_REFERER']);
+            }
+        } catch (Exception $e) {
+
+        }
+        $this->redirect($_SERVER['HTTP_REFERER']);
+    }
+
+
+    public function action_commentsArticles()
+    {
+        try {
+            $next_operation = false;
+            $id = $this->request->param('id', -1);
+            if ($id != -1) {
+                if (isset($_POST['btnsubmincomments'])) {
+                    try {
+
+                        if (isset($_POST['name'])  && isset($_POST['comment'])) {
+                            if (strlen($_POST['name']) >= 3 && strlen($_POST['comment']) >= 3) {
+                                $next_operation = true;
+                                $name = strip_tags($_POST['name']);
+                                $phone = strip_tags($_POST['phone']);
+                                $comment = strip_tags($_POST['comment']);
+                                $root = strip_tags(Arr::get($_POST, 'root', 0));
+                                $sDate = date("Y-m-d G:i:s");
+                                $comments = new Model_ArticlesComments();
+                                $user_id = 0;
+                                $auth = Auth::instance();
+                                if ($auth->logged_in()) {
+                                    $user_temp = $auth->get_user();
+                                    $user_id = $user_temp->id;
+                                }
+                                $comments->values(array('articles_id' => $id,'add_user_id'=>$user_id,'root' => $root, 'date' => $sDate, 'name' => $name, 'phone' => $phone, 'text' => $comment))->save();
+                            }
+                        } else {
+                            $next_operation = false;
+                        }
+                    } catch (Exception $e) {
+                        $next_operation = false;
+                    }
+                }
+                $this->redirect($_SERVER['HTTP_REFERER']);
+            }
+        } catch (Exception $e) {
+
+        }
+        $this->redirect($_SERVER['HTTP_REFERER']);
+    }
+
+
+    public function action_commentsBuy()
+    {
+        try {
+            $next_operation = false;
+            $id = $this->request->param('id', -1);
+            if ($id != -1) {
+                if (isset($_POST['btnsubmincomments'])) {
+                    try {
+
+                        if (isset($_POST['name'])  && isset($_POST['comment'])) {
+                            if (strlen($_POST['name']) >= 3 && strlen($_POST['comment']) >= 3) {
+                                $next_operation = true;
+                                $name = strip_tags($_POST['name']);
+                                $phone = strip_tags($_POST['phone']);
+                                $root = strip_tags(Arr::get($_POST, 'root', 0));
+                                $comment = strip_tags($_POST['comment']);
+                                $sDate = date("Y-m-d G:i:s");
+                                $comments = new Model_BuyComments();
+                                $user_id = 0;
+                                $auth = Auth::instance();
+                                if ($auth->logged_in()) {
+                                    $user_temp = $auth->get_user();
+                                    $user_id = $user_temp->id;
+                                }
+                                $comments->values(array('buy_id' => $id,'add_user_id'=>$user_id,'root' => $root, 'date' => $sDate, 'name' => $name, 'phone' => $phone, 'text' => $comment))->save();
+                            }
+                        } else {
+                            $next_operation = false;
+                        }
+                    } catch (Exception $e) {
+                        $next_operation = false;
+                    }
+                }
+                $this->redirect($_SERVER['HTTP_REFERER']);
+            }
+        } catch (Exception $e) {
+
+        }
+        $this->redirect($_SERVER['HTTP_REFERER']);
+    }
+
+
+    public function action_commentsConference()
+    {
+
+        $next_operation = false;
+        $id = $this->request->param('id', -1);
+        if ($id != -1) {
+            if (isset($_POST['btnsubmincomments'])) {
+                try {
+
+                    if (isset($_POST['name'])  && isset($_POST['comment'])) {
+                        if (strlen($_POST['name']) >= 3 && strlen($_POST['comment']) >= 3) {
+                            $next_operation = true;
+                            $name = strip_tags($_POST['name']);
+                            $phone = strip_tags($_POST['phone']);
+                            $root = strip_tags(Arr::get($_POST, 'root', 0));
+                            $comment = strip_tags($_POST['comment']);
+                            $sDate = date("Y-m-d G:i:s");
+                            $comments = new Model_ConferenceComments();
+                            $user_id = 0;
+                            $auth = Auth::instance();
+                            if ($auth->logged_in()) {
+                                $user_temp = $auth->get_user();
+                                $user_id = $user_temp->id;
+                            }
+                            $comments->values(array('conference_id' => $id,'add_user_id'=>$user_id,'root' => $root, 'date' => $sDate, 'name' => $name, 'phone' => $phone, 'text' => $comment))->save();
+                        }
+                    } else {
+                        $next_operation = false;
+                    }
+                } catch (Exception $e) {
+                    $next_operation = false;
+                }
+            }
+
+            $this->redirect($_SERVER['HTTP_REFERER']);
+        }
+
+        $this->redirect($_SERVER['HTTP_REFERER']);
+    }
+
+
+} // End AddFree

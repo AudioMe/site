@@ -1,0 +1,86 @@
+<?php
+$config = new Model_Configuration();
+?>
+<div id="dialog_nf" not_found="<?php var_export($not_found);?>" title="Студии не найдены">
+  <p>Вашим критериям не подходит ни одна студия, попробуйте поменять условия либо выберите в нашем каталоге</p>
+</div>
+<div class="big_text">
+    Каталог студий
+</div>
+
+    <?php
+
+    if (isset($studios))
+        foreach ($studios as $stud) {
+            $metro = new Model_Metro();
+            $metro_temp = $metro->where('id', '=', $stud['metro'])->find();
+            $rating = new Model_Rating();
+            $ratings = $rating->where('user_id', '=', $stud['user_id'])->find_all();
+            $mark = 1;
+            $count = 0;
+
+            if ($ratings->count() > 0) {
+                $count = $ratings[0]->count;
+                $mark = $ratings[0]->mark;
+            }
+            ?>
+
+            <div class="studio studio_first">
+                <table>
+                    <tr>
+                        <td>
+                            <a href="/studio/view/<?php echo $stud['user_id']; ?>" class="search_a"><h2
+                                    class="studio_title_4len select_color"><?php echo $stud['name']; ?>
+                                </h2></a>
+                            <div class="studio_type">
+                                   <?php echo $config->studio_class[$stud['class']]; ?>
+                            </div>
+                            <div class="studio_adress"><?php echo  $stud['address']; ?>
+                            </div>
+                            <div class="studio_metro">ст. метро <?php echo  $metro_temp->name; ?></div>
+                            <div class="studio_price">от <span class="select_color"><?php echo  $stud['price']; ?></span> руб/час
+                            </div>
+
+                            <a  class="" href="/studio/view/<?php echo $stud['user_id']; ?>"><div class="button_other">Подробнее о студии</div></a>
+                        </td>
+
+                        <td>
+
+                            <div class="studio_image"><?php if (strlen($stud['photo']) >= 3) { ?>
+                                <a href="/studio/view/<?php echo $stud['user_id']; ?>">
+                                    <?php if ($stud['premium'])
+                                        echo "<div class='img_label'></div>";
+                                     ?>
+                                    <img src="<?php echo  $stud['photo']; ?>"  width="120" height="120">
+                                </a>
+                                <?php } ?></div>
+                            <div class="studio_reiting">
+                                <div class="rating_studio" data-average="<?php echo str_replace(',', '.', round($mark, 1)); ?>">
+                                </div>
+                                <p class="ratingText">(<?php echo $count;  ?> голосов)</p>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+
+
+            </div>
+
+        <?php
+        }
+    ?>
+
+<script type="text/javascript">
+    if ('true' == $('#dialog_nf').attr('not_found')) {
+        $('#dialog_nf').dialog({ width: 380, position: { at: "center center" }});
+    }
+    jQuery(function () {
+        jQuery(".rating_studio").jRating({
+            length: 5,
+            showRateInfo: false,
+            decimalLength: 1,
+            isDisabled: true
+        });
+
+    })
+</script>

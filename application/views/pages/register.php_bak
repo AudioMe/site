@@ -1,0 +1,279 @@
+<script type="text/javascript" src="/js/jquery.MultiFile.js"></script>
+<?php
+$msg = Arr::get($_GET, 'error', -1);
+if ($msg != -1) {
+
+    ?>
+    <h2 style="text-align: center; color: red; font-size: 18px;">Логин или пароль введены неправильно</h2>
+<?php
+}
+?>
+<div class="big_text">Анкета</div>
+<form method="post" id="register_form1" enctype="multipart/form-data" action="/registers/user" onsubmit="return valid_form()" >
+    <input type="hidden" value="" id="formreg2" name="formreg2"/>
+    <table>
+        <tr>
+            <td class="vertical_top" style="width: 350px">
+                <table class="register_table">
+                    <tr>
+                        <td class="table_td_first">Адрес: </td>
+                        <td><input type="text" class="register_input" id="in_adres" name="adres"/></td>
+                    </tr>
+                    <tr>
+                        <td class="table_td_first">Телефон: </td>
+                        <td><input type="text" class="register_input" id="in_phone" placeholder="+7(495) 123 45 67"
+                                   name="phone"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="table_td_first">E-mail: </td>
+                        <td><input type="text" class="register_input" id="in_email" name="email"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="table_td_first">Название студии: </td>
+                        <td><input type="text" class="register_input" id="in_name" name="name"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="table_td_first">Время работы: </td>
+                        <td><input type="text" class="register_input" id="in_time" name="time"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="table_td_first">Сайт: </td>
+                        <td><input type="text" class="register_input" id="site_url" placeholder="http://site.ru"
+                                   name="url"/></td>
+                    </tr>
+                    <tr>
+                        <td class="table_td_first">Площадь: </td>
+                        <td><input type="text" class="register_spinner" maxlength="3" id="in_area" name="area"/><span class="register_span"> м2</span></td>
+                    </tr>
+
+                    <tr>
+                        <td class="table_td_first">Цены от:</td>
+                        <td><input type="text" class="register_input" id="in_price" name="price"/><span class="register_span"> рублей</span></td>
+                    </tr>
+                    <tr>
+                        <td class="table_td_first">Контактное лицо:</td>
+                        <td><input class="register_input" type="text" id="in_fio" name="fio"/></td>
+                    </tr>
+                    <tr>
+                        <td class="table_td_first">Станция метро: </td>
+                        <td>
+                            <select id="in_metro" class="register_input" name="metro">
+                                <?php
+                                if (isset($metro))
+                                    foreach ($metro as $m) {
+                                        echo '<option value="' . $m->id . '">' . $m->name . '</option>';
+                                    }
+                                ?>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="table_td_first">Аватар:</td>
+                        <td>
+                            <input type="file" name="photo" id="add_photo" class="multi"
+                                   accept="gif|jpg|png|jpeg|bmp" maxlength="1"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="table_td_first">Фотография:</td>
+                        <td>
+                            <input type="file" name="images[]" id="add_images" class="multi"
+                                   accept="gif|jpg|png|jpeg|bmp" maxlength="1"/>
+                        </td>
+                    </tr>                   
+                </table>
+            </td>
+            <td class="vertical_top">
+                <table class="register_table">
+                    <tr>
+                        <td class="table_td_first textLeft">Количество каналов <br>одновременной записи: </td>
+                        <td><input type="text" maxlength="3" class="register_spinner" type="text" id="count_record"
+                                      name="count_record">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="table_td_first textLeft">Парк микрофонов: </td>
+                        <td><textarea class="register_input" rows="3" id="in_park" name="in_park"></textarea></td>
+                    </tr>
+
+                    <tr>
+                        <td class="table_td_first textLeft">Муз. инструменты: </td>
+                        <td><textarea class="register_input" rows="3" id="in_musics" name="in_musics"></textarea></td>
+                    </tr>
+
+
+                    <tr>
+                        <td class="table_td_first textLeft">Подробно о студии: </td>
+                        <td><textarea class="register_input" rows="3" id="in_about" name="in_about"></textarea></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <br/><br/>
+                            <img id="captcha" src="/register/getCaptcha" alt="CAPTCHA" /><br/>
+                            <input type="text" id="captcha_code" name="captcha_code" size="10" maxlength="6" />
+                            <a href="#" id="recaptcha_reload" onclick="document.getElementById('captcha').src = '/register/getCaptcha?' + Math.random(); return false">[ Другая картинка]</a>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td> 
+            </td>
+            <td style="vertical-align:middle">
+                <input id="sbmbuttonregister" type="submit" title="После проверки информации ваша студия будет опубликована" name="sbmbuttonregister" class="button_register" id="register_studio"
+                       value="Отправить на модерацию"/></td>
+        </tr>
+    </table>
+</form>
+
+<div class="overlay" id="overlay" style="display:none;"></div>
+<div class="box" id="box">
+    <a class="boxclose" style="display: none" id="boxclose"></a>
+    <div id="message_text"></div>
+</div>
+<script type="text/javascript">
+    function show_close(){
+        jQuery('#boxclose').css('display','block');
+    }
+    function valid_form() {
+        var msg = jQuery('#register_form2').serialize();
+        jQuery('#formreg2').val(msg);
+        var temp_z = 0;
+        temp_z += valid_register_form('in_adres');
+        temp_z += valid_register_form('in_phone');
+        temp_z += valid_register_form('site_url');
+        temp_z += valid_register_form('in_metro');
+        temp_z += valid_register_form('in_area');
+        temp_z += valid_register_form('count_record');
+        temp_z += valid_register_form('in_park');
+        temp_z += valid_register_form('in_time');
+        temp_z += valid_register_form('in_name');
+        temp_z += valid_register_form('in_email');
+        temp_z += valid_register_form('in_price');
+        temp_z += valid_register_form('in_musics');
+        temp_z += valid_register_form('in_fio');
+        temp_z += valid_register_form('in_about');
+        if (jQuery('input[name="studio_type"]:checked').size() == 0) {
+            jQuery('.finde_chech_top').css('background', '#FF5656');
+            temp_z += 1;
+        } else {
+            jQuery('.finde_chech_top').css('background', '#FFFFFF');
+        }
+
+
+        if (jQuery('.check_register:checked').size() == 0) {
+            jQuery('.check_bottom').css('background', '#FF5656');
+            temp_z += 1;
+        } else {
+            jQuery('.check_bottom').css('background', '#FFFFFF');
+        }
+        if (temp_z > 0) return false;
+
+        //jQuery("#message_text").html("<h1>Сейчас вы будете зарегистрированы, вы можете дождаться окончания, либо продолжать пользоваться сайтом</h1><p style='text-align: center; padding-top: 10px;'><a style='color: #F50073; font-size: 18px;' href='/about'>Вы также можете вступить в ассоциацию</a></p>");
+        //jQuery('#overlay').fadeIn('fast', function () {
+        //    jQuery('#box').animate({'top': '160px'}, 500);
+        //    setTimeout(show_close, 5000);
+        //});
+        return true;
+
+    }
+
+
+
+    function valid_register_form(id_element) {
+        if (jQuery('#' + id_element).val() == "" || jQuery('#' + id_element).val().length < 1) {
+            jQuery('#' + id_element).css('background', '#FF5656');
+            return 1;
+        } else {
+            jQuery('#' + id_element).removeAttr('style');
+        }
+        return 0;
+    }
+
+    jQuery('#register_form1').ajaxForm(function (data) {
+        $('#recaptcha_reload').click();
+        if ('EROR_CAPTCHA' == data) {
+            $('#captcha_code').css('background-color', '#FF5656');
+        }
+        else
+        {
+            jQuery("#message_text").html(data+"<p style='text-align: center; padding-top: 10px;'><a style='color: #F50073; font-size: 18px;' href='/about'>Вы также можете вступить в ассоциацию</a></p>");
+            $('#captcha_code').css('background-color', '');
+            jQuery('#overlay').fadeIn('fast', function () {
+                jQuery('#box').animate({'top': '160px'}, 500);
+                setTimeout(show_close, 5000);
+            });
+        }
+    });
+
+
+    jQuery(function () {
+        $("#in_area").numericInput({ allowFloat: true, allowNegative: false});
+        $("#in_area").spinner({min: 1, max: 999});
+        $("#count_record").numericInput({ allowFloat: true, allowNegative: false});
+        $("#count_record").spinner({min: 1, max: 999});
+        $("#in_price").numericInput({ allowFloat: true, allowNegative: false});
+        prettyRadio();
+
+        $("#in_phone").mask("+7(999) 999 99 99");
+        $('#sbmbuttonregister').tooltip();
+
+        jQuery('#in_price').change(function(){
+            var price = parseInt(jQuery('#in_price').val());
+            if (price < 500){
+                jQuery('#studio_freel').trigger('click');
+            }
+            if (price >= 500 && price <900){
+                jQuery('#studio_price').trigger('click');
+            }
+            if (price >= 900){
+                jQuery('#studio_top').trigger('click');
+            }
+        });
+
+        jQuery('.register_input, .register_spinner').focusout(function () {
+            if (jQuery(this).val() != "") {
+                jQuery(this).removeAttr('style');
+            } else {
+                jQuery(this).css('background', '#FF5656');
+            }
+        });
+        jQuery('input[name="studio_type"]').click(function () {
+            jQuery('.finde_chech_top').css('background', '#FFFFFF');
+        });
+
+        jQuery('.check_register,.check_register+label').click(function () {
+            if (jQuery('.check_register:checked').size() == 0) {
+                jQuery('.check_bottom').css('background', '#FF5656');
+            } else {
+                jQuery('.check_bottom').css('background', '#FFFFFF');
+            }
+        });
+
+        jQuery('#activator').click(function () {
+            jQuery('#overlay').fadeIn('fast', function () {
+                jQuery('#box').animate({'top': '160px'}, 500);
+            });
+        });
+        jQuery('#boxclose').click(function () {
+            // $('#register_form1').trigger('reset');
+            // $('#register_form2').trigger('reset');
+            jQuery('#box').animate({'top': '-200px'}, 500, function () {
+                jQuery('#overlay').fadeOut('fast');
+            });
+            // document.location.href = '/';
+        });
+    });
+    function isPhotoFile(val) {
+        var v = val.value;
+        var v = v.search(/^.*\.(?:jpg|jpeg|gif|png|bmp)\s*$/ig)
+        if (v != 0) {
+            jQuery('#in_photo').val('');
+        }
+    }
+</script>

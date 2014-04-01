@@ -1,0 +1,161 @@
+<div class="big_text">Каталог студий</div>
+<div id="studios">
+    <?php
+    if (isset($studios))
+        foreach ($studios['studios'] as $stud) {
+        
+            if(!strlen($stud['photo'])) {                
+                $stud['photo'] = '/images/no_photo.gif';
+            }
+            ?>
+
+            <div class="studio_catalog">
+                <table style="width: 100%">
+                    <tr>
+                        <td class="vertical_top width160">
+                            <div class="studio_image">
+                                <a  class="" href="/studio/view/<?php echo $stud['user_id']; ?>">
+                                    <img src="<?php echo  $stud['photo']; ?>"  width="120" height="120">
+                                <?php if ($stud['premium'])
+                                    echo "<div class='img_label' style='position: relative; margin-top: -125px'></div>";
+                                ?></a>
+                            </div>
+                        </td>
+                        <td class="vertical_top width300">
+                            <a href="/studio/view/<?php echo $stud['user_id']; ?>" class="search_a"><h2
+                                    class="studio_title_4len "><?php echo $stud['name']; ?>
+                                </h2></a>
+                            <div class="studio_type">
+                                <?php echo $stud['extra']['studio_type']; ?>
+                            </div>
+                            <div class="studio_adress"><?php echo  $stud['address']; ?>
+                            </div>
+                            <div class="studio_metro">ст. метро <?php echo $stud['extra']['metro'] ?></div>
+                            <div class="studio_price">от <span class="select_color"><?php echo  $stud['price']; ?></span> руб/час
+                            </div>
+
+
+                        </td>
+
+                        <td class="vertical_top text-right padding_left50">
+                            <div class="middle_text_catalog">Рейтинг студии:</div>
+
+                            <div class="studio_reiting">
+                                <div class="rating_studio" data-average="<?php echo $stud['extra']['mark'] ?>">
+                                </div>
+                                <p class="ratingText">(<?php echo $stud['extra']['count'];  ?> голосов)</p>
+
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="width160"></td>
+                        <td class="width300"><div class="catalog_more"><?php if(isset($stud['more'])) echo $stud['more']; ?></div></td>
+                        <td class="text-right padding_left50 vertical_bottom">  <a  class="" href="/studio/view/<?php echo $stud['user_id']; ?>"><div class="button_other">Подробнее о студии</div></a></td>
+                    </tr>
+                </table>
+
+
+            </div>
+
+        <?php
+        }
+    ?>
+</div>
+
+
+<script type="text/javascript">
+    var stack_i = 1;
+    function preloadNextStack() {        
+        $.get('/catalog/next/' + stack_i, false,function(data,status){
+            if (data.reset_i) {
+                stack_i = -1;
+            }
+            loadNextStack(data.studios);
+        }, 'json');
+        
+    }
+    function loadNextStack(data) {      
+        if (data.length) {
+            stack_i++;
+            var id = 'studios';        
+            var next_id = parseInt($('.studio_catalog').length + 1);
+            for (var i in data) {
+                var item_id = 'studio_catalog_' + next_id;       
+                var item = generateItem(item_id, data[i]);
+                $('#' + id).append(item);                                
+                next_id++;
+            }
+            drawRatings();
+            $.waypoints('refresh');
+        }
+    }
+    function generateItem(id, data) {
+    var html = '';
+     html+='<div id="' + id + '" class="studio_catalog">';
+                html+='<table style="width: 100%">';
+                    html+='<tr>';
+                        html+='<td class="vertical_top width160">';
+                            html+='<div class="studio_image">';
+                                html+='<a  class="" href="/studio/view/' + data['user_id'] + '">';
+                                    html+='<img src="' + data['photo'] + '"  width="120" height="120">';
+                                if ('premium' in data && data['premium'] == 1)
+                                    html+='<div class="img_label" style="position: relative; margin-top: -125px"></div>;';
+                                html+='</a>';
+                            html+='</div>';
+                        html+='</td>';
+                        html+='<td class="vertical_top width300">';
+                            html+='<a href="/studio/view/' + data['user_id'] + '" class="search_a"><h2';
+                                    html+=' class="studio_title_4len ">' + data['name'];
+                                html+='</h2></a>';
+                            html+='<div class="studio_type">';
+                                    html+= data['extra']['studio_type']
+                            html+='</div>';
+                            html+='<div class="studio_adress">' + data['address'];
+                            html+='</div>';
+                            html+='<div class="studio_metro">ст. метро ' + data['extra']['metro'] + '</div>';
+                            html+='<div class="studio_price">от <span class="select_color">' + data['price'] + '</span> руб/час';
+                            html+='</div>';
+                        html+='</td>';
+                        html+='<td class="vertical_top text-right padding_left50">';
+                            html+='<div class="middle_text_catalog">Рейтинг студии:</div>';
+                            html+='<div class="studio_reiting">';
+                                html+='<div class="rating_studio" data-average="' + data['extra']['mark'] + '">';
+                                html+='</div>';
+                                html+='<p class="ratingText">(' + data['extra']['count'] +' голосов)</p>';
+
+                            html+='</div>';
+                        html+='</td>';
+                    html+='</tr>';
+                    html+='<tr>';
+                        html+='<td class="width160"></td>';
+                        html+='<td class="width300"><div class="catalog_more">' + data['more'] + '</div></td>';
+                        html+='<td class="text-right padding_left50 vertical_bottom"><a class="" href="/studio/view/' + data['user_id'] + '"><div class="button_other">Подробнее о студии</div></a></td>';
+                    html+='</tr>';
+                html+='</table>';
+                return html;
+    }
+    function drawRatings(selector) {
+        var selector = selector || '.rating_studio';
+        jQuery(selector).jRating({
+            length: 5,
+            showRateInfo: false,
+            decimalLength: 1,
+            isDisabled: true
+        });
+    }
+    function initScrollTrack() {
+        jQuery('#menu_catalog').addClass("menu_active");        
+        $('.global_container').waypoint(function(direction) {
+            preloadNextStack();
+        }, {
+                offset: function() {
+                        return $.waypoints('viewportHeight') - $(this).height() + 100;
+                }
+        });
+    }
+    jQuery(function () {
+        initScrollTrack();
+        drawRatings();
+    });
+</script>

@@ -1,0 +1,15 @@
+.am-checkbox {
+    display:inline-block;
+    background: transparent url("/images/check.png") no-repeat left center;
+}
+.am-checked, .am-selected {
+    background: transparent url("/images/check_ok.png") no-repeat left center !important;
+    display:inline-block;
+}
+.am-checkbox input, .am-radio input{
+}
+.am-hide { opacity: 0; filter:alpha(opacity=0); }
+.am-radio {
+    display:inline-block;
+    background: transparent url("/images/check.png") no-repeat left center;
+}

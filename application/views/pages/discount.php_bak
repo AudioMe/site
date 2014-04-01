@@ -1,0 +1,69 @@
+<div class="big_text">
+    Скидочные купоны
+</div>
+
+<table width="100%" cellpadding="10" border="0">
+    <tbody>
+    <?php
+    if (isset($discounts)) {
+        $d_row = ceil(count($discounts) / 3);
+        $d_td = count($discounts);
+        $ai = 0;
+        for ($i = 0; $i < $d_row; $i++) {
+            echo '<tr valign="top">';
+
+            for ($j = 0; $j < 3; $j++) {
+                if ($ai < $d_td) {
+                    $studios = new Model_Studios();
+                    $st = $studios->where('user_id', '=', $discounts[$ai]->user_id)->find();
+
+                    ?>
+
+                    <td width="33%" align="center">
+                        <a  target="_blank" href="/coupon/get/<?php echo $discounts[$ai]->id; ?>">
+                            <div class="discount">
+
+
+                            <div class="studio_image width99p">
+                               <div class="rotatedBlock sizeDiscount select_color"> <?php echo $discounts[$ai]->size; ?>%</div>
+                                <?php if (strlen($st->photo) >= 3) { ?>
+                                    <img
+                                    src="<?php echo  $st->photo; ?>"  width="120" height="120"><?php } ?></div>
+
+
+                                <div class="select_color discountName"><?php if (isset($st->name)) {
+                                        echo $st->name;
+                                    } ?></div>
+                                <div class="discount_bottom_front">
+                                    <?php echo mb_strimwidth($discounts[$ai]->stipulation, 0, 47, '...'); ?>
+                                    <br>
+                                    В период с <?php echo $discounts[$ai]->date_start; ?>
+                                    по
+                                    <?php echo $discounts[$ai]->date_end; ?>
+                                </div>
+
+                        </div>
+                                </a>
+                    </td>
+
+                    <?php
+                    $ai++;
+                } else {
+                    echo ' <td width="33%" align="center"> </td>';
+                }
+
+            }
+
+            echo "</tr>";
+        }
+    }
+    ?>
+
+    </tbody>
+</table>
+
+<script type="text/javascript">
+    jQuery(function () {
+        jQuery('#menu_discounts').addClass("menu_active");
+    })
+</script>

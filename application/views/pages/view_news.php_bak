@@ -1,0 +1,421 @@
+<?php
+$config = new Model_Configuration();
+?>
+
+<script src="http://vk.com/js/api/openapi.js" type="text/javascript" charset="UTF-8"></script>
+<script type="text/javascript">
+    VK.init({
+        apiId: <?php echo $config->vkKEY; ?>,
+        onlyWidgets: true
+    });
+</script>
+
+<?php
+$studios = new Model_Studios();
+$st = $studios->where('user_id', '=', $news->user_id)->find_all();
+?>
+<div class="article_header">
+    <div class="big_text">
+        <?php if (isset($news->title)) echo $news->title;  ?>
+    </div>
+    <div class="public_date">дата публикации <?php echo $news->date; ?></div>
+</div>
+
+<div class="article_text">
+    <?php
+    if (isset($images) && isset($images[0])) {
+        ?>
+        <?php
+        $image = $images[count($images) - 1];
+        ?>
+        <img class="leftimg"
+             src="/files/<?php echo $news->user_id . "/news/prev_" . $image->id . ".png"; ?>"
+             width="240">
+        <?php
+        ?>
+    <?php
+    }
+    ?>
+    <div style="min-height: 200px;">
+        <?php
+        $text = "";
+        if (isset($news->preview)) {
+            $text = $news->preview;
+        }
+
+        if (isset($news->text) && $news->text != "") {
+
+            echo $news->text;
+        } else {
+            echo $text;
+        }
+
+        ?>
+    </div>
+
+    <div class="social">
+        <span class="float_left">Поделиться:</span>
+
+        <div class="share42init" data-title="<?php if (isset($news->title)) echo $news->title; ?>"></div>
+    </div>
+
+    <?php
+    $stud = $studios->where('user_id', '=', $news->user_id)->find();
+    if (isset($stud->id)) {
+        ?>
+
+        <div class="avatar">
+            <div class="studio_image_e studio_image"><?php if (strlen($stud->photo) >= 3) { ?>
+                    <a href="/studio/view/<?php echo $stud->user_id; ?>">
+                        <img src="<?php echo  $stud->photo; ?>" width="100" height="100">
+                    </a>
+                <?php } ?></div>
+			<div class="image_publish_txt">Опубликовано от: <a href="/studio/view/<?php echo $stud->user_id;?>" class="search_a"><?php echo $stud->name;?></a></div>
+		<div class="clear"></div>
+        </div>
+    <?php
+    }
+    ?>
+    <?php
+    $imagesI = new Model_NewsPhotos();
+    if (isset($art_compare)) {
+        ?>
+        <div class="compare">
+            <div class="middle_text">
+                Читайте на ту же тему:
+            </div>
+            <?
+            foreach ($art_compare as $art) {
+                $im = $imagesI->where('news_id', '=', $art->id)->find_all();
+                ?>
+                <a href="/news/view/<?php echo $art->id; ?>">
+                    <div class="small_article">
+                        <?php if (isset($im) && isset($im[0])) {
+                            $img = $im[0];
+                            ?>
+                            <img class="leftimg"
+                                 src="/files/<?php echo $art->user_id . "/news/prev_" . $img->id . ".png"; ?>"
+                                 width="80"/>
+                        <?php
+                        }
+                        ?>
+                        <div class="small_title"><?php echo $art->title; ?></div>
+                    </div>
+                </a>
+            <?php
+            }
+            ?>
+        </div>
+    <?
+    }
+    ?>
+    <script type="text/javascript" src="audiome.ru/js/share42.js"></script>
+</div>
+
+
+<!-- Begin Comments -->
+<?php
+
+function children($comments, $id)
+{
+    $child_comments = array();
+    foreach ($comments as $com) {
+        if ($com->root == $id) {
+            array_push($child_comments, $com);
+        }
+    }
+    return $child_comments;
+}
+
+
+
+function print_comment($comment, $other_comments, $left)
+{
+    $com_image = "";
+    if (isset($comment->add_user_id)) {
+        $tstudios = new Model_Studios();
+        $t_st = $tstudios->where('user_id', '=', $comment->add_user_id)->find();
+        if (isset($t_st->photo)) {
+            $com_image = $t_st->photo;
+        }
+    }
+    ?>
+    <ol class="root_comment" style="padding-left: <?php echo $left; ?>px;">
+        <li class="comment">
+            <div class="comment">
+                <input type="hidden" value="<?php echo $comment->id; ?>" class="comment_id"/>
+                <?php
+                if (isset($com_image) && strlen($com_image) > 3) {
+                    ?>
+                    <img src="<?php echo $com_image; ?>" class="comment_image" width="100" height="100">
+                <?php
+                }
+                ?>
+                <div class="message">
+                    <div class="info">
+                        <h2><?php echo $comment->name; ?></h2>
+
+                        <p class="meta">написано <?php echo $comment->date; ?></p>
+                    </div>
+                    <div class="comment-body ">
+                        <p><?php echo $comment->text; ?></p>
+                    </div>
+                    <span class="edit-link"></span>
+                </div>
+                <table style="width: 200px">
+                    <tr>
+                        <td class="vertical_top"><a href="#" onclick="return false;">
+                                <div class="like"></div>
+                            </a><span class="like_count">(<?php echo $comment->like; ?>)</span></td>
+                        <td class="vertical_top"><a href="#" onclick="return false;">
+                                <div class="dlike"></div>
+                            </a><span class="dlike_count">(<?php echo $comment->dlike; ?>)</span></td>
+                        <td class="vertical_top"><a href="#" onclick="return false;" class="select_color ansver">ответить</a>
+                        </td>
+                    </tr>
+                </table>
+
+                <div class="clear"></div>
+            </div>
+            <div class="clear"></div>
+        </li>
+    </ol>
+    <?php
+    $child_comments = children($other_comments, $comment->id);
+    foreach ($child_comments as $c) {
+        print_comment($c, $other_comments, $left + 20);
+    }
+
+}
+
+if (isset($comments) && count($comments) > 0) {
+    $root_coments = array();
+    $other_comments = array();
+    foreach ($comments as $com) {
+        if ($com->root == 0) {
+            array_push($root_coments, $com);
+        } else {
+            array_push($other_comments, $com);
+        }
+    }
+    ?>
+    <div id="comments">
+
+        <?php
+        foreach ($root_coments as $comment) {
+            print_comment($comment, $other_comments, 0);
+        }
+
+        ?>
+
+
+    </div>
+<?php
+}
+?>
+<div style="overflow: hidden">
+    <div id="vk_comments2" style="margin: -150px 0 0 0;"></div>
+</div>
+
+
+<div id="wrapper" class="tab1">
+    <a href="#" onclick="return false" class="tab1 tabs_href">Комментировать через AudioMe</a> |
+    <a href="#" onclick="return false" class="tab2 tabs_href">Комментировать через VK</a>
+    <!--|
+    <a href="#" onclick="return false" class="tab3 tabs_href">Комментировать через Facebook</a> -->
+
+    <div class="tab1">
+
+        <div id="comment-form" class="comment-form tab1">
+
+            <div id="respond" class="tab1">
+                <form action="/addFree/commentsNews/<?php if (isset($news->id)) echo $news->id; ?>"
+                      onsubmit="return valid_form()"
+                      method="post"
+                      id="commentform">
+                    <input type="hidden" value="0" id="root" name="root"/>
+                    <table>
+                        <tr>
+                            <td style="width: 470px;">
+                                <?php
+                                $auth = Auth::instance();
+                                $name = "";
+                                $phone = "";
+                                if ($auth->logged_in()) {
+                                    $user_temp = $auth->get_user();
+                                    $user_id = $user_temp->id;
+                                    $studios = new Model_Studios();
+                                    $studio_temp = $studios->where('user_id', '=', $user_id)->find();
+                                    if (isset($studio_temp->name)) {
+                                        $name = $studio_temp->name;
+                                    }
+                                    if (isset($studio_temp->phone)) {
+                                        $phone = $studio_temp->phone;
+                                    }
+                                }
+
+                                ?>
+                                <?php
+                                if ($name != "") {
+                                    ?>
+                                    <input id="author" name="name" type="hidden" value="<?php echo $name; ?>"
+                                           size="30">
+                                <?php
+
+                                } else {
+                                    ?>
+                                    <p class="comment-form-author">
+                                        <input id="author" name="name" placeholder="Ваше имя *" type="text" value=""
+                                               size="30" aria-required='true'/>
+                                    </p>
+
+                                <?php
+                                }
+                                ?>
+
+                                <?php
+                                if ($name != "") {
+                                    ?>
+                                    <input id="phone" name="phone" type="hidden" value="<?php echo $phone; ?>"
+                                           size="30"
+                                           aria-required='true'/>
+                                <?php
+
+                                } else {
+                                    ?>
+                                    <p class="comment-form-email">
+                                        <input id="phone" name="phone" placeholder="Телефон" type="text" value=""
+                                               size="30" aria-required='true'/>
+                                    </p>
+
+                                <?php
+                                }
+                                ?>
+
+                                <p id="re_comment"><i>Re: <span></span></i></p>
+                                <p class="comment-form-comment">
+                                    <textarea id="comment" name="comment" placeholder="Комментарий *" cols="45"
+                                              rows="8" aria-required="true"></textarea>
+                                </p>
+                            </td>
+                            <td class="vertical_bottom">
+                                <input name="btnsubmincomments" type="submit" id="submit" value="Отправить"/>
+                            </td>
+                        </tr>
+                    </table>
+                    <p>
+                        <span class="select_color">*</span> - обязательные поля для заполнения
+                    </p>
+
+
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="tab2">
+        <div class="tab2" style="height: 160px; overflow: hidden">
+            <div class="tab2" id="vk_comments"></div>
+        </div>
+    </div>
+    <div class="tab3">
+        <div class="tab3" style="height: 160px; overflow: hidden">
+            <div class="tab3" id="vk_facebook"></div>
+        </div>
+    </div>
+</div>
+<?php
+
+?>
+
+<div class="overlay" id="overlay" style="display:none;"></div>
+<div class="box" id="box">
+    <a class="boxclose" id="boxclose"></a>
+
+    <div id="message_text"></div>
+</div>
+<script type="text/javascript">
+    VK.Widgets.Comments('vk_comments2', {limit: 10});
+</script>
+
+<script type="text/javascript">
+    VK.Widgets.Comments('vk_comments');
+</script>
+
+<script type="text/javascript">
+
+    jQuery(function () {
+        jQuery("#phone").mask("+7(999) 999 99 99");
+
+        jQuery('#wrapper a').click(function () {
+            if (jQuery(this).attr('class') != jQuery('#wrapper').attr('class')) {
+                jQuery('#wrapper').attr('class', jQuery(this).attr('class'));
+            }
+        });
+
+        jQuery('.ansver').click(function () {
+            var parent = jQuery(this).parent().parent().parent().parent().parent();
+            var id = jQuery('.comment_id', parent).val();
+            var st_name = (parent).find('div.info h2').html();
+            $('#re_comment span').html(st_name);
+            $('#re_comment').css('visibility', 'visible');
+            jQuery('#root').val(id);
+            jQuery('#comment').focus();
+        })
+
+        jQuery('.like').click(function () {
+            var parent = jQuery(this).parent().parent().parent().parent().parent().parent();
+            var id = jQuery('.comment_id', parent).val();
+            jQuery.ajax({
+                type: "POST",
+                data: ({id: id}),
+                url: "/addFree/likeNews",
+                dataType: "text",
+                success: function (data) {
+                    jQuery('.like_count', parent).text(data);
+                }
+            });
+
+
+        })
+
+        jQuery('.dlike').click(function () {
+            var parent = jQuery(this).parent().parent().parent().parent().parent().parent();
+            var id = jQuery('.comment_id', parent).val();
+            jQuery.ajax({
+                type: "POST",
+                data: ({id: id}),
+                url: "/addFree/dlikeNews",
+                dataType: "text",
+                success: function (data) {
+                    jQuery('.dlike_count', parent).text(data);
+                }
+            });
+
+        })
+
+    })
+
+
+    function valid_form_comments() {
+        var c_name = jQuery('#author').val();
+        var c_phone = jQuery('#phone').val();
+        var c_comment = jQuery('#comment').val();
+        var correct = true;
+        if (c_name.length <= 1) {
+            jQuery('#author').css('background', 'red');
+            correct = false;
+        } else {
+            jQuery('#author').removeAttr('style');
+        }
+
+        if (c_comment.length <= 1) {
+            jQuery('#comment').css('background', 'red');
+            correct = false;
+        } else {
+            jQuery('#comment').removeAttr('style');
+        }
+        return correct;
+    }
+
+</script>
+

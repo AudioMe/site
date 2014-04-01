@@ -1,0 +1,131 @@
+<?php
+	$auth = Auth::instance();
+        $u = $auth->get_user();
+?>
+<div class="shapka">
+    <div class="pryamougolnik_2">
+        <div class="fon-holder clearfix">
+            <div class="header_left">
+                <div class="logo">
+                    <a href="/"> <img src="/images/logo.png" width="167" height="70" /></a>
+                </div>
+            </div>
+            <div>
+                <ul class="menu">
+                    <li>
+                        <a id="root_page" href="/">Главная</a>
+                    </li>
+                    <li>
+                        <a id="menu_news" href="/news">Новости</a>
+                    </li>
+                    <li>
+                        <a id="menu_articles" href="/Articles">Статьи</a>
+                    </li>
+                    <li>
+                        <a id="menu_discounts" href="/discount">Скидки</a>
+                    </li>
+                    <li>
+                        <a id="menu_catalog" href="/catalog">Каталог</a>
+                    </li>
+			<?php
+			if ($auth->logged_in() && !$auth->logged_in("admin")) {?>
+			    <li>
+				<a id="menu_blacklist" href="/Blacklist">Черный список</a>
+			    </li>
+			<?php } ?>
+                </ul>
+            </div>
+
+            <div class="register">
+                <?php
+                $user = new Model_Users();
+                if ($auth->logged_in() && !$auth->logged_in("admin")) {
+                    ?>
+                    <div class="name_Studio"><a
+                            href="/studio/view/<?php echo $u->id; ?>"><?php echo $u->username;  ?></a>
+                    </div>
+                    <div class="user_login">
+
+                        <div class="edit_user_menu"><a class="href_input" href="/Edit">Редактировать</a> <a
+                                class="href_input" href="/auth/logout">Выход</a>
+                        </div>
+                    </div>
+                <?php
+                } else {
+                    ?>
+
+                    <div class="knopka">
+                        <a href="/register" class="add_href">Добавить студию</a>
+                    </div>
+
+                    <div class="knopka2">
+                        <a href="#" class="add_href2" id="open-login-popup">Вход для студий</a>
+
+                        <div class="div_input">
+                            <div id="form-login" style="display: none">
+                                <form method="post" id="authForm" action="/auth">
+                                    <table>
+                                        <tr>
+                                            <td><input type="text" id="username" name="username" class="login_input"
+                                                       placeholder="Логин"/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td><input type="password" name="password" id="userpass" class="login_input"
+                                                       placeholder="Пароль"/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td><input type="submit" name="btnlogin" class="href_input" value="Войти"/>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                    <table class="remember_and_register">
+                                        <tr>
+                                            <td><a href="/remind" class="rememb_pass">Забыли пароль?</a></td>
+                                            <td>|</td>
+                                            <td><a href="/register" class="rememb_pass">Регистрация</a></td>
+                                        </tr>
+                                    </table>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                <?php
+                }
+                ?>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+<div class="overlay" id="overlay2" style="display:none;"></div>
+<div class="box" id="box2">
+    <a class="boxclose" id="boxclose2"></a>
+    <div id="message_text2"></div>
+</div>
+
+<script type="text/javascript">
+jQuery(function () {
+
+    jQuery('#authForm').ajaxForm(function (data) {
+        if (data != "ok"){
+            jQuery('#overlay2').fadeIn('fast', function () {
+                jQuery('#box2').animate({'top': '160px'}, 500);
+            });
+            jQuery("#message_text2").html("<p style='text-align: center; padding-top: 10px; color: #F50073; font-size: 18px;'> Логин или пароль введены неправильно</p>");
+        }else{
+            document.location.reload();
+        }
+    });
+
+    jQuery('#boxclose2').click(function () {
+        jQuery('#box2').animate({'top': '-200px'}, 500, function () {
+            jQuery('#overlay2').fadeOut('fast');
+        });
+    });
+})
+</script>

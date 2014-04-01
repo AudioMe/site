@@ -1,0 +1,287 @@
+<?php defined('SYSPATH') OR die('No direct script access.'); ?>
+
+2013-12-29 18:13:39 --- EMERGENCY: ErrorException [ 8 ]: Undefined variable: art ~ APPPATH/views/pages/articles.php [ 47 ] in /home/tim/www/audiome.ru/public_html/application/views/pages/articles.php:47
+2013-12-29 18:13:39 --- DEBUG: #0 /home/tim/www/audiome.ru/public_html/application/views/pages/articles.php(47): Kohana_Core::error_handler(8, 'Undefined varia...', '/home/tim/www/a...', 47, Array)
+#1 /home/tim/www/audiome.ru/public_html/system/classes/Kohana/View.php(61): include('/home/tim/www/a...')
+#2 /home/tim/www/audiome.ru/public_html/system/classes/Kohana/View.php(348): Kohana_View::capture('/home/tim/www/a...', Array)
+#3 /home/tim/www/audiome.ru/public_html/system/classes/Kohana/View.php(228): Kohana_View->render()
+#4 /home/tim/www/audiome.ru/public_html/application/views/basic/2columns.php(26): Kohana_View->__toString()
+#5 /home/tim/www/audiome.ru/public_html/system/classes/Kohana/View.php(61): include('/home/tim/www/a...')
+#6 /home/tim/www/audiome.ru/public_html/system/classes/Kohana/View.php(348): Kohana_View::capture('/home/tim/www/a...', Array)
+#7 /home/tim/www/audiome.ru/public_html/system/classes/Kohana/Controller/Template.php(44): Kohana_View->render()
+#8 /home/tim/www/audiome.ru/public_html/system/classes/Kohana/Controller.php(87): Kohana_Controller_Template->after()
+#9 [internal function]: Kohana_Controller->execute()
+#10 /home/tim/www/audiome.ru/public_html/system/classes/Kohana/Request/Client/Internal.php(97): ReflectionMethod->invoke(Object(Controller_Articles))
+#11 /home/tim/www/audiome.ru/public_html/system/classes/Kohana/Request/Client.php(114): Kohana_Request_Client_Internal->execute_request(Object(Request), Object(Response))
+#12 /home/tim/www/audiome.ru/public_html/system/classes/Kohana/Request.php(991): Kohana_Request_Client->execute(Object(Request))
+#13 /home/tim/www/audiome.ru/public_html/index.php(118): Kohana_Request->execute()
+#14 {main} in /home/tim/www/audiome.ru/public_html/application/views/pages/articles.php:47
+2013-12-29 18:15:13 --- EMERGENCY: ErrorException [ 4 ]: syntax error, unexpected ' ~ APPPATH/views/pages/articles.php [ 40 ] in file:line
+2013-12-29 18:15:13 --- DEBUG: #0 [internal function]: Kohana_Core::shutdown_handler()
+#1 {main} in file:line
+2013-12-29 18:22:41 --- EMERGENCY: ErrorException [ 8 ]: Trying to get property of non-object ~ APPPATH/views/pages/view_articles.php [ 95 ] in /home/tim/www/audiome.ru/public_html/application/views/pages/view_articles.php:95
+2013-12-29 18:22:41 --- DEBUG: #0 /home/tim/www/audiome.ru/public_html/application/views/pages/view_articles.php(95): Kohana_Core::error_handler(8, 'Trying to get p...', '/home/tim/www/a...', 95, Array)
+#1 /home/tim/www/audiome.ru/public_html/system/classes/Kohana/View.php(61): include('/home/tim/www/a...')
+#2 /home/tim/www/audiome.ru/public_html/system/classes/Kohana/View.php(348): Kohana_View::capture('/home/tim/www/a...', Array)
+#3 /home/tim/www/audiome.ru/public_html/system/classes/Kohana/View.php(228): Kohana_View->render()
+#4 /home/tim/www/audiome.ru/public_html/application/views/basic/2columns.php(26): Kohana_View->__toString()
+#5 /home/tim/www/audiome.ru/public_html/system/classes/Kohana/View.php(61): include('/home/tim/www/a...')
+#6 /home/tim/www/audiome.ru/public_html/system/classes/Kohana/View.php(348): Kohana_View::capture('/home/tim/www/a...', Array)
+#7 /home/tim/www/audiome.ru/public_html/system/classes/Kohana/Controller/Template.php(44): Kohana_View->render()
+#8 /home/tim/www/audiome.ru/public_html/system/classes/Kohana/Controller.php(87): Kohana_Controller_Template->after()
+#9 [internal function]: Kohana_Controller->execute()
+#10 /home/tim/www/audiome.ru/public_html/system/classes/Kohana/Request/Client/Internal.php(97): ReflectionMethod->invoke(Object(Controller_Articles))
+#11 /home/tim/www/audiome.ru/public_html/system/classes/Kohana/Request/Client.php(114): Kohana_Request_Client_Internal->execute_request(Object(Request), Object(Response))
+#12 /home/tim/www/audiome.ru/public_html/system/classes/Kohana/Request.php(991): Kohana_Request_Client->execute(Object(Request))
+#13 /home/tim/www/audiome.ru/public_html/index.php(118): Kohana_Request->execute()
+#14 {main} in /home/tim/www/audiome.ru/public_html/application/views/pages/view_articles.php:95
+2013-12-29 18:28:55 --- EMERGENCY: ErrorException [ 1 ]: Call to a member function where() on a non-object ~ APPPATH/views/pages/articles.php [ 43 ] in file:line
+2013-12-29 18:28:55 --- DEBUG: #0 [internal function]: Kohana_Core::shutdown_handler()
+#1 {main} in file:line
+2013-12-29 18:38:23 --- EMERGENCY: ErrorException [ 8 ]: Object of class Model_ArticlesPhotos could not be converted to int ~ MODPATH/database/classes/Kohana/Database/Result.php [ 227 ] in /home/tim/www/audiome.ru/public_html/modules/database/classes/Kohana/Database/Result.php:227
+2013-12-29 18:38:23 --- DEBUG: #0 /home/tim/www/audiome.ru/public_html/modules/database/classes/Kohana/Database/Result.php(227): Kohana_Core::error_handler(8, 'Object of class...', '/home/tim/www/a...', 227, Array)
+#1 /home/tim/www/audiome.ru/public_html/modules/database/classes/Kohana/Database/MySQL/Result.php(33): Kohana_Database_Result->offsetExists(Object(Model_ArticlesPhotos))
+#2 /home/tim/www/audiome.ru/public_html/modules/database/classes/Kohana/Database/Result.php(240): Kohana_Database_MySQL_Result->seek(Object(Model_ArticlesPhotos))
+#3 /home/tim/www/audiome.ru/public_html/application/views/pages/articles.php(47): Kohana_Database_Result->offsetGet(Object(Model_ArticlesPhotos))
+#4 /home/tim/www/audiome.ru/public_html/system/classes/Kohana/View.php(61): include('/home/tim/www/a...')
+#5 /home/tim/www/audiome.ru/public_html/system/classes/Kohana/View.php(348): Kohana_View::capture('/home/tim/www/a...', Array)
+#6 /home/tim/www/audiome.ru/public_html/system/classes/Kohana/View.php(228): Kohana_View->render()
+#7 /home/tim/www/audiome.ru/public_html/application/views/basic/2columns.php(26): Kohana_View->__toString()
+#8 /home/tim/www/audiome.ru/public_html/system/classes/Kohana/View.php(61): include('/home/tim/www/a...')
+#9 /home/tim/www/audiome.ru/public_html/system/classes/Kohana/View.php(348): Kohana_View::capture('/home/tim/www/a...', Array)
+#10 /home/tim/www/audiome.ru/public_html/system/classes/Kohana/Controller/Template.php(44): Kohana_View->render()
+#11 /home/tim/www/audiome.ru/public_html/system/classes/Kohana/Controller.php(87): Kohana_Controller_Template->after()
+#12 [internal function]: Kohana_Controller->execute()
+#13 /home/tim/www/audiome.ru/public_html/system/classes/Kohana/Request/Client/Internal.php(97): ReflectionMethod->invoke(Object(Controller_Articles))
+#14 /home/tim/www/audiome.ru/public_html/system/classes/Kohana/Request/Client.php(114): Kohana_Request_Client_Internal->execute_request(Object(Request), Object(Response))
+#15 /home/tim/www/audiome.ru/public_html/system/classes/Kohana/Request.php(991): Kohana_Request_Client->execute(Object(Request))
+#16 /home/tim/www/audiome.ru/public_html/index.php(118): Kohana_Request->execute()
+#17 {main} in /home/tim/www/audiome.ru/public_html/modules/database/classes/Kohana/Database/Result.php:227
+2013-12-29 18:40:35 --- EMERGENCY: ErrorException [ 8 ]: Trying to get property of non-object ~ APPPATH/views/pages/articles.php [ 47 ] in /home/tim/www/audiome.ru/public_html/application/views/pages/articles.php:47
+2013-12-29 18:40:35 --- DEBUG: #0 /home/tim/www/audiome.ru/public_html/application/views/pages/articles.php(47): Kohana_Core::error_handler(8, 'Trying to get p...', '/home/tim/www/a...', 47, Array)
+#1 /home/tim/www/audiome.ru/public_html/system/classes/Kohana/View.php(61): include('/home/tim/www/a...')
+#2 /home/tim/www/audiome.ru/public_html/system/classes/Kohana/View.php(348): Kohana_View::capture('/home/tim/www/a...', Array)
+#3 /home/tim/www/audiome.ru/public_html/system/classes/Kohana/View.php(228): Kohana_View->render()
+#4 /home/tim/www/audiome.ru/public_html/application/views/basic/2columns.php(26): Kohana_View->__toString()
+#5 /home/tim/www/audiome.ru/public_html/system/classes/Kohana/View.php(61): include('/home/tim/www/a...')
+#6 /home/tim/www/audiome.ru/public_html/system/classes/Kohana/View.php(348): Kohana_View::capture('/home/tim/www/a...', Array)
+#7 /home/tim/www/audiome.ru/public_html/system/classes/Kohana/Controller/Template.php(44): Kohana_View->render()
+#8 /home/tim/www/audiome.ru/public_html/system/classes/Kohana/Controller.php(87): Kohana_Controller_Template->after()
+#9 [internal function]: Kohana_Controller->execute()
+#10 /home/tim/www/audiome.ru/public_html/system/classes/Kohana/Request/Client/Internal.php(97): ReflectionMethod->invoke(Object(Controller_Articles))
+#11 /home/tim/www/audiome.ru/public_html/system/classes/Kohana/Request/Client.php(114): Kohana_Request_Client_Internal->execute_request(Object(Request), Object(Response))
+#12 /home/tim/www/audiome.ru/public_html/system/classes/Kohana/Request.php(991): Kohana_Request_Client->execute(Object(Request))
+#13 /home/tim/www/audiome.ru/public_html/index.php(118): Kohana_Request->execute()
+#14 {main} in /home/tim/www/audiome.ru/public_html/application/views/pages/articles.php:47
+2013-12-29 18:41:53 --- EMERGENCY: ErrorException [ 8 ]: Object of class Model_ArticlesPhotos could not be converted to int ~ MODPATH/database/classes/Kohana/Database/Result.php [ 227 ] in /home/tim/www/audiome.ru/public_html/modules/database/classes/Kohana/Database/Result.php:227
+2013-12-29 18:41:53 --- DEBUG: #0 /home/tim/www/audiome.ru/public_html/modules/database/classes/Kohana/Database/Result.php(227): Kohana_Core::error_handler(8, 'Object of class...', '/home/tim/www/a...', 227, Array)
+#1 /home/tim/www/audiome.ru/public_html/modules/database/classes/Kohana/Database/MySQL/Result.php(33): Kohana_Database_Result->offsetExists(Object(Model_ArticlesPhotos))
+#2 /home/tim/www/audiome.ru/public_html/modules/database/classes/Kohana/Database/Result.php(240): Kohana_Database_MySQL_Result->seek(Object(Model_ArticlesPhotos))
+#3 /home/tim/www/audiome.ru/public_html/application/views/pages/articles.php(47): Kohana_Database_Result->offsetGet(Object(Model_ArticlesPhotos))
+#4 /home/tim/www/audiome.ru/public_html/system/classes/Kohana/View.php(61): include('/home/tim/www/a...')
+#5 /home/tim/www/audiome.ru/public_html/system/classes/Kohana/View.php(348): Kohana_View::capture('/home/tim/www/a...', Array)
+#6 /home/tim/www/audiome.ru/public_html/system/classes/Kohana/View.php(228): Kohana_View->render()
+#7 /home/tim/www/audiome.ru/public_html/application/views/basic/2columns.php(26): Kohana_View->__toString()
+#8 /home/tim/www/audiome.ru/public_html/system/classes/Kohana/View.php(61): include('/home/tim/www/a...')
+#9 /home/tim/www/audiome.ru/public_html/system/classes/Kohana/View.php(348): Kohana_View::capture('/home/tim/www/a...', Array)
+#10 /home/tim/www/audiome.ru/public_html/system/classes/Kohana/Controller/Template.php(44): Kohana_View->render()
+#11 /home/tim/www/audiome.ru/public_html/system/classes/Kohana/Controller.php(87): Kohana_Controller_Template->after()
+#12 [internal function]: Kohana_Controller->execute()
+#13 /home/tim/www/audiome.ru/public_html/system/classes/Kohana/Request/Client/Internal.php(97): ReflectionMethod->invoke(Object(Controller_Articles))
+#14 /home/tim/www/audiome.ru/public_html/system/classes/Kohana/Request/Client.php(114): Kohana_Request_Client_Internal->execute_request(Object(Request), Object(Response))
+#15 /home/tim/www/audiome.ru/public_html/system/classes/Kohana/Request.php(991): Kohana_Request_Client->execute(Object(Request))
+#16 /home/tim/www/audiome.ru/public_html/index.php(118): Kohana_Request->execute()
+#17 {main} in /home/tim/www/audiome.ru/public_html/modules/database/classes/Kohana/Database/Result.php:227
+2013-12-29 18:42:08 --- EMERGENCY: ErrorException [ 8 ]: Object of class Model_ArticlesPhotos could not be converted to int ~ MODPATH/database/classes/Kohana/Database/Result.php [ 227 ] in /home/tim/www/audiome.ru/public_html/modules/database/classes/Kohana/Database/Result.php:227
+2013-12-29 18:42:08 --- DEBUG: #0 /home/tim/www/audiome.ru/public_html/modules/database/classes/Kohana/Database/Result.php(227): Kohana_Core::error_handler(8, 'Object of class...', '/home/tim/www/a...', 227, Array)
+#1 /home/tim/www/audiome.ru/public_html/modules/database/classes/Kohana/Database/MySQL/Result.php(33): Kohana_Database_Result->offsetExists(Object(Model_ArticlesPhotos))
+#2 /home/tim/www/audiome.ru/public_html/modules/database/classes/Kohana/Database/Result.php(240): Kohana_Database_MySQL_Result->seek(Object(Model_ArticlesPhotos))
+#3 /home/tim/www/audiome.ru/public_html/application/views/pages/articles.php(48): Kohana_Database_Result->offsetGet(Object(Model_ArticlesPhotos))
+#4 /home/tim/www/audiome.ru/public_html/system/classes/Kohana/View.php(61): include('/home/tim/www/a...')
+#5 /home/tim/www/audiome.ru/public_html/system/classes/Kohana/View.php(348): Kohana_View::capture('/home/tim/www/a...', Array)
+#6 /home/tim/www/audiome.ru/public_html/system/classes/Kohana/View.php(228): Kohana_View->render()
+#7 /home/tim/www/audiome.ru/public_html/application/views/basic/2columns.php(26): Kohana_View->__toString()
+#8 /home/tim/www/audiome.ru/public_html/system/classes/Kohana/View.php(61): include('/home/tim/www/a...')
+#9 /home/tim/www/audiome.ru/public_html/system/classes/Kohana/View.php(348): Kohana_View::capture('/home/tim/www/a...', Array)
+#10 /home/tim/www/audiome.ru/public_html/system/classes/Kohana/Controller/Template.php(44): Kohana_View->render()
+#11 /home/tim/www/audiome.ru/public_html/system/classes/Kohana/Controller.php(87): Kohana_Controller_Template->after()
+#12 [internal function]: Kohana_Controller->execute()
+#13 /home/tim/www/audiome.ru/public_html/system/classes/Kohana/Request/Client/Internal.php(97): ReflectionMethod->invoke(Object(Controller_Articles))
+#14 /home/tim/www/audiome.ru/public_html/system/classes/Kohana/Request/Client.php(114): Kohana_Request_Client_Internal->execute_request(Object(Request), Object(Response))
+#15 /home/tim/www/audiome.ru/public_html/system/classes/Kohana/Request.php(991): Kohana_Request_Client->execute(Object(Request))
+#16 /home/tim/www/audiome.ru/public_html/index.php(118): Kohana_Request->execute()
+#17 {main} in /home/tim/www/audiome.ru/public_html/modules/database/classes/Kohana/Database/Result.php:227
+2013-12-29 18:42:19 --- EMERGENCY: ErrorException [ 8 ]: Undefined variable: cs ~ APPPATH/views/pages/articles.php [ 48 ] in /home/tim/www/audiome.ru/public_html/application/views/pages/articles.php:48
+2013-12-29 18:42:19 --- DEBUG: #0 /home/tim/www/audiome.ru/public_html/application/views/pages/articles.php(48): Kohana_Core::error_handler(8, 'Undefined varia...', '/home/tim/www/a...', 48, Array)
+#1 /home/tim/www/audiome.ru/public_html/system/classes/Kohana/View.php(61): include('/home/tim/www/a...')
+#2 /home/tim/www/audiome.ru/public_html/system/classes/Kohana/View.php(348): Kohana_View::capture('/home/tim/www/a...', Array)
+#3 /home/tim/www/audiome.ru/public_html/system/classes/Kohana/View.php(228): Kohana_View->render()
+#4 /home/tim/www/audiome.ru/public_html/application/views/basic/2columns.php(26): Kohana_View->__toString()
+#5 /home/tim/www/audiome.ru/public_html/system/classes/Kohana/View.php(61): include('/home/tim/www/a...')
+#6 /home/tim/www/audiome.ru/public_html/system/classes/Kohana/View.php(348): Kohana_View::capture('/home/tim/www/a...', Array)
+#7 /home/tim/www/audiome.ru/public_html/system/classes/Kohana/Controller/Template.php(44): Kohana_View->render()
+#8 /home/tim/www/audiome.ru/public_html/system/classes/Kohana/Controller.php(87): Kohana_Controller_Template->after()
+#9 [internal function]: Kohana_Controller->execute()
+#10 /home/tim/www/audiome.ru/public_html/system/classes/Kohana/Request/Client/Internal.php(97): ReflectionMethod->invoke(Object(Controller_Articles))
+#11 /home/tim/www/audiome.ru/public_html/system/classes/Kohana/Request/Client.php(114): Kohana_Request_Client_Internal->execute_request(Object(Request), Object(Response))
+#12 /home/tim/www/audiome.ru/public_html/system/classes/Kohana/Request.php(991): Kohana_Request_Client->execute(Object(Request))
+#13 /home/tim/www/audiome.ru/public_html/index.php(118): Kohana_Request->execute()
+#14 {main} in /home/tim/www/audiome.ru/public_html/application/views/pages/articles.php:48
+2013-12-29 18:42:56 --- EMERGENCY: ErrorException [ 8 ]: Trying to get property of non-object ~ APPPATH/views/pages/articles.php [ 47 ] in /home/tim/www/audiome.ru/public_html/application/views/pages/articles.php:47
+2013-12-29 18:42:56 --- DEBUG: #0 /home/tim/www/audiome.ru/public_html/application/views/pages/articles.php(47): Kohana_Core::error_handler(8, 'Trying to get p...', '/home/tim/www/a...', 47, Array)
+#1 /home/tim/www/audiome.ru/public_html/system/classes/Kohana/View.php(61): include('/home/tim/www/a...')
+#2 /home/tim/www/audiome.ru/public_html/system/classes/Kohana/View.php(348): Kohana_View::capture('/home/tim/www/a...', Array)
+#3 /home/tim/www/audiome.ru/public_html/system/classes/Kohana/View.php(228): Kohana_View->render()
+#4 /home/tim/www/audiome.ru/public_html/application/views/basic/2columns.php(26): Kohana_View->__toString()
+#5 /home/tim/www/audiome.ru/public_html/system/classes/Kohana/View.php(61): include('/home/tim/www/a...')
+#6 /home/tim/www/audiome.ru/public_html/system/classes/Kohana/View.php(348): Kohana_View::capture('/home/tim/www/a...', Array)
+#7 /home/tim/www/audiome.ru/public_html/system/classes/Kohana/Controller/Template.php(44): Kohana_View->render()
+#8 /home/tim/www/audiome.ru/public_html/system/classes/Kohana/Controller.php(87): Kohana_Controller_Template->after()
+#9 [internal function]: Kohana_Controller->execute()
+#10 /home/tim/www/audiome.ru/public_html/system/classes/Kohana/Request/Client/Internal.php(97): ReflectionMethod->invoke(Object(Controller_Articles))
+#11 /home/tim/www/audiome.ru/public_html/system/classes/Kohana/Request/Client.php(114): Kohana_Request_Client_Internal->execute_request(Object(Request), Object(Response))
+#12 /home/tim/www/audiome.ru/public_html/system/classes/Kohana/Request.php(991): Kohana_Request_Client->execute(Object(Request))
+#13 /home/tim/www/audiome.ru/public_html/index.php(118): Kohana_Request->execute()
+#14 {main} in /home/tim/www/audiome.ru/public_html/application/views/pages/articles.php:47
+2013-12-29 18:58:39 --- EMERGENCY: ErrorException [ 1 ]: Cannot use object of type Model_ArticlesPhotos as array ~ APPPATH/views/pages/articles.php [ 46 ] in file:line
+2013-12-29 18:58:39 --- DEBUG: #0 [internal function]: Kohana_Core::shutdown_handler()
+#1 {main} in file:line
+2013-12-29 18:59:39 --- EMERGENCY: ErrorException [ 8 ]: Trying to get property of non-object ~ APPPATH/views/pages/articles.php [ 47 ] in /home/tim/www/audiome.ru/public_html/application/views/pages/articles.php:47
+2013-12-29 18:59:39 --- DEBUG: #0 /home/tim/www/audiome.ru/public_html/application/views/pages/articles.php(47): Kohana_Core::error_handler(8, 'Trying to get p...', '/home/tim/www/a...', 47, Array)
+#1 /home/tim/www/audiome.ru/public_html/system/classes/Kohana/View.php(61): include('/home/tim/www/a...')
+#2 /home/tim/www/audiome.ru/public_html/system/classes/Kohana/View.php(348): Kohana_View::capture('/home/tim/www/a...', Array)
+#3 /home/tim/www/audiome.ru/public_html/system/classes/Kohana/View.php(228): Kohana_View->render()
+#4 /home/tim/www/audiome.ru/public_html/application/views/basic/2columns.php(26): Kohana_View->__toString()
+#5 /home/tim/www/audiome.ru/public_html/system/classes/Kohana/View.php(61): include('/home/tim/www/a...')
+#6 /home/tim/www/audiome.ru/public_html/system/classes/Kohana/View.php(348): Kohana_View::capture('/home/tim/www/a...', Array)
+#7 /home/tim/www/audiome.ru/public_html/system/classes/Kohana/Controller/Template.php(44): Kohana_View->render()
+#8 /home/tim/www/audiome.ru/public_html/system/classes/Kohana/Controller.php(87): Kohana_Controller_Template->after()
+#9 [internal function]: Kohana_Controller->execute()
+#10 /home/tim/www/audiome.ru/public_html/system/classes/Kohana/Request/Client/Internal.php(97): ReflectionMethod->invoke(Object(Controller_Articles))
+#11 /home/tim/www/audiome.ru/public_html/system/classes/Kohana/Request/Client.php(114): Kohana_Request_Client_Internal->execute_request(Object(Request), Object(Response))
+#12 /home/tim/www/audiome.ru/public_html/system/classes/Kohana/Request.php(991): Kohana_Request_Client->execute(Object(Request))
+#13 /home/tim/www/audiome.ru/public_html/index.php(118): Kohana_Request->execute()
+#14 {main} in /home/tim/www/audiome.ru/public_html/application/views/pages/articles.php:47
+2013-12-29 19:02:59 --- EMERGENCY: ErrorException [ 8 ]: Trying to get property of non-object ~ APPPATH/views/pages/articles.php [ 47 ] in /home/tim/www/audiome.ru/public_html/application/views/pages/articles.php:47
+2013-12-29 19:02:59 --- DEBUG: #0 /home/tim/www/audiome.ru/public_html/application/views/pages/articles.php(47): Kohana_Core::error_handler(8, 'Trying to get p...', '/home/tim/www/a...', 47, Array)
+#1 /home/tim/www/audiome.ru/public_html/system/classes/Kohana/View.php(61): include('/home/tim/www/a...')
+#2 /home/tim/www/audiome.ru/public_html/system/classes/Kohana/View.php(348): Kohana_View::capture('/home/tim/www/a...', Array)
+#3 /home/tim/www/audiome.ru/public_html/system/classes/Kohana/View.php(228): Kohana_View->render()
+#4 /home/tim/www/audiome.ru/public_html/application/views/basic/2columns.php(26): Kohana_View->__toString()
+#5 /home/tim/www/audiome.ru/public_html/system/classes/Kohana/View.php(61): include('/home/tim/www/a...')
+#6 /home/tim/www/audiome.ru/public_html/system/classes/Kohana/View.php(348): Kohana_View::capture('/home/tim/www/a...', Array)
+#7 /home/tim/www/audiome.ru/public_html/system/classes/Kohana/Controller/Template.php(44): Kohana_View->render()
+#8 /home/tim/www/audiome.ru/public_html/system/classes/Kohana/Controller.php(87): Kohana_Controller_Template->after()
+#9 [internal function]: Kohana_Controller->execute()
+#10 /home/tim/www/audiome.ru/public_html/system/classes/Kohana/Request/Client/Internal.php(97): ReflectionMethod->invoke(Object(Controller_Articles))
+#11 /home/tim/www/audiome.ru/public_html/system/classes/Kohana/Request/Client.php(114): Kohana_Request_Client_Internal->execute_request(Object(Request), Object(Response))
+#12 /home/tim/www/audiome.ru/public_html/system/classes/Kohana/Request.php(991): Kohana_Request_Client->execute(Object(Request))
+#13 /home/tim/www/audiome.ru/public_html/index.php(118): Kohana_Request->execute()
+#14 {main} in /home/tim/www/audiome.ru/public_html/application/views/pages/articles.php:47
+2013-12-29 19:11:35 --- EMERGENCY: ErrorException [ 8 ]: Trying to get property of non-object ~ APPPATH/views/pages/articles.php [ 47 ] in /home/tim/www/audiome.ru/public_html/application/views/pages/articles.php:47
+2013-12-29 19:11:35 --- DEBUG: #0 /home/tim/www/audiome.ru/public_html/application/views/pages/articles.php(47): Kohana_Core::error_handler(8, 'Trying to get p...', '/home/tim/www/a...', 47, Array)
+#1 /home/tim/www/audiome.ru/public_html/system/classes/Kohana/View.php(61): include('/home/tim/www/a...')
+#2 /home/tim/www/audiome.ru/public_html/system/classes/Kohana/View.php(348): Kohana_View::capture('/home/tim/www/a...', Array)
+#3 /home/tim/www/audiome.ru/public_html/system/classes/Kohana/View.php(228): Kohana_View->render()
+#4 /home/tim/www/audiome.ru/public_html/application/views/basic/2columns.php(26): Kohana_View->__toString()
+#5 /home/tim/www/audiome.ru/public_html/system/classes/Kohana/View.php(61): include('/home/tim/www/a...')
+#6 /home/tim/www/audiome.ru/public_html/system/classes/Kohana/View.php(348): Kohana_View::capture('/home/tim/www/a...', Array)
+#7 /home/tim/www/audiome.ru/public_html/system/classes/Kohana/Controller/Template.php(44): Kohana_View->render()
+#8 /home/tim/www/audiome.ru/public_html/system/classes/Kohana/Controller.php(87): Kohana_Controller_Template->after()
+#9 [internal function]: Kohana_Controller->execute()
+#10 /home/tim/www/audiome.ru/public_html/system/classes/Kohana/Request/Client/Internal.php(97): ReflectionMethod->invoke(Object(Controller_Articles))
+#11 /home/tim/www/audiome.ru/public_html/system/classes/Kohana/Request/Client.php(114): Kohana_Request_Client_Internal->execute_request(Object(Request), Object(Response))
+#12 /home/tim/www/audiome.ru/public_html/system/classes/Kohana/Request.php(991): Kohana_Request_Client->execute(Object(Request))
+#13 /home/tim/www/audiome.ru/public_html/index.php(118): Kohana_Request->execute()
+#14 {main} in /home/tim/www/audiome.ru/public_html/application/views/pages/articles.php:47
+2013-12-29 19:16:34 --- EMERGENCY: ErrorException [ 8 ]: Undefined property: Database_MySQL_Result::$id ~ APPPATH/views/pages/articles.php [ 46 ] in /home/tim/www/audiome.ru/public_html/application/views/pages/articles.php:46
+2013-12-29 19:16:34 --- DEBUG: #0 /home/tim/www/audiome.ru/public_html/application/views/pages/articles.php(46): Kohana_Core::error_handler(8, 'Undefined prope...', '/home/tim/www/a...', 46, Array)
+#1 /home/tim/www/audiome.ru/public_html/system/classes/Kohana/View.php(61): include('/home/tim/www/a...')
+#2 /home/tim/www/audiome.ru/public_html/system/classes/Kohana/View.php(348): Kohana_View::capture('/home/tim/www/a...', Array)
+#3 /home/tim/www/audiome.ru/public_html/system/classes/Kohana/View.php(228): Kohana_View->render()
+#4 /home/tim/www/audiome.ru/public_html/application/views/basic/2columns.php(26): Kohana_View->__toString()
+#5 /home/tim/www/audiome.ru/public_html/system/classes/Kohana/View.php(61): include('/home/tim/www/a...')
+#6 /home/tim/www/audiome.ru/public_html/system/classes/Kohana/View.php(348): Kohana_View::capture('/home/tim/www/a...', Array)
+#7 /home/tim/www/audiome.ru/public_html/system/classes/Kohana/Controller/Template.php(44): Kohana_View->render()
+#8 /home/tim/www/audiome.ru/public_html/system/classes/Kohana/Controller.php(87): Kohana_Controller_Template->after()
+#9 [internal function]: Kohana_Controller->execute()
+#10 /home/tim/www/audiome.ru/public_html/system/classes/Kohana/Request/Client/Internal.php(97): ReflectionMethod->invoke(Object(Controller_Articles))
+#11 /home/tim/www/audiome.ru/public_html/system/classes/Kohana/Request/Client.php(114): Kohana_Request_Client_Internal->execute_request(Object(Request), Object(Response))
+#12 /home/tim/www/audiome.ru/public_html/system/classes/Kohana/Request.php(991): Kohana_Request_Client->execute(Object(Request))
+#13 /home/tim/www/audiome.ru/public_html/index.php(118): Kohana_Request->execute()
+#14 {main} in /home/tim/www/audiome.ru/public_html/application/views/pages/articles.php:46
+2013-12-29 19:16:59 --- EMERGENCY: ErrorException [ 8 ]: Trying to get property of non-object ~ APPPATH/views/pages/articles.php [ 46 ] in /home/tim/www/audiome.ru/public_html/application/views/pages/articles.php:46
+2013-12-29 19:16:59 --- DEBUG: #0 /home/tim/www/audiome.ru/public_html/application/views/pages/articles.php(46): Kohana_Core::error_handler(8, 'Trying to get p...', '/home/tim/www/a...', 46, Array)
+#1 /home/tim/www/audiome.ru/public_html/system/classes/Kohana/View.php(61): include('/home/tim/www/a...')
+#2 /home/tim/www/audiome.ru/public_html/system/classes/Kohana/View.php(348): Kohana_View::capture('/home/tim/www/a...', Array)
+#3 /home/tim/www/audiome.ru/public_html/system/classes/Kohana/View.php(228): Kohana_View->render()
+#4 /home/tim/www/audiome.ru/public_html/application/views/basic/2columns.php(26): Kohana_View->__toString()
+#5 /home/tim/www/audiome.ru/public_html/system/classes/Kohana/View.php(61): include('/home/tim/www/a...')
+#6 /home/tim/www/audiome.ru/public_html/system/classes/Kohana/View.php(348): Kohana_View::capture('/home/tim/www/a...', Array)
+#7 /home/tim/www/audiome.ru/public_html/system/classes/Kohana/Controller/Template.php(44): Kohana_View->render()
+#8 /home/tim/www/audiome.ru/public_html/system/classes/Kohana/Controller.php(87): Kohana_Controller_Template->after()
+#9 [internal function]: Kohana_Controller->execute()
+#10 /home/tim/www/audiome.ru/public_html/system/classes/Kohana/Request/Client/Internal.php(97): ReflectionMethod->invoke(Object(Controller_Articles))
+#11 /home/tim/www/audiome.ru/public_html/system/classes/Kohana/Request/Client.php(114): Kohana_Request_Client_Internal->execute_request(Object(Request), Object(Response))
+#12 /home/tim/www/audiome.ru/public_html/system/classes/Kohana/Request.php(991): Kohana_Request_Client->execute(Object(Request))
+#13 /home/tim/www/audiome.ru/public_html/index.php(118): Kohana_Request->execute()
+#14 {main} in /home/tim/www/audiome.ru/public_html/application/views/pages/articles.php:46
+2013-12-29 19:18:53 --- EMERGENCY: ErrorException [ 1 ]: Cannot use object of type Model_ArticlesPhotos as array ~ APPPATH/views/pages/articles.php [ 47 ] in file:line
+2013-12-29 19:18:53 --- DEBUG: #0 [internal function]: Kohana_Core::shutdown_handler()
+#1 {main} in file:line
+2013-12-29 19:19:08 --- EMERGENCY: ErrorException [ 8 ]: Trying to get property of non-object ~ APPPATH/views/pages/articles.php [ 47 ] in /home/tim/www/audiome.ru/public_html/application/views/pages/articles.php:47
+2013-12-29 19:19:08 --- DEBUG: #0 /home/tim/www/audiome.ru/public_html/application/views/pages/articles.php(47): Kohana_Core::error_handler(8, 'Trying to get p...', '/home/tim/www/a...', 47, Array)
+#1 /home/tim/www/audiome.ru/public_html/system/classes/Kohana/View.php(61): include('/home/tim/www/a...')
+#2 /home/tim/www/audiome.ru/public_html/system/classes/Kohana/View.php(348): Kohana_View::capture('/home/tim/www/a...', Array)
+#3 /home/tim/www/audiome.ru/public_html/system/classes/Kohana/View.php(228): Kohana_View->render()
+#4 /home/tim/www/audiome.ru/public_html/application/views/basic/2columns.php(26): Kohana_View->__toString()
+#5 /home/tim/www/audiome.ru/public_html/system/classes/Kohana/View.php(61): include('/home/tim/www/a...')
+#6 /home/tim/www/audiome.ru/public_html/system/classes/Kohana/View.php(348): Kohana_View::capture('/home/tim/www/a...', Array)
+#7 /home/tim/www/audiome.ru/public_html/system/classes/Kohana/Controller/Template.php(44): Kohana_View->render()
+#8 /home/tim/www/audiome.ru/public_html/system/classes/Kohana/Controller.php(87): Kohana_Controller_Template->after()
+#9 [internal function]: Kohana_Controller->execute()
+#10 /home/tim/www/audiome.ru/public_html/system/classes/Kohana/Request/Client/Internal.php(97): ReflectionMethod->invoke(Object(Controller_Articles))
+#11 /home/tim/www/audiome.ru/public_html/system/classes/Kohana/Request/Client.php(114): Kohana_Request_Client_Internal->execute_request(Object(Request), Object(Response))
+#12 /home/tim/www/audiome.ru/public_html/system/classes/Kohana/Request.php(991): Kohana_Request_Client->execute(Object(Request))
+#13 /home/tim/www/audiome.ru/public_html/index.php(118): Kohana_Request->execute()
+#14 {main} in /home/tim/www/audiome.ru/public_html/application/views/pages/articles.php:47
+2013-12-29 19:21:41 --- EMERGENCY: ErrorException [ 8 ]: Trying to get property of non-object ~ APPPATH/views/pages/articles.php [ 48 ] in /home/tim/www/audiome.ru/public_html/application/views/pages/articles.php:48
+2013-12-29 19:21:41 --- DEBUG: #0 /home/tim/www/audiome.ru/public_html/application/views/pages/articles.php(48): Kohana_Core::error_handler(8, 'Trying to get p...', '/home/tim/www/a...', 48, Array)
+#1 /home/tim/www/audiome.ru/public_html/system/classes/Kohana/View.php(61): include('/home/tim/www/a...')
+#2 /home/tim/www/audiome.ru/public_html/system/classes/Kohana/View.php(348): Kohana_View::capture('/home/tim/www/a...', Array)
+#3 /home/tim/www/audiome.ru/public_html/system/classes/Kohana/View.php(228): Kohana_View->render()
+#4 /home/tim/www/audiome.ru/public_html/application/views/basic/2columns.php(26): Kohana_View->__toString()
+#5 /home/tim/www/audiome.ru/public_html/system/classes/Kohana/View.php(61): include('/home/tim/www/a...')
+#6 /home/tim/www/audiome.ru/public_html/system/classes/Kohana/View.php(348): Kohana_View::capture('/home/tim/www/a...', Array)
+#7 /home/tim/www/audiome.ru/public_html/system/classes/Kohana/Controller/Template.php(44): Kohana_View->render()
+#8 /home/tim/www/audiome.ru/public_html/system/classes/Kohana/Controller.php(87): Kohana_Controller_Template->after()
+#9 [internal function]: Kohana_Controller->execute()
+#10 /home/tim/www/audiome.ru/public_html/system/classes/Kohana/Request/Client/Internal.php(97): ReflectionMethod->invoke(Object(Controller_Articles))
+#11 /home/tim/www/audiome.ru/public_html/system/classes/Kohana/Request/Client.php(114): Kohana_Request_Client_Internal->execute_request(Object(Request), Object(Response))
+#12 /home/tim/www/audiome.ru/public_html/system/classes/Kohana/Request.php(991): Kohana_Request_Client->execute(Object(Request))
+#13 /home/tim/www/audiome.ru/public_html/index.php(118): Kohana_Request->execute()
+#14 {main} in /home/tim/www/audiome.ru/public_html/application/views/pages/articles.php:48
+2013-12-29 19:22:27 --- EMERGENCY: ErrorException [ 1 ]: Call to a member function as_array() on a non-object ~ APPPATH/views/pages/articles.php [ 46 ] in file:line
+2013-12-29 19:22:27 --- DEBUG: #0 [internal function]: Kohana_Core::shutdown_handler()
+#1 {main} in file:line
+2013-12-29 19:24:32 --- EMERGENCY: ErrorException [ 1 ]: Call to undefined method Model_ArticlesPhotos::as_assoc() ~ APPPATH/views/pages/articles.php [ 45 ] in file:line
+2013-12-29 19:24:32 --- DEBUG: #0 [internal function]: Kohana_Core::shutdown_handler()
+#1 {main} in file:line
+2013-12-29 20:51:02 --- EMERGENCY: ErrorException [ 4 ]: syntax error, unexpected '$disc' (T_VARIABLE) ~ APPPATH/views/pages/discount.php [ 8 ] in file:line
+2013-12-29 20:51:02 --- DEBUG: #0 [internal function]: Kohana_Core::shutdown_handler()
+#1 {main} in file:line
+2013-12-29 21:32:47 --- EMERGENCY: ErrorException [ 4 ]: syntax error, unexpected end of file ~ APPPATH/views/pages/catalog.php [ 236 ] in file:line
+2013-12-29 21:32:47 --- DEBUG: #0 [internal function]: Kohana_Core::shutdown_handler()
+#1 {main} in file:line
+2013-12-29 21:33:04 --- EMERGENCY: ErrorException [ 4 ]: syntax error, unexpected end of file ~ APPPATH/views/pages/catalog.php [ 236 ] in file:line
+2013-12-29 21:33:04 --- DEBUG: #0 [internal function]: Kohana_Core::shutdown_handler()
+#1 {main} in file:line
+2013-12-29 21:33:23 --- EMERGENCY: ErrorException [ 4 ]: syntax error, unexpected end of file ~ APPPATH/views/pages/catalog.php [ 236 ] in file:line
+2013-12-29 21:33:23 --- DEBUG: #0 [internal function]: Kohana_Core::shutdown_handler()
+#1 {main} in file:line
+2013-12-29 21:33:51 --- EMERGENCY: ErrorException [ 4 ]: syntax error, unexpected end of file ~ APPPATH/views/pages/catalog.php [ 237 ] in file:line
+2013-12-29 21:33:51 --- DEBUG: #0 [internal function]: Kohana_Core::shutdown_handler()
+#1 {main} in file:line
+2013-12-29 22:26:32 --- EMERGENCY: ErrorException [ 4 ]: syntax error, unexpected ';' ~ APPPATH/views/pages/catalog.php [ 14 ] in file:line
+2013-12-29 22:26:32 --- DEBUG: #0 [internal function]: Kohana_Core::shutdown_handler()
+#1 {main} in file:line

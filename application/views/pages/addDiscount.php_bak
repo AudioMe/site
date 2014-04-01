@@ -1,0 +1,186 @@
+<link type="text/css" rel="stylesheet" media="all" href="/css/jquery-ui-1.10.3.custom.min.css"/>
+<script type="text/javascript" src="/js/jquery-ui-1.10.3.custom.min.js"></script>
+
+<div class="big_text">
+    <center> Добавить скидки</center>
+    <br>
+</div><br>
+
+
+<table width="100%" cellpadding="10" border="0">
+    <tbody>
+    <?php
+    if (isset($discounts)) {
+        $d_row = ceil(count($discounts) / 3);
+        $d_td = count($discounts);
+        $ai = 0;
+        for ($i = 0; $i < $d_row; $i++) {
+            echo '<tr valign="top">';
+
+            for ($j = 0; $j < 3; $j++) {
+                if ($ai < $d_td) {
+                    $studios = new Model_Studios();
+                    $st = $studios->where('user_id', '=', $discounts[$ai]->user_id)->find();
+
+                    ?>
+
+                    <td width="33%" align="center">
+
+
+                        <div class="discount">
+
+                            <div class="studio_image width99p">
+                                <div
+                                    class="rotatedBlock sizeDiscount select_color"> <?php echo $discounts[$ai]->size; ?>
+                                    %
+                                </div>
+                                <?php if (strlen($st->photo) >= 3) { ?>
+                                    <img
+                                    src="<?php echo  $st->photo; ?>"  width="120" height="120"><?php } ?></div>
+
+
+                            <div class="select_color discountName"><?php if (isset($st->name)) {
+                                    echo $st->name;
+                                } ?></div>
+                            <div class="discount_bottom">
+                                <?php echo $discounts[$ai]->stipulation; ?>
+                                <br>
+                                В период с <?php echo $discounts[$ai]->date_start; ?>
+                                по
+                                <?php echo $discounts[$ai]->date_end; ?>
+                            </div>
+
+                            <p>
+                                <a href="/remove/discount/<?php echo $discounts[$ai]->id; ?>"
+                                   class="img_remove_discount remove_discount"></a>
+                                <a class="img_edit_discount" href="/edit/coupon/<?php echo $discounts[$ai]->id; ?>"
+                                   class="img_edit"></a></p>
+                            <br/>
+                        </div>
+
+
+                    </td>
+
+                    <?php
+                    $ai++;
+                } else {
+                    echo ' <td width="33%" align="center"> </td>';
+                }
+
+            }
+
+
+            echo "</tr>";
+        }
+    }
+    ?>
+
+    </tbody>
+</table>
+<br/>
+
+<div id="comment-form" class="comment-form">
+
+    <div id="respond">
+        <form action="/add/discount" onsubmit="return valid_form()" method="post" id="commentform">
+            <p class="discountRow">
+                <label for="size" class="w140">Размер скидки %<span class="required">*</span></label>
+                <input maxlength="2" id="size" class="w140" name="size" type="text" value="" size="30" aria-required='true'/>
+            </p>
+
+            <p class="discountRow">
+                <label for="date_start" class="w140">Дата начала<span class="required">*</span></label>
+                <input maxlength="20" id="date_start" class="w140" name="date_start" type="text" value="" size="30"
+                       aria-required='true'/>
+            </p>
+
+            <p class="discountRow">
+                <label for="date_end" class="w140">Дата окончания<span class="required">*</span></label>
+                <input maxlength="20" id="date_end" class="w140" name="date_end" type="text" value="" size="30"
+                       aria-required='true'/>
+            </p>
+
+            <p class="comment-form-comment">
+                <label for="comment">Условие предоставления скидки<span class="required">*</span></label>
+                <textarea maxlength="250" id="comment" class="input100" name="comment" cols="45" rows="8"
+                          aria-required="true"></textarea>
+            </p>
+
+            <p class="form-submit">
+                <input name="btnsubmdiscount" type="submit" id="submit" value="Добавить скидку"/>
+            </p>
+        </form>
+    </div>
+    <!-- #respond -->
+</div>
+
+
+<script type="text/javascript">
+    $(function () {
+        $("#size").numericInput({ allowFloat: true, allowNegative: false});
+        jQuery('#menu_adddiscounts').addClass("menu_active");
+        jQuery.datepicker.regional['ru'] = {
+            closeText: 'Закрыть',
+            prevText: '&#x3c;Пред',
+            nextText: 'След&#x3e;',
+            currentText: 'Сегодня',
+            monthNames: ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь',
+                'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'],
+            monthNamesShort: ['Янв', 'Фев', 'Мар', 'Апр', 'Май', 'Июн',
+                'Июл', 'Авг', 'Сен', 'Окт', 'Ноя', 'Дек'],
+            dayNames: ['воскресенье', 'понедельник', 'вторник', 'среда', 'четверг', 'пятница', 'суббота'],
+            dayNamesShort: ['вск', 'пнд', 'втр', 'срд', 'чтв', 'птн', 'сбт'],
+            dayNamesMin: ['Вс', 'Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб'],
+            weekHeader: 'Не',
+            dateFormat: 'dd.mm.yy',
+            firstDay: 1,
+            isRTL: false,
+            showMonthAfterYear: false,
+            dateFormat: 'yy-mm-dd',
+            yearSuffix: ''};
+        jQuery.datepicker.setDefaults($.datepicker.regional['ru']);
+
+        jQuery("#date_start").datepicker();
+        jQuery("#date_end").datepicker();
+
+        jQuery('.remove_discount').click(function () {
+            return confirm("Вы действительно хотите удалить данную скидку?");
+        })
+    });
+
+    function valid_form() {
+        var c_size = jQuery('#size').val();
+        var c_start = jQuery('#date_start').val();
+        var c_end = jQuery('#date_end').val();
+        var c_comment = jQuery('#comment').val();
+        var correct = true;
+        if (c_size.length < 1) {
+            jQuery('#size').css('background', 'red');
+            correct = false;
+        } else {
+            jQuery('#size').removeAttr('style');
+        }
+
+        if (c_start.length <= 7) {
+            jQuery('#date_start').css('background', 'red');
+            correct = false;
+        } else {
+            jQuery('#date_start').removeAttr('style');
+        }
+
+        if (c_end.length <= 1) {
+            jQuery('#date_end').css('background', 'red');
+            correct = false;
+        } else {
+            jQuery('#date_end').removeAttr('style');
+        }
+
+        if (c_comment.length <= 1) {
+            jQuery('#comment').css('background', 'red');
+            correct = false;
+        } else {
+            jQuery('#comment').removeAttr('style');
+        }
+        return correct;
+    }
+</script>

@@ -1,0 +1,668 @@
+<script src="/js/studio.js" type="text/javascript" charset="UTF-8"></script>
+<?php
+$config = new Model_Configuration();
+?>
+
+<?php
+if($prev_id) {
+	?>
+	<script>addPrevStudBtn(<?php echo $prev_id;?>);</script>
+<?php	
+}
+if ($next_id) {
+?>
+	<script>addNextStudBtn(<?php echo $next_id;?>);</script>
+<?php	
+}
+?>
+
+<script src="http://vk.com/js/api/openapi.js" type="text/javascript" charset="UTF-8"></script>
+<script type="text/javascript">
+    VK.init({
+        apiId: <?php echo $config->vkKEY; ?>,
+        onlyWidgets: true
+    });
+</script>
+
+<?php
+if (isset($studio)) {
+    ?>
+
+    <div class="studio_one">
+    <table>
+        <tr>
+            <td class="vertical_middle padding_left">
+                <div class="studio_image">
+                    <?php if ($studio->premium)
+                        echo "<div class='img_label'></div>";
+                    ?>                        <?php
+                    if (isset($studio->photo) && strlen($studio->photo) > 3) {
+                        ?>
+                        <img src="<?php echo $studio->photo; ?>" width="120" height="120">
+                    <?php
+                    }
+                    ?>
+                </div>
+            </td>
+            <td class="vertical_middle padding_left">
+                <h1 class="studio_title_4len select_color"><?php echo $studio->name; ?>
+                </h1>
+
+                <div class="studio_type"><?php echo $config->studio_class[$studio->class];  ?>
+                </div>
+                <div class="studio_adress "><?php echo $studio->address; ?>
+                </div>
+                <div class="studio_metro "><span class="studio_choose_name">Ст. метро </span> "<?php echo $metro; ?>
+                    "
+                </div>
+                <div class="studio_phone "><?php echo $studio->phone; ?>
+                </div>
+                <div class="studio_reiting ">
+                    <?php
+                    $cook = Cookie::get('audio_ration_' . $studio_id, '-1');
+                    $rating = new Model_Rating();
+                    $ratings = $rating->where('user_id', '=', $studio_id)->find_all();
+                    $mark = 1;
+                    $count = 0;
+
+                    if ($ratings->count() > 0) {
+                        $count = $ratings[0]->count;
+                        $mark = $ratings[0]->mark;
+                    }
+
+                    ?>
+                    <div class="rating_studio" data-average="<?php echo str_replace(',', '.', round($mark, 1)); ?>">
+                    </div>
+                    <p class="ratingText" style="text-align: left">(<span
+                            id="rating_count"><?php echo $count;  ?></span> голосов, <?php echo $studio->view;  ?> просмотров)</p>
+                </div>
+            </td>
+            <td class="vertical_top padding_top padding_left">
+                <div class="studio_price ">от <?php echo $studio->price; ?> руб/час
+                </div>
+
+                <div class="studio_url"><a
+                        href="<?php echo $studio_url;?>" target="_blank"><?php echo $studio->url;?></a>
+                </div>
+                <div class="studio_email "><a
+                        href="mailto:<?php echo $email; ?>"><?php echo $email; ?></a></div>
+
+                <div class="studio_time "><?php echo $studio->time; ?></div>
+
+                <a href="/catalog">
+                    <div class="href_a"></div>
+                    <div class="button_back">Назад в каталог</div>
+                </a>
+
+            </td>
+        </tr>
+    </table>
+    
+    <div class="social">
+        <span class="float_left">Поделиться:</span>
+
+        <div class="share42init" data-title="<?php echo $social_title;?>"></div>
+    </div>
+
+    <div class="big_text">
+        О студии
+    </div>
+    <table>
+        <tr>
+            <td style="width: 300px" class="vertical_top">
+                <div class="studio_more"><?php echo $studio->more; ?></div>
+            </td>
+            <td style="width: 360px" class="vertical_top padding_left">
+                <div id="YMapsID" class="studio_map" style="width:350px;height:200px"></div>
+            </td>
+        </tr>
+    </table>
+
+
+    <table class="table_studio">
+        <tr>
+            <td class="vertical_top" style="width: 395px">
+                <div class="middle_text">
+                    Музыкальные инструменты
+                </div>
+                <div>
+                    <?php echo nl2br($studio->music_tools); ?>.
+                </div>
+
+                <div class="middle_text">Парк микрофонов</div>
+                <div>
+                    <?php echo nl2br($studio->microphones); ?>
+                </div>
+
+
+                <table>
+                    <tr>
+                        <td style="width: 205px;" class="vertical_top">
+                            <div class="middle_text">Количество каналов одновременной записи:</div>
+                        </td>
+                        <td class="vertical_top">
+                            <div style="padding-top: 20px"
+                                 class="select_color sizeTextStudio"><?php echo $studio->count_channel; ?></div>
+                        </td>
+                        <td class="vertical_top" style="width: 170px;">
+                            <div class="middle_text">Общая площадь студии:</div>
+                        </td>
+                        <td class="vertical_top">
+                            <div style="padding-top: 10px"
+                                 class="select_color sizeTextStudio"> <?php echo $studio->area; ?>м<sup class="supSize">2</sup>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+
+                <div class="middle_text">Контактное лицо</div>
+
+                <div class="studio_contact">
+                    <?php echo $studio->fio; ?>
+                    , <?php echo '<span style="font-weight:bold;">' . $studio->phone . '</span>'; ?>, <a
+                        href="mailto:<?php echo $email; ?>"><?php echo $email; ?></a>
+                </div>
+
+
+            </td>
+            <td class="vertical_top">
+
+                <div class="studio_works">
+                    <h2 class="hFinde typeworksize">Виды выполняемых работ</h2>
+
+                    <div class="finde_chech_top">
+                        <ul class="typeworkul">
+                            <?php
+                            foreach ($work as $w) {
+                                echo "<li>– " . $w->name . "</li>";
+                            }
+                            ?>
+                        </ul>
+                    </div>
+                </div>
+
+            </td>
+        </tr>
+    </table>
+
+    <?php
+    if ($musics->count() > 0) {
+        ?>
+        <div class="middle_text">Примеры работ студии</div>
+        <div class="music">
+            <?php
+            $i_c = 0;
+            if (isset($musics))
+                foreach ($musics as $m) {
+                    $i_c++;
+                    ?>
+                    <object width="350" height="35" data="/player.swf" type="application/x-shockwave-flash">
+                        <param name="movie" value="/player.swf"/>
+                        <param name="flashvars"
+                               value="path_mp3=/files/<?php echo $m->user_id; ?>/musics/<?php echo $m->url; ?>.mp3&name_mp3=<?php echo $m->description; ?>&w=350&h=35&cbf=0xff0099&cb=0xffffff&cif=0xcccccc&ci=0xCF3584&cbuf=0xdddddd&ct=0xCF3584&auto=no"/>
+                        <param name="wmode" value="transparent"/>
+                    </object>
+                    </p>
+                <?php
+
+                }
+            ?>
+
+
+        </div>
+    <?php
+
+    }
+
+
+    ?>
+
+
+
+
+    <?php
+    if ($photos->count() > 0) {
+        ?>
+        <p class="font_type">Фотографии студии</p>
+        <div>
+            <div class="horizontal2">
+                <div class="horizontal">
+
+                    <div class="carousel">
+                        <a class="carousel_prev carousel_left" href="">prev</a>
+
+                        <div class="carousel_container">
+                            <ul class="portfolio_items">
+                                <?php
+                                foreach ($photos as $p) {
+                                    ?>
+                                    <li>
+                                        <div class="inner"><a rel="lightbox[roadtrip]"
+                                                              href="/files/<?php echo $studio_id . "/images/" . $p->url; ?>.png"><img
+                                                    src="/files/<?php echo $studio_id . "/images/prev_" . $p->url; ?>.png"
+                                                    width="150" height="90"></a></div>
+                                    </li>
+                                <?php
+
+                                }
+                                ?>
+                            </ul>
+                        </div>
+                        <a class="carousel_next carousel_right" href="">next</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    <?php
+
+    }
+
+    ?>
+
+
+    </div>
+    <!-- Begin Comments -->
+    <?php
+
+    function children($comments, $id)
+    {
+        $child_comments = array();
+        foreach ($comments as $com) {
+            if ($com->root == $id) {
+                array_push($child_comments, $com);
+            }
+        }
+        return $child_comments;
+    }
+
+
+    function print_comment($comment, $other_comments, $left)
+    {
+        $com_image = "/images/no_photo.gif";        
+        if (!empty($comment->add_user_id)){
+            $tstudios = new Model_Studios();
+            $t_st = $tstudios->where('user_id','=',$comment->add_user_id)->find();
+            
+            if (isset($t_st->photo)){
+                $com_image = $t_st->photo;
+            }
+            
+        }
+        ?>
+        <h1></h1>
+        <ol class="root_comment" style="padding-left: <?php echo $left; ?>px;">
+            <li class="comment">
+                <div class="comment">
+                    <input type="hidden" value="<?php echo $comment->id; ?>" class="comment_id"/>
+
+                    <?php
+                    if (isset($com_image) && strlen($com_image) > 3) {
+                        ?>
+                        <img src="<?php echo $com_image; ?>" class="comment_image" width="100" height="100">
+                    <?php
+                    }
+                    ?>
+                    <div class="message">
+                        <div class="info">
+                            <h2><?php echo $comment->name; ?></h2>
+
+                            <p class="meta">написано <?php echo $comment->date; ?></p>
+                        </div>
+                        <div class="comment-body ">
+                            <p><?php echo $comment->text; ?></p>
+                        </div>
+                        <span class="edit-link"></span>
+                    </div>
+                    <table style="width: 200px">
+                        <tr>
+                            <td class="vertical_top"><a href="#" onclick="return false;">
+                                    <div class="like"></div>
+                                </a><span class="like_count">(<?php echo $comment->like; ?>)</span></td>
+                            <td class="vertical_top"><a href="#" onclick="return false;">
+                                    <div class="dlike"></div>
+                                </a><span class="dlike_count">(<?php echo $comment->dlike; ?>)</span></td>
+                            <td class="vertical_top"><a href="#" onclick="return false;" class="select_color ansver">ответить</a>
+                            </td>
+                        </tr>
+                    </table>
+
+                    <div class="clear"></div>
+                </div>
+                <div class="clear"></div>
+            </li>
+        </ol>
+        <?php
+        $child_comments = children($other_comments, $comment->id);
+        foreach ($child_comments as $c) {
+            print_comment($c, $other_comments, $left + 20);
+        }
+
+    }
+
+    if (isset($comments) && count($comments) > 0) {
+        $root_coments = array();
+        $other_comments = array();
+        foreach ($comments as $com) {
+            if ($com->root == 0) {
+                array_push($root_coments, $com);
+            } else {
+                array_push($other_comments, $com);
+            }
+        }
+        ?>
+        <div id="comments">
+
+            <?php
+            foreach ($root_coments as $comment) {
+                print_comment($comment, $other_comments, 0);
+            }
+
+            ?>
+
+
+        </div>
+    <?php
+    }
+    ?>
+    <div style="overflow: hidden">
+        <div id="vk_comments2" style="margin: -150px 0 0 0;"></div>
+    </div>
+
+
+    <div id="wrapper" class="tab1">
+        <a href="#" onclick="return false" class="tab1 tabs_href">Комментировать через AudioMe</a> |
+        <a href="#" onclick="return false" class="tab2 tabs_href">Комментировать через VK</a>
+        <!--|
+        <a href="#" onclick="return false" class="tab3 tabs_href">Комментировать через Facebook</a> -->
+
+        <div class="tab1">
+
+            <div id="comment-form" class="comment-form tab1">
+
+                <div id="respond" class="tab1">
+                    <form action="/addFree/comments/<?php echo $studio_id; ?>" onsubmit="return valid_form()"
+                          method="post"
+                          id="commentform">
+                        <input type="hidden" value="0" id="root" name="root"/>
+                        <table>
+                            <tr>
+                                <td style="width: 470px;">
+                                    <?php
+                                    $auth = Auth::instance();
+                                    $name = "";
+                                    $phone = "";
+                                    if ($auth->logged_in()) {
+                                        $user_temp = $auth->get_user();
+                                        $user_id = $user_temp->id;
+                                        $studios = new Model_Studios();
+                                        $studio_temp = $studios->where('user_id', '=', $user_id)->find();
+                                        if (isset($studio_temp->name)) {
+                                            $name = $studio_temp->name;
+                                        }
+                                        if (isset($studio_temp->phone)) {
+                                            $phone = $studio_temp->phone;
+                                        }
+                                    }
+
+                                    ?>
+                                    <?php
+                                    if ($name != "") {
+                                        ?>
+                                        <input id="author" name="name" type="hidden" value="<?php echo $name; ?>"
+                                               size="30">
+                                    <?php
+
+                                    } else {
+                                        ?>
+                                        <p class="comment-form-author">
+                                            <input id="author" name="name" placeholder="Ваше имя *" type="text" value=""
+                                                   size="30" aria-required='true'/>
+                                        </p>
+
+                                    <?php
+                                    }
+                                    ?>
+
+                                    <?php
+                                    if ($name != "") {
+                                        ?>
+                                        <input id="phone" name="phone" type="hidden" value="<?php echo $phone; ?>"
+                                               size="30"
+                                               aria-required='true'/>
+                                    <?php
+
+                                    } else {
+                                        ?>
+                                        <p class="comment-form-email">
+                                            <input id="phone" name="phone" placeholder="Телефон" type="text" value=""
+                                                   size="30" aria-required='true'/>
+                                        </p>
+
+                                    <?php
+                                    }
+                                    ?>
+
+                                    <p id="re_comment"><i>Re: <span></span></i></p>
+                                    <p class="comment-form-comment">
+                                        <textarea id="comment" name="comment" placeholder="Комментарий *" cols="45"
+                                                  rows="8" aria-required="true"></textarea>
+                                    </p>
+                                </td>
+                                <td class="vertical_bottom">
+                                    <input name="btnsubmincomments" type="submit" id="submit" value="Отправить"/>
+                                </td>
+                            </tr>
+				<tr>
+					<td colspan="2">
+						<p>
+						    <span class="select_color">*</span> - обязательные поля для заполнения
+						</p>
+					</td>
+				</tr>
+                        </table>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="tab2">
+            <div class="tab2" style="height: 160px; overflow: hidden">
+                <div class="tab2" id="vk_comments"></div>
+            </div>
+        </div>
+        <div class="tab3">
+            <div class="tab3" style="height: 160px; overflow: hidden">
+                <div class="tab3" id="vk_facebook"></div>
+            </div>
+        </div>
+    </div>
+<?php
+}
+?>
+
+<div class="overlay" id="overlay" style="display:none;"></div>
+<div class="box" id="box">
+    <a class="boxclose" id="boxclose"></a>
+
+    <div id="message_text"></div>
+</div>
+<script type="text/javascript">
+    VK.Widgets.Comments('vk_comments2', {limit: 10});
+</script>
+
+<script type="text/javascript">
+    VK.Widgets.Comments('vk_comments');
+</script>
+
+
+<script type="text/javascript">
+
+    function valid_form() {
+        var c_name = jQuery('#author').val();
+        var c_comment = jQuery('#comment').val();
+        var correct = true;
+        if (c_name.length <= 1) {
+            jQuery('#author').css('background', 'red');
+            correct = false;
+        } else {
+            jQuery('#author').removeAttr('style');
+        }
+
+        if (c_comment.length <= 1) {
+            jQuery('#comment').css('background', 'red');
+            correct = false;
+        } else {
+            jQuery('#comment').removeAttr('style');
+        }
+        return correct;
+    }
+    jQuery(function () {
+
+        jQuery('.ansver').click(function () {
+            var parent = jQuery(this).parent().parent().parent().parent().parent();
+            var st_name = (parent).find('div.info h2').html();
+            $('#re_comment span').html(st_name);
+            $('#re_comment').css('visibility', 'visible');
+            var id = jQuery('.comment_id', parent).val();
+            jQuery('#root').val(id);
+            jQuery('#comment').focus();
+        })
+
+        jQuery('.like').click(function () {
+            var parent = jQuery(this).parent().parent().parent().parent().parent().parent();
+            var id = jQuery('.comment_id', parent).val();
+            jQuery.ajax({
+                type: "POST",
+                data: ({id: id}),
+                url: "/addFree/like",
+                dataType: "text",
+                success: function (data) {
+                    jQuery('.like_count', parent).text(data);
+                }
+            });
+
+
+        })
+
+        jQuery('.dlike').click(function () {
+            var parent = jQuery(this).parent().parent().parent().parent().parent().parent();
+            var id = jQuery('.comment_id', parent).val();
+            jQuery.ajax({
+                type: "POST",
+                data: ({id: id}),
+                url: "/addFree/dlike",
+                dataType: "text",
+                success: function (data) {
+                    jQuery('.dlike_count', parent).text(data);
+                }
+            });
+
+        })
+
+        jQuery("#phone").mask("+7(999) 999 99 99");
+        var count_music = jQuery('.music p').size();
+        jQuery('.music').css('height', (count_music * 50) + 'px');
+
+        jQuery(".rating_studio").jRating({
+            length: 5,
+            showRateInfo: false,
+            decimalLength: 1,
+            <?php
+                if ($cook != -1){
+                    echo "isDisabled : true,";
+                }
+            ?>
+            phpPath: '/rating/index/<?php echo $studio_id;  ?>',
+            onSuccess: function () {
+                var count = parseInt(jQuery('#rating_count').text());
+                count++;
+                jQuery('#rating_count').text(count);
+
+            },
+            onError: function () {
+            }
+        });
+
+
+        jQuery('#boxclose').click(function () {
+            $('#commentform').trigger('reset');
+            jQuery('#box').animate({'top': '-200px'}, 500, function () {
+                jQuery('#overlay').fadeOut('fast');
+            });
+        });
+
+        jQuery('#wrapper a').click(function () {
+            if (jQuery(this).attr('class') != jQuery('#wrapper').attr('class')) {
+                jQuery('#wrapper').attr('class', jQuery(this).attr('class'));
+            }
+        });
+
+        jQuery('.carousel').elegantcarousel({
+            delay: 50,
+            fade: 300,
+            slide: 500,
+            effect: 'fade',
+            orientation: 'horizontal',
+            loop: false,
+            autoplay: false,
+            time: 5000      });
+
+    });
+
+    // Создание обработчика для события window.onLoad
+    YMaps.jQuery(function () {
+        // Создание экземпляра карты и его привязка к созданному контейнеру
+        var map = new YMaps.Map(YMaps.jQuery("#YMapsID")[0]);
+
+        // Установка для карты ее центра и масштаба
+        map.setCenter(new YMaps.GeoPoint(37.64, 55.76), 11);
+
+        // Создание обычных студий
+        var s1 = new YMaps.Style();
+        s1.iconStyle = new YMaps.IconStyle();
+        s1.iconStyle.href = "/image/icons/studio.png";
+        s1.iconStyle.size = new YMaps.Point(38, 38);
+        s1.iconStyle.offset = new YMaps.Point(-9, -29);
+
+        // Создание стиля для примиум
+        var s2 = new YMaps.Style();
+        s2.iconStyle = new YMaps.IconStyle();
+        s2.iconStyle.href = "/image/icons/me.png";
+        s2.iconStyle.size = new YMaps.Point(38, 38);
+        s2.iconStyle.offset = new YMaps.Point(-9, -29);
+
+
+// координаты объекта
+        <?php
+
+         $rating = new Model_Rating();
+         if (isset($studio))
+
+            if ($studio->latitude != null && $studio->longitude){
+             $ratings = $rating->where('user_id', '=', $studio->user_id)->find_all();
+        $mark = 1;
+        $count = 0;
+
+        if ($ratings->count() > 0) {
+            $count = $ratings[0]->count;
+            $mark = $ratings[0]->mark;
+        }
+        ?>
+        map.setCenter(new YMaps.GeoPoint(<?php echo $studio->latitude; ?>, <?php echo $studio->longitude; ?>), 11);
+        var placemark<?php echo $studio->id; ?> = new YMaps.Placemark(new YMaps.GeoPoint(<?php echo $studio->latitude; ?>, <?php echo $studio->longitude; ?>), {style: s<?php if ($studio->premium) echo 2;else echo 1; ?>});
+        placemark<?php echo $studio->id; ?>.name = "<?php echo $studio->name; ?> ";
+        placemark<?php echo $studio->id; ?>.description = "<?php echo "Цена:".$studio->price." руб/час рейтинг:".round($mark,2); ?> ";
+        map.addOverlay(placemark<?php echo $studio->id; ?>);
+
+        <?php
+            }
+
+         ?>
+
+        // map.addControl(new YMaps.ToolBar());
+        map.addControl(new YMaps.Zoom());
+        //map.addControl(new YMaps.ScaleLine());
+    });
+
+</script>

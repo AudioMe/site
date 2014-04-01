@@ -1,0 +1,77 @@
+<div class="big_text">
+    Куплю/Продам
+</div>
+<?php
+if (isset($package) && $package['level'] > 1) {
+?>
+<a class="a_back add_new_button" style="    margin: 0; width: 100%;" href="/addBuy">
+    <div class="button_back" style="float: right">Добавить/Изменить</div>
+</a>
+<?php
+}
+?>
+<div class="news all_news">
+
+
+
+    <?php
+    $imagesI = new Model_BuyPhotos();
+    $studios = new Model_Studios();
+    if (isset($buy))
+        foreach ($buy as $art) {
+            $im = $imagesI->where('buy_id','=', $art->id)->find_all();
+            $st = $studios->where('user_id', '=', $art->user_id)->find_all();
+            ?>
+            <div class="new">
+                <table class="big_table">
+                    <tr>
+                        <td class="vertical_top img_prev_bloc"> <?php if (isset($im) && isset($im[0])){
+                                $img = $im[count($im)-1];
+                                ?>
+
+                                <img class="leftimg"
+                                     src="/files/<?php echo $art->user_id . "/buy/prev_" . $img->id . ".png"; ?>"
+                                     width="240">
+                            <?php
+                            }
+                            ?></td>
+                        <td class="vertical_top">
+                            <div class="middle_title"><a href="/buy/view/<?php echo $art->id; ?>"><?php echo $art->title; ?> <span class="select_color"><?php echo Model_Currencies::getFormatedPrice($art->currency_id, $art->price); ?></span></a></div>
+
+                            <div class="new_short_text">
+                                <?php echo $art->preview; ?>
+                            </div>
+
+                            <div class="more"><a href="/buy/view/<?php echo $art->id; ?>"> читать далее...</a></div>
+                        </td>
+                    </tr>
+                </table>
+
+
+
+            </div>
+        <?php
+        }
+    ?>
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+<div class="pagination">
+    <?php if (isset($pagination)) echo $pagination; ?>
+</div>
+
+<script type="text/javascript">
+    jQuery(function () {
+        jQuery('#menu_buy').addClass("menu_active");
+    })
+</script>

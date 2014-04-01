@@ -1,0 +1,226 @@
+<?php defined('SYSPATH') OR die('No direct script access.'); ?>
+
+2013-11-04 11:27:51 --- EMERGENCY: Database_Exception [ 1064 ]: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '-1' at line 1 [ SELECT * FROM `studios` AS `s` WHERE `public` = '1' AND `premium` = '0' LIMIT 3 OFFSET -1 ] ~ MODPATH/database/classes/Kohana/Database/MySQL.php [ 194 ] in /var/www/antony/data/www/audiome.ru/modules/database/classes/Kohana/Database/Query.php:251
+2013-11-04 11:27:51 --- DEBUG: #0 /var/www/antony/data/www/audiome.ru/modules/database/classes/Kohana/Database/Query.php(251): Kohana_Database_MySQL->query(1, 'SELECT * FROM `...', false, Array)
+#1 /var/www/antony/data/www/audiome.ru/application/classes/Controller/Catalog.php(69): Kohana_Database_Query->execute()
+#2 /var/www/antony/data/www/audiome.ru/application/classes/Controller/Catalog.php(32): Controller_Catalog->_getStudios(4, 8)
+#3 /var/www/antony/data/www/audiome.ru/system/classes/Kohana/Controller.php(84): Controller_Catalog->action_next()
+#4 [internal function]: Kohana_Controller->execute()
+#5 /var/www/antony/data/www/audiome.ru/system/classes/Kohana/Request/Client/Internal.php(97): ReflectionMethod->invoke(Object(Controller_Catalog))
+#6 /var/www/antony/data/www/audiome.ru/system/classes/Kohana/Request/Client.php(114): Kohana_Request_Client_Internal->execute_request(Object(Request), Object(Response))
+#7 /var/www/antony/data/www/audiome.ru/system/classes/Kohana/Request.php(991): Kohana_Request_Client->execute(Object(Request))
+#8 /var/www/antony/data/www/audiome.ru/index.php(118): Kohana_Request->execute()
+#9 {main} in /var/www/antony/data/www/audiome.ru/modules/database/classes/Kohana/Database/Query.php:251
+2013-11-04 11:55:39 --- EMERGENCY: ErrorException [ 8 ]: Trying to get property of non-object ~ APPPATH/views/pages/view_news.php [ 91 ] in /var/www/antony/data/www/audiome.ru/application/views/pages/view_news.php:91
+2013-11-04 11:55:39 --- DEBUG: #0 /var/www/antony/data/www/audiome.ru/application/views/pages/view_news.php(91): Kohana_Core::error_handler(8, 'Trying to get p...', '/var/www/antony...', 91, Array)
+#1 /var/www/antony/data/www/audiome.ru/system/classes/Kohana/View.php(61): include('/var/www/antony...')
+#2 /var/www/antony/data/www/audiome.ru/system/classes/Kohana/View.php(348): Kohana_View::capture('/var/www/antony...', Array)
+#3 /var/www/antony/data/www/audiome.ru/system/classes/Kohana/View.php(228): Kohana_View->render()
+#4 /var/www/antony/data/www/audiome.ru/application/views/basic/3columns.php(24): Kohana_View->__toString()
+#5 /var/www/antony/data/www/audiome.ru/system/classes/Kohana/View.php(61): include('/var/www/antony...')
+#6 /var/www/antony/data/www/audiome.ru/system/classes/Kohana/View.php(348): Kohana_View::capture('/var/www/antony...', Array)
+#7 /var/www/antony/data/www/audiome.ru/system/classes/Kohana/Controller/Template.php(44): Kohana_View->render()
+#8 /var/www/antony/data/www/audiome.ru/system/classes/Kohana/Controller.php(87): Kohana_Controller_Template->after()
+#9 [internal function]: Kohana_Controller->execute()
+#10 /var/www/antony/data/www/audiome.ru/system/classes/Kohana/Request/Client/Internal.php(97): ReflectionMethod->invoke(Object(Controller_News))
+#11 /var/www/antony/data/www/audiome.ru/system/classes/Kohana/Request/Client.php(114): Kohana_Request_Client_Internal->execute_request(Object(Request), Object(Response))
+#12 /var/www/antony/data/www/audiome.ru/system/classes/Kohana/Request.php(991): Kohana_Request_Client->execute(Object(Request))
+#13 /var/www/antony/data/www/audiome.ru/index.php(118): Kohana_Request->execute()
+#14 {main} in /var/www/antony/data/www/audiome.ru/application/views/pages/view_news.php:91
+2013-11-04 12:25:22 --- EMERGENCY: Database_Exception [ 1064 ]: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '-1' at line 1 [ SELECT * FROM `studios` AS `s` WHERE `public` = '1' AND `premium` = '0' LIMIT 3 OFFSET -1 ] ~ MODPATH/database/classes/Kohana/Database/MySQL.php [ 194 ] in /var/www/antony/data/www/audiome.ru/modules/database/classes/Kohana/Database/Query.php:251
+2013-11-04 12:25:22 --- DEBUG: #0 /var/www/antony/data/www/audiome.ru/modules/database/classes/Kohana/Database/Query.php(251): Kohana_Database_MySQL->query(1, 'SELECT * FROM `...', false, Array)
+#1 /var/www/antony/data/www/audiome.ru/application/classes/Controller/Catalog.php(69): Kohana_Database_Query->execute()
+#2 /var/www/antony/data/www/audiome.ru/application/classes/Controller/Catalog.php(32): Controller_Catalog->_getStudios(4, 8)
+#3 /var/www/antony/data/www/audiome.ru/system/classes/Kohana/Controller.php(84): Controller_Catalog->action_next()
+#4 [internal function]: Kohana_Controller->execute()
+#5 /var/www/antony/data/www/audiome.ru/system/classes/Kohana/Request/Client/Internal.php(97): ReflectionMethod->invoke(Object(Controller_Catalog))
+#6 /var/www/antony/data/www/audiome.ru/system/classes/Kohana/Request/Client.php(114): Kohana_Request_Client_Internal->execute_request(Object(Request), Object(Response))
+#7 /var/www/antony/data/www/audiome.ru/system/classes/Kohana/Request.php(991): Kohana_Request_Client->execute(Object(Request))
+#8 /var/www/antony/data/www/audiome.ru/index.php(118): Kohana_Request->execute()
+#9 {main} in /var/www/antony/data/www/audiome.ru/modules/database/classes/Kohana/Database/Query.php:251
+2013-11-04 15:24:41 --- EMERGENCY: ErrorException [ 4 ]: syntax error, unexpected ';' ~ APPPATH/classes/Model/Studios.php [ 53 ] in file:line
+2013-11-04 15:24:41 --- DEBUG: #0 [internal function]: Kohana_Core::shutdown_handler()
+#1 {main} in file:line
+2013-11-04 15:39:46 --- EMERGENCY: ErrorException [ 1 ]: Call to undefined function phpvar_dump() ~ APPPATH/views/pages/studio.php [ 273 ] in file:line
+2013-11-04 15:39:46 --- DEBUG: #0 [internal function]: Kohana_Core::shutdown_handler()
+#1 {main} in file:line
+2013-11-04 15:42:06 --- EMERGENCY: Kohana_Exception [ 0 ]: The add_user_id property does not exist in the Model_Comments class ~ MODPATH/orm/classes/Kohana/ORM.php [ 684 ] in /var/www/antony/data/www/audiome.ru/modules/orm/classes/Kohana/ORM.php:600
+2013-11-04 15:42:06 --- DEBUG: #0 /var/www/antony/data/www/audiome.ru/modules/orm/classes/Kohana/ORM.php(600): Kohana_ORM->get('add_user_id')
+#1 /var/www/antony/data/www/audiome.ru/application/views/pages/studio.php(273): Kohana_ORM->__get('add_user_id')
+#2 /var/www/antony/data/www/audiome.ru/application/views/pages/studio.php(338): print_comment(Object(Model_Comments), Array, 0)
+#3 /var/www/antony/data/www/audiome.ru/system/classes/Kohana/View.php(61): include('/var/www/antony...')
+#4 /var/www/antony/data/www/audiome.ru/system/classes/Kohana/View.php(348): Kohana_View::capture('/var/www/antony...', Array)
+#5 /var/www/antony/data/www/audiome.ru/system/classes/Kohana/View.php(228): Kohana_View->render()
+#6 /var/www/antony/data/www/audiome.ru/application/views/basic/3columns.php(24): Kohana_View->__toString()
+#7 /var/www/antony/data/www/audiome.ru/system/classes/Kohana/View.php(61): include('/var/www/antony...')
+#8 /var/www/antony/data/www/audiome.ru/system/classes/Kohana/View.php(348): Kohana_View::capture('/var/www/antony...', Array)
+#9 /var/www/antony/data/www/audiome.ru/system/classes/Kohana/Controller/Template.php(44): Kohana_View->render()
+#10 /var/www/antony/data/www/audiome.ru/system/classes/Kohana/Controller.php(87): Kohana_Controller_Template->after()
+#11 [internal function]: Kohana_Controller->execute()
+#12 /var/www/antony/data/www/audiome.ru/system/classes/Kohana/Request/Client/Internal.php(97): ReflectionMethod->invoke(Object(Controller_Studio))
+#13 /var/www/antony/data/www/audiome.ru/system/classes/Kohana/Request/Client.php(114): Kohana_Request_Client_Internal->execute_request(Object(Request), Object(Response))
+#14 /var/www/antony/data/www/audiome.ru/system/classes/Kohana/Request.php(991): Kohana_Request_Client->execute(Object(Request))
+#15 /var/www/antony/data/www/audiome.ru/index.php(118): Kohana_Request->execute()
+#16 {main} in /var/www/antony/data/www/audiome.ru/modules/orm/classes/Kohana/ORM.php:600
+2013-11-04 16:02:38 --- EMERGENCY: ErrorException [ 8 ]: Undefined variable: comments ~ APPPATH/views/pages/studio.php [ 264 ] in /var/www/antony/data/www/audiome.ru/application/views/pages/studio.php:264
+2013-11-04 16:02:38 --- DEBUG: #0 /var/www/antony/data/www/audiome.ru/application/views/pages/studio.php(264): Kohana_Core::error_handler(8, 'Undefined varia...', '/var/www/antony...', 264, Array)
+#1 /var/www/antony/data/www/audiome.ru/application/views/pages/studio.php(340): print_comment(Object(Model_Comments), Array, 0)
+#2 /var/www/antony/data/www/audiome.ru/system/classes/Kohana/View.php(61): include('/var/www/antony...')
+#3 /var/www/antony/data/www/audiome.ru/system/classes/Kohana/View.php(348): Kohana_View::capture('/var/www/antony...', Array)
+#4 /var/www/antony/data/www/audiome.ru/system/classes/Kohana/View.php(228): Kohana_View->render()
+#5 /var/www/antony/data/www/audiome.ru/application/views/basic/3columns.php(24): Kohana_View->__toString()
+#6 /var/www/antony/data/www/audiome.ru/system/classes/Kohana/View.php(61): include('/var/www/antony...')
+#7 /var/www/antony/data/www/audiome.ru/system/classes/Kohana/View.php(348): Kohana_View::capture('/var/www/antony...', Array)
+#8 /var/www/antony/data/www/audiome.ru/system/classes/Kohana/Controller/Template.php(44): Kohana_View->render()
+#9 /var/www/antony/data/www/audiome.ru/system/classes/Kohana/Controller.php(87): Kohana_Controller_Template->after()
+#10 [internal function]: Kohana_Controller->execute()
+#11 /var/www/antony/data/www/audiome.ru/system/classes/Kohana/Request/Client/Internal.php(97): ReflectionMethod->invoke(Object(Controller_Studio))
+#12 /var/www/antony/data/www/audiome.ru/system/classes/Kohana/Request/Client.php(114): Kohana_Request_Client_Internal->execute_request(Object(Request), Object(Response))
+#13 /var/www/antony/data/www/audiome.ru/system/classes/Kohana/Request.php(991): Kohana_Request_Client->execute(Object(Request))
+#14 /var/www/antony/data/www/audiome.ru/index.php(118): Kohana_Request->execute()
+#15 {main} in /var/www/antony/data/www/audiome.ru/application/views/pages/studio.php:264
+2013-11-04 16:34:22 --- EMERGENCY: ErrorException [ 4 ]: syntax error, unexpected ';' ~ APPPATH/classes/Model/Studios.php [ 58 ] in file:line
+2013-11-04 16:34:22 --- DEBUG: #0 [internal function]: Kohana_Core::shutdown_handler()
+#1 {main} in file:line
+2013-11-04 16:34:39 --- EMERGENCY: ErrorException [ 4 ]: syntax error, unexpected ';' ~ APPPATH/classes/Model/Studios.php [ 58 ] in file:line
+2013-11-04 16:34:39 --- DEBUG: #0 [internal function]: Kohana_Core::shutdown_handler()
+#1 {main} in file:line
+2013-11-04 16:35:21 --- EMERGENCY: ErrorException [ 1 ]: Call to a member function as_array() on a non-object ~ APPPATH/classes/Model/Studios.php [ 55 ] in file:line
+2013-11-04 16:35:21 --- DEBUG: #0 [internal function]: Kohana_Core::shutdown_handler()
+#1 {main} in file:line
+2013-11-04 16:51:27 --- EMERGENCY: Database_Exception [ 1064 ]: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '-1' at line 1 [ SELECT * FROM `studios` AS `s` WHERE `public` = '1' AND `premium` = '0' LIMIT 3 OFFSET -1 ] ~ MODPATH/database/classes/Kohana/Database/MySQL.php [ 194 ] in /var/www/antony/data/www/audiome.ru/modules/database/classes/Kohana/Database/Query.php:251
+2013-11-04 16:51:27 --- DEBUG: #0 /var/www/antony/data/www/audiome.ru/modules/database/classes/Kohana/Database/Query.php(251): Kohana_Database_MySQL->query(1, 'SELECT * FROM `...', false, Array)
+#1 /var/www/antony/data/www/audiome.ru/application/classes/Controller/Catalog.php(69): Kohana_Database_Query->execute()
+#2 /var/www/antony/data/www/audiome.ru/application/classes/Controller/Catalog.php(32): Controller_Catalog->_getStudios(4, 8)
+#3 /var/www/antony/data/www/audiome.ru/system/classes/Kohana/Controller.php(84): Controller_Catalog->action_next()
+#4 [internal function]: Kohana_Controller->execute()
+#5 /var/www/antony/data/www/audiome.ru/system/classes/Kohana/Request/Client/Internal.php(97): ReflectionMethod->invoke(Object(Controller_Catalog))
+#6 /var/www/antony/data/www/audiome.ru/system/classes/Kohana/Request/Client.php(114): Kohana_Request_Client_Internal->execute_request(Object(Request), Object(Response))
+#7 /var/www/antony/data/www/audiome.ru/system/classes/Kohana/Request.php(991): Kohana_Request_Client->execute(Object(Request))
+#8 /var/www/antony/data/www/audiome.ru/index.php(118): Kohana_Request->execute()
+#9 {main} in /var/www/antony/data/www/audiome.ru/modules/database/classes/Kohana/Database/Query.php:251
+2013-11-04 17:10:50 --- EMERGENCY: Database_Exception [ 1064 ]: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '-1' at line 1 [ SELECT * FROM `studios` AS `s` WHERE `public` = '1' AND `premium` = '0' LIMIT 3 OFFSET -1 ] ~ MODPATH/database/classes/Kohana/Database/MySQL.php [ 194 ] in /var/www/antony/data/www/audiome.ru/modules/database/classes/Kohana/Database/Query.php:251
+2013-11-04 17:10:50 --- DEBUG: #0 /var/www/antony/data/www/audiome.ru/modules/database/classes/Kohana/Database/Query.php(251): Kohana_Database_MySQL->query(1, 'SELECT * FROM `...', false, Array)
+#1 /var/www/antony/data/www/audiome.ru/application/classes/Controller/Catalog.php(69): Kohana_Database_Query->execute()
+#2 /var/www/antony/data/www/audiome.ru/application/classes/Controller/Catalog.php(32): Controller_Catalog->_getStudios(4, 8)
+#3 /var/www/antony/data/www/audiome.ru/system/classes/Kohana/Controller.php(84): Controller_Catalog->action_next()
+#4 [internal function]: Kohana_Controller->execute()
+#5 /var/www/antony/data/www/audiome.ru/system/classes/Kohana/Request/Client/Internal.php(97): ReflectionMethod->invoke(Object(Controller_Catalog))
+#6 /var/www/antony/data/www/audiome.ru/system/classes/Kohana/Request/Client.php(114): Kohana_Request_Client_Internal->execute_request(Object(Request), Object(Response))
+#7 /var/www/antony/data/www/audiome.ru/system/classes/Kohana/Request.php(991): Kohana_Request_Client->execute(Object(Request))
+#8 /var/www/antony/data/www/audiome.ru/index.php(118): Kohana_Request->execute()
+#9 {main} in /var/www/antony/data/www/audiome.ru/modules/database/classes/Kohana/Database/Query.php:251
+2013-11-04 17:27:39 --- EMERGENCY: Database_Exception [ 1064 ]: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '-1' at line 1 [ SELECT * FROM `studios` AS `s` WHERE `public` = '1' AND `premium` = '0' LIMIT 3 OFFSET -1 ] ~ MODPATH/database/classes/Kohana/Database/MySQL.php [ 194 ] in /var/www/antony/data/www/audiome.ru/modules/database/classes/Kohana/Database/Query.php:251
+2013-11-04 17:27:39 --- DEBUG: #0 /var/www/antony/data/www/audiome.ru/modules/database/classes/Kohana/Database/Query.php(251): Kohana_Database_MySQL->query(1, 'SELECT * FROM `...', false, Array)
+#1 /var/www/antony/data/www/audiome.ru/application/classes/Controller/Catalog.php(69): Kohana_Database_Query->execute()
+#2 /var/www/antony/data/www/audiome.ru/application/classes/Controller/Catalog.php(32): Controller_Catalog->_getStudios(4, 8)
+#3 /var/www/antony/data/www/audiome.ru/system/classes/Kohana/Controller.php(84): Controller_Catalog->action_next()
+#4 [internal function]: Kohana_Controller->execute()
+#5 /var/www/antony/data/www/audiome.ru/system/classes/Kohana/Request/Client/Internal.php(97): ReflectionMethod->invoke(Object(Controller_Catalog))
+#6 /var/www/antony/data/www/audiome.ru/system/classes/Kohana/Request/Client.php(114): Kohana_Request_Client_Internal->execute_request(Object(Request), Object(Response))
+#7 /var/www/antony/data/www/audiome.ru/system/classes/Kohana/Request.php(991): Kohana_Request_Client->execute(Object(Request))
+#8 /var/www/antony/data/www/audiome.ru/index.php(118): Kohana_Request->execute()
+#9 {main} in /var/www/antony/data/www/audiome.ru/modules/database/classes/Kohana/Database/Query.php:251
+2013-11-04 17:45:03 --- EMERGENCY: Database_Exception [ 1064 ]: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '-1' at line 1 [ SELECT * FROM `studios` AS `s` WHERE `public` = '1' AND `premium` = '0' LIMIT 3 OFFSET -1 ] ~ MODPATH/database/classes/Kohana/Database/MySQL.php [ 194 ] in /var/www/antony/data/www/audiome.ru/modules/database/classes/Kohana/Database/Query.php:251
+2013-11-04 17:45:03 --- DEBUG: #0 /var/www/antony/data/www/audiome.ru/modules/database/classes/Kohana/Database/Query.php(251): Kohana_Database_MySQL->query(1, 'SELECT * FROM `...', false, Array)
+#1 /var/www/antony/data/www/audiome.ru/application/classes/Controller/Catalog.php(69): Kohana_Database_Query->execute()
+#2 /var/www/antony/data/www/audiome.ru/application/classes/Controller/Catalog.php(32): Controller_Catalog->_getStudios(4, 8)
+#3 /var/www/antony/data/www/audiome.ru/system/classes/Kohana/Controller.php(84): Controller_Catalog->action_next()
+#4 [internal function]: Kohana_Controller->execute()
+#5 /var/www/antony/data/www/audiome.ru/system/classes/Kohana/Request/Client/Internal.php(97): ReflectionMethod->invoke(Object(Controller_Catalog))
+#6 /var/www/antony/data/www/audiome.ru/system/classes/Kohana/Request/Client.php(114): Kohana_Request_Client_Internal->execute_request(Object(Request), Object(Response))
+#7 /var/www/antony/data/www/audiome.ru/system/classes/Kohana/Request.php(991): Kohana_Request_Client->execute(Object(Request))
+#8 /var/www/antony/data/www/audiome.ru/index.php(118): Kohana_Request->execute()
+#9 {main} in /var/www/antony/data/www/audiome.ru/modules/database/classes/Kohana/Database/Query.php:251
+2013-11-04 17:51:16 --- EMERGENCY: Database_Exception [ 1064 ]: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '-1' at line 1 [ SELECT * FROM `studios` AS `s` WHERE `public` = '1' AND `premium` = '0' LIMIT 3 OFFSET -1 ] ~ MODPATH/database/classes/Kohana/Database/MySQL.php [ 194 ] in /var/www/antony/data/www/audiome.ru/modules/database/classes/Kohana/Database/Query.php:251
+2013-11-04 17:51:16 --- DEBUG: #0 /var/www/antony/data/www/audiome.ru/modules/database/classes/Kohana/Database/Query.php(251): Kohana_Database_MySQL->query(1, 'SELECT * FROM `...', false, Array)
+#1 /var/www/antony/data/www/audiome.ru/application/classes/Controller/Catalog.php(69): Kohana_Database_Query->execute()
+#2 /var/www/antony/data/www/audiome.ru/application/classes/Controller/Catalog.php(32): Controller_Catalog->_getStudios(4, 8)
+#3 /var/www/antony/data/www/audiome.ru/system/classes/Kohana/Controller.php(84): Controller_Catalog->action_next()
+#4 [internal function]: Kohana_Controller->execute()
+#5 /var/www/antony/data/www/audiome.ru/system/classes/Kohana/Request/Client/Internal.php(97): ReflectionMethod->invoke(Object(Controller_Catalog))
+#6 /var/www/antony/data/www/audiome.ru/system/classes/Kohana/Request/Client.php(114): Kohana_Request_Client_Internal->execute_request(Object(Request), Object(Response))
+#7 /var/www/antony/data/www/audiome.ru/system/classes/Kohana/Request.php(991): Kohana_Request_Client->execute(Object(Request))
+#8 /var/www/antony/data/www/audiome.ru/index.php(118): Kohana_Request->execute()
+#9 {main} in /var/www/antony/data/www/audiome.ru/modules/database/classes/Kohana/Database/Query.php:251
+2013-11-04 17:53:05 --- EMERGENCY: Database_Exception [ 1064 ]: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '-1' at line 1 [ SELECT * FROM `studios` AS `s` WHERE `public` = '1' AND `premium` = '0' LIMIT 3 OFFSET -1 ] ~ MODPATH/database/classes/Kohana/Database/MySQL.php [ 194 ] in /var/www/antony/data/www/audiome.ru/modules/database/classes/Kohana/Database/Query.php:251
+2013-11-04 17:53:05 --- DEBUG: #0 /var/www/antony/data/www/audiome.ru/modules/database/classes/Kohana/Database/Query.php(251): Kohana_Database_MySQL->query(1, 'SELECT * FROM `...', false, Array)
+#1 /var/www/antony/data/www/audiome.ru/application/classes/Controller/Catalog.php(69): Kohana_Database_Query->execute()
+#2 /var/www/antony/data/www/audiome.ru/application/classes/Controller/Catalog.php(32): Controller_Catalog->_getStudios(4, 8)
+#3 /var/www/antony/data/www/audiome.ru/system/classes/Kohana/Controller.php(84): Controller_Catalog->action_next()
+#4 [internal function]: Kohana_Controller->execute()
+#5 /var/www/antony/data/www/audiome.ru/system/classes/Kohana/Request/Client/Internal.php(97): ReflectionMethod->invoke(Object(Controller_Catalog))
+#6 /var/www/antony/data/www/audiome.ru/system/classes/Kohana/Request/Client.php(114): Kohana_Request_Client_Internal->execute_request(Object(Request), Object(Response))
+#7 /var/www/antony/data/www/audiome.ru/system/classes/Kohana/Request.php(991): Kohana_Request_Client->execute(Object(Request))
+#8 /var/www/antony/data/www/audiome.ru/index.php(118): Kohana_Request->execute()
+#9 {main} in /var/www/antony/data/www/audiome.ru/modules/database/classes/Kohana/Database/Query.php:251
+2013-11-04 17:57:41 --- EMERGENCY: Database_Exception [ 1064 ]: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '-1' at line 1 [ SELECT * FROM `studios` AS `s` WHERE `public` = '1' AND `premium` = '0' LIMIT 3 OFFSET -1 ] ~ MODPATH/database/classes/Kohana/Database/MySQL.php [ 194 ] in /var/www/antony/data/www/audiome.ru/modules/database/classes/Kohana/Database/Query.php:251
+2013-11-04 17:57:41 --- DEBUG: #0 /var/www/antony/data/www/audiome.ru/modules/database/classes/Kohana/Database/Query.php(251): Kohana_Database_MySQL->query(1, 'SELECT * FROM `...', false, Array)
+#1 /var/www/antony/data/www/audiome.ru/application/classes/Controller/Catalog.php(69): Kohana_Database_Query->execute()
+#2 /var/www/antony/data/www/audiome.ru/application/classes/Controller/Catalog.php(32): Controller_Catalog->_getStudios(4, 8)
+#3 /var/www/antony/data/www/audiome.ru/system/classes/Kohana/Controller.php(84): Controller_Catalog->action_next()
+#4 [internal function]: Kohana_Controller->execute()
+#5 /var/www/antony/data/www/audiome.ru/system/classes/Kohana/Request/Client/Internal.php(97): ReflectionMethod->invoke(Object(Controller_Catalog))
+#6 /var/www/antony/data/www/audiome.ru/system/classes/Kohana/Request/Client.php(114): Kohana_Request_Client_Internal->execute_request(Object(Request), Object(Response))
+#7 /var/www/antony/data/www/audiome.ru/system/classes/Kohana/Request.php(991): Kohana_Request_Client->execute(Object(Request))
+#8 /var/www/antony/data/www/audiome.ru/index.php(118): Kohana_Request->execute()
+#9 {main} in /var/www/antony/data/www/audiome.ru/modules/database/classes/Kohana/Database/Query.php:251
+2013-11-04 18:07:02 --- EMERGENCY: Database_Exception [ 1064 ]: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '-1' at line 1 [ SELECT * FROM `studios` AS `s` WHERE `public` = '1' AND `premium` = '0' LIMIT 3 OFFSET -1 ] ~ MODPATH/database/classes/Kohana/Database/MySQL.php [ 194 ] in /var/www/antony/data/www/audiome.ru/modules/database/classes/Kohana/Database/Query.php:251
+2013-11-04 18:07:02 --- DEBUG: #0 /var/www/antony/data/www/audiome.ru/modules/database/classes/Kohana/Database/Query.php(251): Kohana_Database_MySQL->query(1, 'SELECT * FROM `...', false, Array)
+#1 /var/www/antony/data/www/audiome.ru/application/classes/Controller/Catalog.php(69): Kohana_Database_Query->execute()
+#2 /var/www/antony/data/www/audiome.ru/application/classes/Controller/Catalog.php(32): Controller_Catalog->_getStudios(4, 8)
+#3 /var/www/antony/data/www/audiome.ru/system/classes/Kohana/Controller.php(84): Controller_Catalog->action_next()
+#4 [internal function]: Kohana_Controller->execute()
+#5 /var/www/antony/data/www/audiome.ru/system/classes/Kohana/Request/Client/Internal.php(97): ReflectionMethod->invoke(Object(Controller_Catalog))
+#6 /var/www/antony/data/www/audiome.ru/system/classes/Kohana/Request/Client.php(114): Kohana_Request_Client_Internal->execute_request(Object(Request), Object(Response))
+#7 /var/www/antony/data/www/audiome.ru/system/classes/Kohana/Request.php(991): Kohana_Request_Client->execute(Object(Request))
+#8 /var/www/antony/data/www/audiome.ru/index.php(118): Kohana_Request->execute()
+#9 {main} in /var/www/antony/data/www/audiome.ru/modules/database/classes/Kohana/Database/Query.php:251
+2013-11-04 18:33:37 --- EMERGENCY: ErrorException [ 8 ]: Undefined variable: title ~ APPPATH/views/pages/studio.php [ 104 ] in /var/www/antony/data/www/audiome.ru/application/views/pages/studio.php:104
+2013-11-04 18:33:37 --- DEBUG: #0 /var/www/antony/data/www/audiome.ru/application/views/pages/studio.php(104): Kohana_Core::error_handler(8, 'Undefined varia...', '/var/www/antony...', 104, Array)
+#1 /var/www/antony/data/www/audiome.ru/system/classes/Kohana/View.php(61): include('/var/www/antony...')
+#2 /var/www/antony/data/www/audiome.ru/system/classes/Kohana/View.php(348): Kohana_View::capture('/var/www/antony...', Array)
+#3 /var/www/antony/data/www/audiome.ru/system/classes/Kohana/View.php(228): Kohana_View->render()
+#4 /var/www/antony/data/www/audiome.ru/application/views/basic/3columns.php(24): Kohana_View->__toString()
+#5 /var/www/antony/data/www/audiome.ru/system/classes/Kohana/View.php(61): include('/var/www/antony...')
+#6 /var/www/antony/data/www/audiome.ru/system/classes/Kohana/View.php(348): Kohana_View::capture('/var/www/antony...', Array)
+#7 /var/www/antony/data/www/audiome.ru/system/classes/Kohana/Controller/Template.php(44): Kohana_View->render()
+#8 /var/www/antony/data/www/audiome.ru/system/classes/Kohana/Controller.php(87): Kohana_Controller_Template->after()
+#9 [internal function]: Kohana_Controller->execute()
+#10 /var/www/antony/data/www/audiome.ru/system/classes/Kohana/Request/Client/Internal.php(97): ReflectionMethod->invoke(Object(Controller_Studio))
+#11 /var/www/antony/data/www/audiome.ru/system/classes/Kohana/Request/Client.php(114): Kohana_Request_Client_Internal->execute_request(Object(Request), Object(Response))
+#12 /var/www/antony/data/www/audiome.ru/system/classes/Kohana/Request.php(991): Kohana_Request_Client->execute(Object(Request))
+#13 /var/www/antony/data/www/audiome.ru/index.php(118): Kohana_Request->execute()
+#14 {main} in /var/www/antony/data/www/audiome.ru/application/views/pages/studio.php:104
+2013-11-04 18:33:45 --- EMERGENCY: ErrorException [ 8 ]: Undefined variable: title ~ APPPATH/views/pages/studio.php [ 104 ] in /var/www/antony/data/www/audiome.ru/application/views/pages/studio.php:104
+2013-11-04 18:33:45 --- DEBUG: #0 /var/www/antony/data/www/audiome.ru/application/views/pages/studio.php(104): Kohana_Core::error_handler(8, 'Undefined varia...', '/var/www/antony...', 104, Array)
+#1 /var/www/antony/data/www/audiome.ru/system/classes/Kohana/View.php(61): include('/var/www/antony...')
+#2 /var/www/antony/data/www/audiome.ru/system/classes/Kohana/View.php(348): Kohana_View::capture('/var/www/antony...', Array)
+#3 /var/www/antony/data/www/audiome.ru/system/classes/Kohana/View.php(228): Kohana_View->render()
+#4 /var/www/antony/data/www/audiome.ru/application/views/basic/3columns.php(24): Kohana_View->__toString()
+#5 /var/www/antony/data/www/audiome.ru/system/classes/Kohana/View.php(61): include('/var/www/antony...')
+#6 /var/www/antony/data/www/audiome.ru/system/classes/Kohana/View.php(348): Kohana_View::capture('/var/www/antony...', Array)
+#7 /var/www/antony/data/www/audiome.ru/system/classes/Kohana/Controller/Template.php(44): Kohana_View->render()
+#8 /var/www/antony/data/www/audiome.ru/system/classes/Kohana/Controller.php(87): Kohana_Controller_Template->after()
+#9 [internal function]: Kohana_Controller->execute()
+#10 /var/www/antony/data/www/audiome.ru/system/classes/Kohana/Request/Client/Internal.php(97): ReflectionMethod->invoke(Object(Controller_Studio))
+#11 /var/www/antony/data/www/audiome.ru/system/classes/Kohana/Request/Client.php(114): Kohana_Request_Client_Internal->execute_request(Object(Request), Object(Response))
+#12 /var/www/antony/data/www/audiome.ru/system/classes/Kohana/Request.php(991): Kohana_Request_Client->execute(Object(Request))
+#13 /var/www/antony/data/www/audiome.ru/index.php(118): Kohana_Request->execute()
+#14 {main} in /var/www/antony/data/www/audiome.ru/application/views/pages/studio.php:104
+2013-11-04 18:34:53 --- EMERGENCY: ErrorException [ 8 ]: Undefined variable: social_title ~ APPPATH/views/pages/studio.php [ 104 ] in /var/www/antony/data/www/audiome.ru/application/views/pages/studio.php:104
+2013-11-04 18:34:53 --- DEBUG: #0 /var/www/antony/data/www/audiome.ru/application/views/pages/studio.php(104): Kohana_Core::error_handler(8, 'Undefined varia...', '/var/www/antony...', 104, Array)
+#1 /var/www/antony/data/www/audiome.ru/system/classes/Kohana/View.php(61): include('/var/www/antony...')
+#2 /var/www/antony/data/www/audiome.ru/system/classes/Kohana/View.php(348): Kohana_View::capture('/var/www/antony...', Array)
+#3 /var/www/antony/data/www/audiome.ru/system/classes/Kohana/View.php(228): Kohana_View->render()
+#4 /var/www/antony/data/www/audiome.ru/application/views/basic/3columns.php(24): Kohana_View->__toString()
+#5 /var/www/antony/data/www/audiome.ru/system/classes/Kohana/View.php(61): include('/var/www/antony...')
+#6 /var/www/antony/data/www/audiome.ru/system/classes/Kohana/View.php(348): Kohana_View::capture('/var/www/antony...', Array)
+#7 /var/www/antony/data/www/audiome.ru/system/classes/Kohana/Controller/Template.php(44): Kohana_View->render()
+#8 /var/www/antony/data/www/audiome.ru/system/classes/Kohana/Controller.php(87): Kohana_Controller_Template->after()
+#9 [internal function]: Kohana_Controller->execute()
+#10 /var/www/antony/data/www/audiome.ru/system/classes/Kohana/Request/Client/Internal.php(97): ReflectionMethod->invoke(Object(Controller_Studio))
+#11 /var/www/antony/data/www/audiome.ru/system/classes/Kohana/Request/Client.php(114): Kohana_Request_Client_Internal->execute_request(Object(Request), Object(Response))
+#12 /var/www/antony/data/www/audiome.ru/system/classes/Kohana/Request.php(991): Kohana_Request_Client->execute(Object(Request))
+#13 /var/www/antony/data/www/audiome.ru/index.php(118): Kohana_Request->execute()
+#14 {main} in /var/www/antony/data/www/audiome.ru/application/views/pages/studio.php:104

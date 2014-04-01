@@ -1,0 +1,191 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta http-equiv="content-type" content="text/html" />
+    <meta charset="utf-8" />
+	<title>AudioMe</title>
+    <link rel="icon" href="/img/favicon.ico" type="image/x-icon" />
+    <link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon" />
+    <link rel="icon" type="image/png" href="img/favicon.png" />
+    <link type="text/css" rel="stylesheet" href="css/ui.css" />
+    <link type="text/css" rel="stylesheet" href="css/jquery.formstyler.css" />
+    <link type="text/css" rel="stylesheet" href="css/jquery.bxslider.css" />
+    <script type="text/javascript" src="js/jquery-1.9.1.js"></script>
+    <!--script type="text/javascript" src="_xprecise/js/jquery.min.js"></script>
+    <script type="text/javascript" src="_xprecise/js/xprecise.min.js"></script-->
+    <script type="text/javascript" src="js/jquery.formstyler.js"></script>
+    <script>
+        $(function()
+        {
+            $("input[type='file'], input[type='checkbox'], input[type='radio'], select").styler();
+        });
+    </script>
+</head>
+
+<body>
+    <div id="wrap">
+        <!--HEADER_START-->
+        <header>
+            <div class="header_block width_wrap">
+                <a href="#" class="logo_block"><img src="img/logo.png" /></a>
+                <ul class="menu_top">
+                    <li><a href="#">Главная</a></li>
+                    <li><a href="#">Новости</a></li>
+                    <li><a href="#">Статьи</a></li>
+                    <li><a href="#">Скидки</a></li>
+                    <li><a href="#">Каталог</a></li>
+                </ul>
+                <div class="auth_block">
+                    <a href="/register" class="ui_button plus">Добавить студию</a>
+                    <a href="/login" class="login_link">Вход для студий</a>
+                </div>
+            </div>
+        </header>
+        <!--HEADER_END-->
+        
+        <!--CONTENT_START-->
+        <div class="content_wrap">
+            <div class="content_block width_wrap clearfix">
+                <div class="left_side">
+                    <h2 class="p_l_10">Анкета</h2>
+                    <div class="worksheet_block clearfix">
+                        <form method="post">
+                            <div class="left">
+                                <div class="clearfix m_b_10">
+                                    <div class="desc"><label for="address">Адрес:</label></div>
+                                    <div class="value"><input type="text" id="address" class="ui_input" /></div>
+                                </div>
+                                
+                                <div class="clearfix m_b_10">
+                                    <div class="desc"><label for="phone">Телефон:</label></div>
+                                    <div class="value"><input type="text" id="phone" class="ui_input" /></div>
+                                </div>
+                                
+                                <div class="clearfix m_b_10">
+                                    <div class="desc"><label>E-mail:</label></div>
+                                    <div class="value"><input type="text" class="ui_input" /></div>
+                                </div>
+                                
+                                <div class="clearfix m_b_10">
+                                    <div class="desc"><label>Название студии:</label></div>
+                                    <div class="value"><input type="text" class="ui_input" /></div>
+                                </div>
+                                
+                                <div class="clearfix m_b_10">
+                                    <div class="desc"><label>Сайт:</label></div>
+                                    <div class="value"><input type="text" class="ui_input" /></div>
+                                </div>
+                                
+                                <div class="clearfix m_b_10">
+                                    <div class="desc"><label>Площадь:</label></div>
+                                    <div class="value"><input type="text" class="ui_input" /></div>
+                                </div>
+                                
+                                <div class="clearfix m_b_10">
+                                    <div class="desc"><label>Цены от:</label></div>
+                                    <div class="value"><input type="text" class="ui_input" /></div>
+                                </div>
+                                
+                                <div class="clearfix m_b_10">
+                                    <div class="desc"><label>Контактное лицо:</label></div>
+                                    <div class="value"><input type="text" class="ui_input" /></div>
+                                </div>
+                                
+                                <div class="clearfix m_b_10">
+                                    <div class="desc"><label>Станция метро:</label></div>
+                                    <div class="value">
+                                        <select>
+                                            <option>Академическая</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                
+                                <div class="clearfix m_b_10">
+                                    <div class="desc"><label>Фотографии:</label></div>
+                                    <div class="value"><input type="file" /></div>
+                                </div>
+                                
+                                <div class="clearfix m_b_10">
+                                    <div class="desc"><label>Примеры работ:</label></div>
+                                    <div class="value"><input type="file" /></div>
+                                </div>
+                            </div>
+                            
+                            <div class="right">
+                                <div class="clearfix m_b_10">
+                                    <div class="desc"><label>Количествово каналов одновременной записи:</label></div>
+                                    <div class="value"><textarea class="ui_textarea"></textarea></div>
+                                </div>
+                                
+                                <div class="clearfix m_b_10">
+                                    <div class="desc"><label>Парк микрофонов:</label></div>
+                                    <div class="value"><textarea class="ui_textarea"></textarea></div>
+                                </div>
+                                
+                                <div class="clearfix m_b_10">
+                                    <div class="desc"><label>Муз. инструменты:</label></div>
+                                    <div class="value"><textarea class="ui_textarea"></textarea></div>
+                                </div>
+                                
+                                <div class="clearfix m_b_10">
+                                    <div class="desc"><label>Подробно о студии:</label></div>
+                                    <div class="value"><textarea class="ui_textarea"></textarea></div>
+                                </div>
+                                
+                                <div class="clearfix p_t_20">
+                                    <div class="desc"><label>Подробно о студии:</label></div>
+                                    <div class="value"><input type="submit" value="Отправить на модерацию" class="ui_button w_100" /></div>
+                                </div>
+                                
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                
+                <div class="right_side">                    
+                    <div class="p_articles_block" style="padding-top: 62px;">
+                        <div class="list_box">
+                            <h3>Последние новости</h3>
+                            <ul>
+                                <li><a href="#">Название статьи Lorem Ipsum</a></li>
+                                <li><a href="#">This is Photoshop's Lorem Ipsum</a></li>
+                                <li><a href="#">Version of Lorem Ipsum</a></li>
+                                <li><a href="#">Proin gravida nibh vel velit auctor</a></li>
+                                <li><a href="#">Aiquet. Aenean sollicitudin</a></li>
+                                <li><a href="#">Lorem quis bibendum auctor</a></li>
+                                <li><a href="#">Risi elit consequat ipsum</a></li>
+                                <li><a href="#">Nec sagittis sem nibh id elit. </a></li>
+                                <li><a href="#">Duis sed odio sit amet nibh</a></li>
+                                <li><a href="#">Название статьи Lorem Ipsum</a></li>
+                                <li><a href="#">This is Photoshop's Lorem Ipsum</a></li>
+                                <li><a href="#">Version of Lorem Ipsum</a></li>
+                            </ul>
+                            <a href="#" class="read_all">читать все новости</a>
+                        </div>
+                    </div>
+                    
+                    <div class="p_adv_block">
+                        <h3>Реклама</h3>
+                        <div class="align_center"><img src="img/rec_2.png" /></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--CONTENT_END-->
+        
+        <!--FOOTER_START-->
+        <footer>
+            <div class="footer_block width_wrap clearfix">
+                <div class="copyright">Все права защищены.</div>
+                <ul class="menu_bottom">
+                    <li><a href="#">Обратная связь</a></li>
+                    <li><a href="#">Контакты</a></li>
+                    <li><a href="#">О проекте</a></li>
+                </ul>
+                <div class="footer_contatct">По всем вопросам: <strong>8 (800) 890-90-87</strong></div>
+            </div>
+        </footer>
+        <!--FOOTER_END-->
+    </div>
+</body>
+</html>

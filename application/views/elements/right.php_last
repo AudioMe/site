@@ -1,0 +1,417 @@
+<?php
+$print_reclam = true;
+$auth = Auth::instance();
+$is_premium = false;
+$user_id = -1;
+$premium_end = date_create(date("Y-m-d"));
+
+if ($auth->logged_in() && !$auth->logged_in("admin")) {
+    $user_temp = $auth->get_user();
+    $user_id = $user_temp->id;
+
+    $comments = new Model_Studios();
+    $studio_temp = $comments->where('user_id', '=', $user_id)->find();
+    if (isset($studio_temp->id)) {
+        $is_premium = $studio_temp->premium;
+    }
+}
+?>
+
+<?php
+$date_end = $date_cur = null;
+
+$difDate = null;
+$user_premium = false;
+$queue_package = false;
+$curent_package = false;
+
+if (isset($is_premium) && $is_premium) {
+    $package = DB::select()->from(array('premium', 'p'))
+        ->join(array('premium_types','pt'))
+        ->on('p.premium_type_id', '=', 'pt.premium_type_id')
+        ->where('p.user_id', '=', $user_id)
+        ->limit(1)->execute()->current();
+    $print_reclam = false;
+    if ($package) {
+        $date_end = date_create($package['date_end']);
+        $premium_end = $date_end;
+        $date_cur = date_create(date("Y-m-d"));
+        $difDate = date_diff($date_cur, $date_end);
+
+        if ($date_cur < $date_end) {
+            $user_premium = true;
+            $queue_package = Model_PremiumQueue::getUserQueue($user_id, array('pending', 'processed'));
+            $curent_package = Model_Premium::getUserPackage($user_id);
+            $day_suffix = Model_DataHelper::num2AlphaSuffix($difDate->days);
+        }
+    }
+}
+if ($user_premium) {
+    ?>
+    <div class="div_finde">
+        <h2 class="hFinde">Членам ассоциации:</h2>
+        <div class="finde_chech_top">
+            <ul class="menu2">
+                <?php
+                if (3 == $package['level'] || 2 == $package['level']){ ?>
+                <li class="menu_articles">
+                    <a id="menu_addArticles" href="/AddArticles">Добавить статью</a>
+                </li>
+                <li class="menu_addnews">
+                    <a id="menu_addnews" href="/AddNews">Добавить новость</a>
+                </li>
+                <li class="menu_cell">
+                    <a id="menu_adddiscounts" href="/AddDiscount">Сообщить о скидках</a>
+                </li>
+                <li class="menu_buy">
+                    <a id="menu_buy" href="/Buy">Куплю-продам</a>
+                </li>
+                <li class="menu_conference">
+                    <a id="menu_conference" href="/Conference">Обсуждения</a>
+                </li>
+            </ul>
+                <?}else {?>
+                <li class="menu_articles">
+                    <a id="menu_addArticles" href="/AddArticles">Написать статью</a>
+                </li>
+                    <li class="menu_addnews menu2edit">
+                        <a id="menu_addnews" href="javascript:void(0);">Добавить новость</a>
+                    </li>
+                    <li class="menu_cell menu2edit">
+                        <a id="menu_adddiscounts" href="javascript:void(0)">Сообщить о скидках</a>
+                    </li>
+                    <li class="menu_buy menu2edit">
+                        <a id="menu_buy" href="javascript:void(0)">Куплю-продам</a>
+                    </li>
+                    <li class="menu_conference menu2edit">
+                        <a id="menu_conference" href="javascript:void(0)">Обсуждения</a>
+                    </li>
+                <?}?>
+
+        </div>
+        <div class="finde_chech_top">
+            <div class="timer_studio">
+                Вы состоите в ассоциации до
+                <span class="color_red"><?php echo $premium_end->format("Y-m-d");   ?></span><br/>
+                Ваш пакет <span class="color_red"><?php echo $curent_package['description']?></span>
+                <?php
+                    if ($queue_package) {?>
+                <p>Через <span class="color_red"><?php echo $difDate->days . " " . $day_suffix;?></span> audiome.ru обновит Ваш пакет до <span class="color_red"><?php echo $queue_package['desc_to'];?></span></p>
+                    <?php }
+                ?>
+            </div>
+            <div>
+                
+                <?php
+                
+                if($queue_package && 'pending' == $queue_package['status']) {
+                    echo '<a class="button2" href="/updateTask">Обновить сейчас!</a>';
+                }
+                else if($queue_package && 'processed' == $queue_package['status']) {
+                    echo '<a class="button2" href="/updateTask/manual">Обновить сейчас!</a>';
+                }
+                else
+                {
+                    echo '<a class="button2" href="/premium">Продлить!</a>';
+                }
+                ?>
+                
+            </div>
+        </div>
+    </div>
+
+<?php
+
+
+} else {
+    if ($auth->logged_in() && !$auth->logged_in("admin") && !isset($indexPage)) {
+        ?>
+        <div class="div_finde">
+            <h2 class="hFinde">Членам ассоциации:</h2>
+
+            <div class="finde_chech_top" title="Премиум меню доступно только для членов Ассоциации">
+                <ul class="menu2 menu2edit">
+                    <li class="menu_articles">
+                        <a id="menu_addArticles" href="javascript:void(0);">Написать статью</a>
+                    </li>
+                    <li class="menu_addnews">
+                        <a id="menu_addnews" href="javascript:void(0)">Добавить новость</a>
+                    </li>
+                    <li class="menu_cell">
+                        <a id="menu_adddiscounts" href="javascript:void(0)">Сообщить о скидках</a>
+                    </li>
+                    <li class="menu_buy">
+                        <a id="menu_buy" href="javascript:void(0)">Куплю-продам</a>
+                    </li>
+                    <li class="menu_conference">
+                        <a id="menu_conference" href="javascript:void(0)">Обсуждения</a>
+                    </li>
+                </ul>
+
+            </div>
+            <div class="finde_chech_top">
+                <div class="timer_studio">
+                    Вы так же можете присоединиться к Ассоциации студий звукозаписи.
+                </div>
+                <div>
+                    <a class="button2" href="/premium">ПРИСОЕДИНИТЬСЯ</a>
+                </div>
+            </div>
+        </div>
+
+    <?php
+    }
+    $print_reclam = true;
+}
+?>
+<?php
+
+?>
+
+<?php
+$works = new Model_Work();
+$works_temp = $works->find_all();
+
+$metros = new Model_Metro();
+$metro = $metros->find_all();
+
+$studios = new Model_Studios();
+$count_studio = $studios->find_all()->count();
+?>
+
+
+<?php
+if (isset($latestnews)) {
+    $news = new Model_News();
+    $all_news = $news->find_all();
+    ?>
+    <div class="p_articles_block" style="padding-top: 61px;">
+        <div class="list_box">
+            <h3>Последние новости</h3>
+            <ul>
+                <?php
+                $j = 0;
+                for ($i = 0; $i < count($all_news); $i++){
+                    if ($j++ >8) break;
+                    ?>
+                    <li><a href="/news/view/<?php echo $all_news[$i]->id; ?>"><?php echo $all_news[$i]->title; ?></a></li>
+                <?php
+                }
+                ?>
+            </ul>
+            <div class="allnews">
+                <a class="select_color" href="/news">читать все новости</a>
+            </div>
+        </div>
+    </div>
+
+<?php
+}
+?>
+
+
+<?php
+if (isset($latestarticles)) {
+    $news = new Model_Articles();
+    $all_news = $news->where('public','=',1)->find_all();
+    ?>
+    <div class="p_articles_block" style="padding-top: 61px;">
+        <div class="list_box">
+            <h3>Последние статьи</h3>
+            <ul>
+                <?php
+                $j = 0;
+                for ($i = 0; $i < count($all_news); $i++){
+                    if ($j++ >8) break;
+                    ?>
+                    <li><a href="/articles/view/<?php echo $all_news[$i]->id; ?>"><?php echo $all_news[$i]->title; ?></a></li>
+                <?php
+                }
+                ?>
+
+            </ul>
+            <div class="allnews">
+                <a class="select_color" href="/articles">читать все статьи</a>
+            </div>
+        </div>
+    </div>
+
+
+<?php
+}
+?>
+
+<?php
+if (!isset($selectStudio)) {
+    ?>
+    <div class="p_filter_block div_finde">
+        <form method="post" action="/search" id="search_form1" onsubmit=" return valid_form_search()">
+            <fieldset>
+                <legend>Категория</legend>
+                <div class="fieldset_body">
+                    <ul>
+                        <li>
+                            <input type="checkbox" <?php if (isset($class1)) { echo "checked"; }?>
+                            class="search_checked_class search_change" id="studio_top" value="1" name="studio_top"/>
+                            <label for="studio_top">от 900 руб. / час</label>
+                        </li>
+                        <li>
+                            <input type="checkbox" <?php if (isset($class2)) { echo "checked"; }?>
+                            class="search_checked_class search_change" id="studio_price" value="1" name="studio_price"/>
+                            <label for="studio_price">от 500 до 900 руб. / час</label>
+                        </li>
+                        <li>
+                            <input type="checkbox" <?php if (isset($class3)) { echo "checked"; }?>
+                            class="search_checked_class search_change" id="studio_freel" value="1" name="studio_freel"/>
+                            <label for="studio_freel">от 900 руб. / час</label>
+                        </li>
+                    </ul>
+                </div>
+            </fieldset>
+            
+            <fieldset>
+                <legend>Услуги</legend>
+                <div class="fieldset_body">
+                    <ul>
+                    <?php if (isset($works_temp))
+                    foreach ($works_temp as $w) {
+                        ?>
+                            <li><input type="checkbox"
+                            class="search_checked_works search_change"
+                            <?php if (isset($sworks) && (array_search($w->id, $sworks) !== false)) {
+                                echo "checked";
+                            } ?>  id="find_check<?php echo $w->id; ?>" value="<?php echo $w->id; ?>"
+                                   name="find_check<?php echo $w->id; ?>"/>
+                            <label for="find_check<?php echo $w->id; ?>"><?php echo $w->name;  ?></label></li>
+
+                        <?php } ?>
+                    </ul>
+                </div>
+            </fieldset>
+            
+            <fieldset>
+                <legend>Станция метро</legend>
+                <div class="fieldset_body">
+                    <select class="select_f search_change" name="metro">
+                        <option value="-1">Выберите станцию метро</option>
+                        <?php
+                        if (isset($metroVal)) {
+                            echo $metroVal;
+                        }
+                        if (isset($metro))
+                            foreach ($metro as $m) {
+                                if (isset($metroVal) && $m->id == $metroVal) {
+                                    echo '<option selected="selected" value="' . $m->id . '">' . $m->name . '</option>';
+                                } else {
+                                    echo '<option   value="' . $m->id . '">' . $m->name . '</option>';
+                                }
+
+                            }
+                        ?>
+                    </select>
+                </div>
+            </fieldset>
+            
+            <a href="#" id="search_studios" class="ui_button dark">
+                Показать студии (<span id="studio_count"><?php echo $count_studio; ?></span>)
+            </a>
+            <input type="hidden" id="hiddensearch"/>
+        </form>
+    </div>
+
+
+    <script type="text/javascript">
+        $(function(){
+            $('input[type=checkbox]').prettyAM();
+            $('input[type=radio]').prettyAM();
+        });
+        function valid_form_search() {
+            var msg = jQuery('#search_form1').serialize();
+            jQuery('#hiddensearch').val(msg);
+//        var temp_z = 0;
+//        var size1 = jQuery('.search_checked_class:checked').size();
+//        var size2 = jQuery('.search_checked_works:checked').size();
+//        if (size1 == 0 && size2 == 0) {
+//            jQuery('.finde_chech_top').css('background', '#FF5656');
+//            temp_z += 1;
+//        } else {
+//            jQuery('.finde_chech_top').css('background', 'none');
+//        }
+
+
+//        if (size1 == 0 && size2 == 0) {
+//            jQuery('.check_bottom').css('background', '#FF5656');
+//            temp_z += 1;
+//        } else {
+//            jQuery('.check_bottom').css('background', 'none');
+//        }
+//        if (temp_z <= 1) {
+//            return true;
+//        } else {
+//            return false;
+//        }
+            return true;
+        }
+        //    jQuery('.search_checked_works').change(function () {
+        //        jQuery('.check_bottom').css('background', 'none');
+        //        jQuery('.finde_chech_top').css('background', 'none');
+        //    });
+        //    jQuery('.search_checked_class').change(function () {
+        //        jQuery('.finde_chech_top').css('background', 'none');
+        //        jQuery('.check_bottom').css('background', 'none');
+        //    });
+
+        function sendFosrData() {
+            var valForm = jQuery('#search_form1').serialize();
+            jQuery.ajax({
+                type: "GET",
+                data: valForm,
+                url: "/addFree/search",
+                dataType: "text",
+                success: function (data) {
+                    jQuery('#studio_count').text(data);
+                }
+            });
+        }
+        jQuery('.search_change').change(function () {
+            sendFosrData();
+        })
+        sendFosrData();
+    </script>
+<?php
+}
+
+
+?>
+
+<?php
+
+if ($print_reclam && !isset($noreclam)) {
+    $pages = new Model_Pages();
+    $page = $pages->where('id', '=', '1')->find();
+    $partners = $page->partner;
+    $reclams = $page->advert;
+    if (strlen($partners) > 3) {
+        ?>
+        <div class="sponsor">
+            <?php echo $partners; ?>
+        </div>
+
+    <?php
+    }
+    if (strlen($reclams) > 3) {
+        ?>
+        <div class="reclam">
+            <?php echo $reclams; ?>
+        </div>
+
+    <?php
+    }
+}
+?>
+<script>
+$(function() {
+    $('select').styler();
+    $('.finde_chech_top').tooltip({ position: { at: "center top" } });
+});
+</script>

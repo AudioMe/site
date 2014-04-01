@@ -1,0 +1,507 @@
+<script type="text/javascript" src="/js/jquery.MultiFile.js"></script>
+<script type="text/javascript" src="/js/ajaxupload.js"></script>
+<script type="text/javascript" src="/js/jquery.form.js"></script>
+<div class="progress_bar"><div class="progress-label">Идет загрузка...</div></div>
+<?php
+if (isset($studio)) {
+    
+    ?>
+    <br/>
+    <table>
+        <tr>
+            <td>
+                <?php if(strlen($studio->photo)) {?>                
+                   <div id="avatar" class="studio_image avatar_block">
+                       <img width="120" height="120" src="<?php echo $studio->photo;?>">
+                       <div id="loading_ava"></div>                       
+                   </div>
+               <?php
+
+               }
+               else {?>
+                   <div id="avatar" class="studio_image avatar_block">
+                       <img width="120" height="120" src="/images/no_photo.gif"/>
+                       <div id="loading_ava"></div>
+                   </div>
+               <?php
+               }
+               ?>
+            </td>
+            <td style="vertical-align: middle;">
+                <a id="uploadBtn" class="" href="#">загрузить</a><br/><br/>
+                <a id="rmAva" class="<?php if(!strlen($studio->photo)) echo 'hidden';?>" href="javascript:rmAva();">удалить</a><br/>
+            </td>
+            <td style="vertical-align: middle;">
+                <div id="InfoBox"></div>
+            </td>
+        </tr>
+    </table>
+    <div class="big_text"><?php echo $studio->name; ?> <span class="span_h1">(редактировать)</span>   
+    </div>
+
+
+    <form method="post" id="register_form1" enctype="multipart/form-data" action="/EditSave/studio?ajax=true"
+          onsubmit="return valid_form()">
+        <input type="hidden" value="" id="formreg2" name="formreg2"/>
+        <table>
+            <tr>
+                <td class="vertical_top">
+                    <table class="register_table">
+                        <tr>
+                            <td class="table_td_first">Адрес</td>
+                            <td><input type="text" class="register_input" value="<?php echo $studio->address; ?>"
+                                       id="in_adres"
+                                       name="adres"/></td>
+                        </tr>
+                        <tr>
+                            <td class="table_td_first">Телефон</td>
+                            <td><input type="text" class="register_input" value="<?php echo $studio->phone; ?>"
+                                       id="in_phone"
+                                       placeholder="+7(495) 123 45 67" name="phone"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="table_td_first">E-mail</td>
+                            <td><input type="text" class="register_input" value="<?php echo $email; ?>" id="in_email"
+                                       name="email"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="table_td_first">Название студии</td>
+                            <td><input type="text" class="register_input" value="<?php echo $studio->name; ?>"
+                                       id="in_name"
+                                       name="name"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="table_td_first">Контактное лицо</td>
+                            <td><input class="register_input" type="text" value="<?php echo $studio->fio; ?>"
+                                       id="in_fio"
+                                       name="fio"/></td>
+                        </tr>
+                        <tr>
+                            <td class="table_td_first">Метро</td>
+                            <td>
+                                <select id="in_metro" class="register_input" name="metro">
+                                    <?php
+                                    foreach ($metro as $m) {
+                                        if ($studio->metro == $m->id) {
+                                            echo '<option value="' . $m->id . '"  selected >' . $m->name . '</option>';
+                                        } else {
+                                            echo '<option value="' . $m->id . '">' . $m->name . '</option>';
+                                        }
+
+                                    }
+                                    ?>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="table_td_first">URL</td>
+                            <td><input type="text" class="register_input" value="<?php echo $studio->url; ?>"
+                                       id="site_url"
+                                       placeholder="http://site.ru" name="url"/></td>
+                        </tr>
+                        <tr>
+                            <td class="table_td_first">Площадь</td>
+                            <td><input type="text" class="register_spinner" value="<?php echo $studio->area; ?>"
+                                       id="in_area" name="area" maxlength="3"/></td>
+                        </tr>
+                        <?php
+                        $add_photos = 0;
+                        $add_music = 0;
+                        if ($studio->premium && $package){
+                            $add_photos = ($package['features']['photo_count']-$photos->count());
+                            $add_music = ($package['features']['work_count']-$musics->count());
+                            if ($add_photos < 0)
+                                $add_photos = 0;
+                            if($add_music < 0)
+                                $add_music = 0;
+                        }else if ($package) {
+                            if ($photos->count() == 0)$add_photos = $package['features']['photo_count'];
+                            if ($musics->count() == 0)$add_music = $package['features']['work_count'];
+                        }                        
+                        ?>
+
+                        <tr>
+                            <td class="table_td_first">Цены от</td>
+                            <td><input type="text" class="register_input" value="<?php echo $studio->price; ?>"
+                                       id="in_price"
+                                       name="price"/></td>
+                        </tr>
+                        <tr>
+                            <td class="table_td_first">Фотографии:</td>
+                            <td>
+                                <input type="file" name="images[]" id="add_photos" class="multi" <?php if($add_photos == 0) echo 'disabled="disabled"';  ?>
+                                       accept="gif|jpg|png|jpeg|bmp" maxlength="<?php echo $add_photos;  ?>"/>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td class="table_td_first">Примеры работ:</td>
+                            <td>
+                                <input type="file" name="musics[]" id="add_music" class="multi" <?php if($add_music == 0) echo 'disabled="disabled"';  ?>  accept="mp3" maxlength="<?php echo $add_music;  ?>"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="table_td_first">Текущий пароль</td>
+                            <td><input type="password" class="" value=""
+                                       id="cur_password"
+                                       name="cur_password"/></td>
+                        </tr>
+                        <tr>
+                            <td class="table_td_first">Новый пароль</td>
+                            <td><input type="password" class="" value="<?php echo $studio->price; ?>"
+                                       id="in_password"
+                                       name="edit_password"/></td>
+                        </tr>
+                        <tr>
+                            <td class="table_td_first">Повторите пароль</td>
+                            <td><input type="password" class="" value="<?php echo $studio->price; ?>"
+                                       id="in_password2"
+                                       name="edit_password2"/></td>
+                        </tr>
+
+                    </table>
+                </td>
+                <td class="vertical_top">
+                    <table class="register_table">
+                        <tr>
+                            <td class="table_td_first">Количество каналов <br>одновременной записи</td>
+                            <td><input class="register_spinner" type="text" id="count_record"
+                                          name="count_record" value="<?php echo $studio->count_channel; ?>"/
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="table_td_first">Парк микрофонов</td>
+                            <td><textarea class="register_input" rows="3" id="in_park"
+                                          name="in_park"><?php echo $studio->microphones; ?></textarea></td>
+                        </tr>
+
+                        <tr>
+                            <td class="table_td_first">Муз. инструменты</td>
+                            <td><textarea class="register_input" rows="3" id="in_musics"
+                                          name="in_musics"><?php echo $studio->music_tools; ?></textarea></td>
+                        </tr>
+
+                        <tr>
+                            <td class="table_td_first">Подробно о студии</td>
+                            <td><textarea class="register_input" rows="3" id="in_about"
+                                          name="in_about"><?php echo $studio->more; ?></textarea></td>
+                        </tr>
+
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><input type="submit" name="sbmbuttonedit" class="button_register" id="register_studio"
+                           value="Сохранить"/></td>
+            </tr>
+        </table>
+
+
+    </form>
+
+    <?php
+    if ($musics->count() > 0) {
+        ?>
+        <div class="middle_text">Введите название трека:</div>
+        <div class="music">
+            <?php
+            $i_c = 0;
+            if (isset($musics))
+                foreach ($musics as $m) {
+                    $i_c++;
+                    ?>
+                        <input type="hidden" class="music_id" value="<?php echo $m->id; ?>" />
+                        <table>
+                        <tr>
+                        
+                        <td><input type="text" class="description_music" value="<?php echo $m->description; ?>" /></td>
+                        <td class="middle"><object width="300" height="35" data="/player.swf" type="application/x-shockwave-flash">
+                            <param name="movie" value="/player.swf"/>
+                            <param name="flashvars"
+                                   value="path_mp3=/files/<?php echo $m->user_id; ?>/musics/<?php echo $m->url; ?>.mp3&w=300&h=30&cbf=0xff0099&cb=0xffffff&cif=0xcccccc&ci=0xCF3584&cbuf=0xdddddd&ct=0xCF3584&auto=no"/>
+                            <param name="wmode" value="transparent"/>
+                        </object>
+                        </td>
+                        <td width="40"></td>
+                        <td class="middle b12"><a href="/remove/music/<?php echo $m->id; ?>" class="mus_remove select_color">Удалить</a></td>
+                        </tr>
+                        </table>
+                <?php
+
+                }
+            ?>
+
+
+        </div>
+    <?php
+
+    }
+
+
+    ?>
+
+
+
+
+    <?php
+    if ( $photos->count() > 0) {
+        ?>
+        <p class="font_type">Фотографии студии</p>
+        <div>
+            <div class="horizontal2">
+                <div class="horizontal">
+
+                    <div class="carousel">
+                        <a class="carousel_prev carousel_left" href="">prev</a>
+
+                        <div class="carousel_container">
+                            <ul class="portfolio_items">
+                                <?php
+                                foreach ($photos as $p) {
+                                    ?>
+                                    <li>
+                                        <div class="inner">
+                                            <a rel="lightbox[roadtrip]" class="gallery_a"
+                                               href="/files/<?php echo $studio->user_id . "/images/" . $p->url; ?>.png">Просмотреть</a>
+                                            <a href="/remove/photo/<?php echo $p->id; ?>"  class="img_remove gallery_a margin50">Удалить</a>
+                                            <img
+                                                src="/files/<?php echo $studio->user_id . "/images/prev_" . $p->url; ?>.png"
+                                                width="150" height="90"></div>
+                                    </li>
+                                <?php
+
+                                }
+                                ?>
+                            </ul>
+                        </div>
+                        <a class="carousel_next carousel_right" href="">next</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    <?php
+
+    }
+
+    ?>
+
+    <div class="overlay" id="overlay" style="display:none;"></div>
+    <div class="box" id="box">
+        <a class="boxclose" id="boxclose"></a>
+
+        <div id="message_text"></div>
+    </div>
+<?php
+}
+?>
+<script type="text/javascript">
+
+    function valid_register_form(id_element) {
+        if (jQuery('#' + id_element).val() == "") {
+            jQuery('#' + id_element).css('background', '#FF5656');
+            return 1;
+        } else {
+            jQuery('#' + id_element).removeAttr('style');
+        }
+        return 0;
+    }
+
+    function valid_form() {
+        var msg = jQuery('#register_form2').serialize();
+        jQuery('#formreg2').val(msg);
+        var temp_z = 0;
+        temp_z += valid_register_form('in_adres');
+        temp_z += valid_register_form('in_phone');
+        temp_z += valid_register_form('site_url');
+        temp_z += valid_register_form('in_metro');
+        temp_z += valid_register_form('in_area');
+        temp_z += valid_register_form('count_record');
+        temp_z += valid_register_form('in_park');
+        temp_z += valid_register_form('in_name');
+        temp_z += valid_register_form('in_email');
+        temp_z += valid_register_form('in_price');
+        temp_z += valid_register_form('in_musics');
+        temp_z += valid_register_form('in_fio');
+        temp_z += valid_register_form('in_about');
+        if (jQuery('input[name="studio_type"]:checked').size() == 0) {
+            jQuery('.finde_chech_top').css('background', '#FF5656');
+            temp_z += 1;
+        } else {
+            jQuery('.finde_chech_top').css('background', '#FFFFFF');
+        }
+
+
+        if (jQuery('.check_register:checked').size() == 0) {
+            jQuery('.check_bottom').css('background', '#FF5656');
+            temp_z += 1;
+        } else {
+            jQuery('.check_bottom').css('background', '#FFFFFF');
+        }
+
+        var password = jQuery('#in_password').val();
+        var password2 = jQuery('#in_password2').val();
+        if (password != password2 && password != "") {
+            jQuery('#in_password2').css('background', '#FF5656');
+            jQuery('#in_password').css('background', '#FF5656');
+            temp_z += 1;
+        } else {
+            jQuery('#in_password').css('background', 'none');
+            jQuery('#in_password2').css('background', 'none');
+        }
+
+        if (temp_z > 0) return false;
+
+        return true;
+
+    }
+
+    jQuery(function () {
+        $("#in_area").numericInput({ allowFloat: true, allowNegative: false});
+        $("#in_area").spinner({min: 1, max: 999});
+        $("#count_record").numericInput({ allowFloat: true, allowNegative: false});
+        $("#count_record").spinner({min: 1, max: 999});
+        $("#in_price").numericInput({ allowFloat: true, allowNegative: false});
+
+        $('#register_form1').ajaxForm({
+            delegation: true,
+	    dataType: 'json',
+            beforeSend: function(arr, myform, options) {
+              $(".progress_bar").progressbar().show();
+            },
+            beforeSubmit: function() {
+            },
+            uploadProgress: function(event, position, total, percentComplete) {
+                $(".progress_bar").progressbar( "option", {
+                          value: Math.floor(percentComplete)
+                        });
+                if (percentComplete == 100 ) $(".progress_bar").hide();
+            },
+            error: function(xhr) {
+              console.log('Connection error: ' + xhr.status + ' ' + xhr.statusText);
+              $('#loading').hide();
+            },
+            success: function(response) {
+		jQuery('#cur_password').css('background', '');
+		if ('code' in response) {
+ 			if (0 == response.code) {
+				location.reload();
+				return;
+			}
+			else if (2 == response.code) {
+				jQuery('#cur_password').css('background', '#FF5656');
+				return;
+			}
+		}
+		alert('Произошла ошибка');
+		return;
+            }
+          });
+        prepareUploadBtn();
+
+        jQuery('.description_music').change(function(){
+            var desc = jQuery(this).val();
+            var id = jQuery('.music_id',jQuery(this).parent()).val();
+            $.ajax({
+                type: "POST",
+                url: "/editSave/musicDescription",
+                data: "id="+id+"&desc="+desc,
+                success: function(msg){
+                }
+            });
+        })
+        $("#in_phone").mask("+7(999) 999 99 99");
+
+        jQuery('#in_price').change(function(){
+           var price = parseInt(jQuery('#in_price').val());
+            if (price < 500){
+                jQuery('#studio_freel').trigger('click');
+            }
+            if (price >= 500 && price <900){
+                jQuery('#studio_price').trigger('click');
+            }
+            if (price >= 900){
+                jQuery('#studio_top').trigger('click');
+            }
+        });
+
+        jQuery('.img_remove').click(function(){
+            return confirm("Вы действительно хотите удалить данное изображение?");
+        })
+
+        jQuery('.mus_remove').click(function () {
+            return confirm("Вы действительно хотите удалить данный пример работы?");
+        })
+        jQuery('.carousel').elegantcarousel({
+            delay: 50,
+            fade: 300,
+            slide: 500,
+            effect: 'fade',
+            orientation: 'horizontal',
+            loop: false,
+            autoplay: false,
+            time: 5000      });
+
+        jQuery('#in_password').val("");
+        jQuery('#in_password2').val("");
+        jQuery('.register_input').focusout(function () {
+            if (jQuery(this).val() != "") {
+                jQuery(this).removeAttr('style');
+            } else {
+                jQuery(this).css('background', '#FF5656');
+            }
+        });
+        jQuery('input[name="studio_type"]').click(function () {
+            jQuery('.finde_chech_top').css('background', '#FFFFFF');
+        });
+
+        jQuery('.check_register,.check_register+label').click(function () {
+            if (jQuery('.check_register:checked').size() == 0) {
+                jQuery('.check_bottom').css('background', '#FF5656');
+            } else {
+                jQuery('.check_bottom').css('background', '#FFFFFF');
+            }
+        });
+
+    });
+
+    function isPhotoFile(val) {
+        var v = val.value;
+        var v = v.search(/^.*\.(?:jpg|jpeg|gif|png|bmp)\s*$/ig)
+        if (v != 0) {
+            jQuery('#in_photo').val('');
+        }
+    }
+    function rmAva() {
+        $.get('/EditSave/delAva', null, function (data){
+            if ('OK' == data) {
+                $('#avatar img').attr('src','/images/no_photo.gif');
+                $('#rmAva').hide();
+            }
+        });
+    }
+    function prepareUploadBtn() {
+        $('#uploadBtn').ajaxUpload({
+        url : "/EditSave/studioavatar",
+        name: "photo",
+        onSubmit: function() {
+           // $('#InfoBox').html('Uploading ... ');
+           $('#loading_ava').show();
+        },
+        onComplete: function(result) {            
+            var result = result || false;
+            // $('#InfoBox').html('');
+            if ('ERROR' != result) {     
+                $('#avatar img').attr('src', result);
+                $('#loading_ava').hide();
+                $('#rmAva').show();
+            }
+            
+        }
+        });
+    }
+</script>

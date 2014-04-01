@@ -1,0 +1,210 @@
+<?php
+$config = new Model_Configuration();
+?>
+<div id="dialog_nf" not_found="<?php var_export($not_found);?>" title="Студии не найдены">
+  <p>Вашим критериям не подходит ни одна студия, попробуйте поменять условия либо выберите в нашем каталоге</p>
+</div>
+
+<div id="YMapsID" style="width:630px;height:400px"></div>
+<div id="studios" class="studio_first">
+    <?php
+    if (isset($studios_premium))
+        foreach ($studios_premium as $st) {
+            $metro = new Model_Metro();
+            $metro_temp = $metro->where('id', '=', $st->metro)->find();
+            $comments = new Model_Comments();
+            $comments_count = $comments->where('user_id', '=', $st->user_id)->find_all()->count();
+
+            $rating = new Model_Rating();
+            $ratings = $rating->where('user_id', '=', $st->user_id)->find_all();
+            $mark = 1;
+            $count = 0;
+
+            if ($ratings->count() > 0) {
+                $count = $ratings[0]->count;
+                $mark = $ratings[0]->mark;
+            }
+            ?>
+            <a href="/studio/view/<?php echo $st->user_id; ?>" class="search_a">
+                <div class="studioSearch studio_first">
+                    <table>
+                        <tr>
+                            <td class="vertical_top">
+                                <a href="/studio/view/<?php echo $st->user_id; ?>" class="search_a"><h2
+                                        class="studio_title_4len select_color"><?php echo $st->name; ?>
+                                    </h2></a>
+                                <div class="studio_type">
+                                    <?php echo $config->studio_class[$st->class]; ?>
+                                </div>
+                                <div class="studio_adress"><?php echo  $st->address; ?>
+                                </div>
+                                <div class="studio_metro">ст. метро <?php echo  $metro_temp->name; ?></div>
+                                <div class="studio_price">от <span class="select_color"><?php echo  $st->price; ?></span> руб/час
+                                </div>
+
+                                <a  class="" href="/studio/view/<?php echo $st->user_id; ?>"><div class="button_other">Подробнее о студии</div></a>
+                            </td>
+
+                            <td class="vertical_top">
+                                <div class="studio_image"><?php if (strlen($st->photo) >= 3) { ?>
+                                        <img
+                                        src="<?php echo  $st->photo; ?>"  width="120" height="120"><?php } ?>
+                                    <?php if ($st->premium)
+                                        echo "<div class='img_label' style='position: relative; margin-top: -125px'></div>";
+                                    ?>
+                                </div>
+                                <div class="studio_reiting">
+                                    <div class="rating_studio" data-average="<?php echo str_replace(',', '.', round($mark, 1)); ?>">
+                                    </div>
+                                    <p class="ratingText">(<?php echo $count;  ?> голосов)</p>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+
+
+                </div>
+            </a>
+
+        <?php
+
+        }
+    ?>
+
+    <?php
+    if (isset($studios_no_premium))
+        foreach ($studios_no_premium as $st) {
+            $metro = new Model_Metro();
+            $metro_temp = $metro->where('id', '=', $st->metro)->find();
+            $comments = new Model_Comments();
+            $comments_count = $comments->where('user_id', '=', $st->user_id)->find_all()->count();
+
+            $rating = new Model_Rating();
+            $ratings = $rating->where('user_id', '=', $st->user_id)->find_all();
+            $mark = 1;
+            $count = 0;
+
+            if ($ratings->count() > 0) {
+                $count = $ratings[0]->count;
+                $mark = $ratings[0]->mark;
+            }
+            ?>
+            <a href="/studio/view/<?php echo $st->user_id; ?>" class="search_a">
+                <div class="studioSearch">
+                    <table>
+                        <tr>
+                            <td class="vertical_top">
+                                <a href="/studio/view/<?php echo $st->user_id; ?>" class="search_a"><h2
+                                        class="studio_title_4len select_color"><?php echo $st->name; ?>
+                                    </h2></a>
+                                <div class="studio_type">
+                                    <?php echo $config->studio_class[$st->class]; ?>
+                                </div>
+                                <div class="studio_adress"><?php echo  $st->address; ?>
+                                </div>
+                                <div class="studio_metro">ст. метро <?php echo  $metro_temp->name; ?></div>
+                                <div class="studio_price">от <span class="select_color"><?php echo  $st->price; ?></span> руб/час
+                                </div>
+
+                                <a  class="" href="/studio/view/<?php echo $st->user_id; ?>"><div class="button_other">Подробнее о студии</div></a>
+                            </td>
+
+                            <td class="vertical_top">
+                                <div class="studio_image"><?php if (strlen($st->photo) >= 3) { ?>
+                                        <img
+                                        src="<?php echo  $st->photo; ?>"  width="120" height="120"><?php } ?>
+                                    <?php if ($st->premium)
+                                        echo "<div class='img_label' style='position: relative; margin-top: -125px'></div>";
+                                    ?>
+                                </div>
+                                <div class="studio_reiting">
+                                    <div class="rating_studio" data-average="<?php echo str_replace(',', '.', round($mark, 1)); ?>">
+                                    </div>
+                                    <p class="ratingText">(<?php echo $count;  ?> голосов)</p>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+
+
+                </div>
+            </a>
+
+        <?php
+
+        }
+    ?>
+
+
+</div>
+<?php
+$studios_all = array_merge($studios_premium, $studios_no_premium);
+?>
+
+<script type="text/javascript">
+    jQuery(function () {
+        jQuery(".rating_studio").jRating({
+            length: 5,
+            showRateInfo: false,
+            decimalLength: 1,
+            isDisabled: true
+        });
+    })
+</script>
+
+<script type='text/javascript'>
+    if ('true' == $('#dialog_nf').attr('not_found')) {
+        $('#dialog_nf').dialog({ width: 380, position: { at: "center center" }});
+    }
+
+
+    // Создание обработчика для события window.onLoad
+    YMaps.jQuery(function () {
+        // Создание экземпляра карты и его привязка к созданному контейнеру
+        var map = new YMaps.Map(YMaps.jQuery("#YMapsID")[0]);
+
+        // Установка для карты ее центра и масштаба
+        map.setCenter(new YMaps.GeoPoint(37.64, 55.76), 11);
+
+        // Создание стиля для фрилансеров
+        var s1 = new YMaps.Style();
+        s1.iconStyle = new YMaps.IconStyle();
+        s1.iconStyle.href = "/image/icons/studio.png";
+        s1.iconStyle.size = new YMaps.Point(38, 38);
+        s1.iconStyle.offset = new YMaps.Point(-9, -29);
+
+        // Создание стиля для примиум
+        var s2 = new YMaps.Style();
+        s2.iconStyle = new YMaps.IconStyle();
+        s2.iconStyle.href = "/image/icons/me.png";
+        s2.iconStyle.size = new YMaps.Point(38, 38);
+        s2.iconStyle.offset = new YMaps.Point(-9, -29);
+
+// координаты объекта
+        <?php
+        if (isset($studios_all))
+            foreach ($studios_all as $st){
+            if ($st->latitude != null && $st->longitude){
+             $mark = 1;
+        $count = 0;
+         $ratings = $rating->where('user_id', '=', $st->user_id)->find_all();
+        if ($ratings->count() > 0) {
+            $count = $ratings[0]->count;
+            $mark = $ratings[0]->mark;
+        }
+        ?>
+        var placemark<?php echo $st->id; ?> = new YMaps.Placemark(new YMaps.GeoPoint(<?php echo $st->latitude; ?>, <?php echo $st->longitude; ?>), {style: s<?php if ($st->premium) echo 2;else echo 1; ?>});
+        placemark<?php echo $st->id; ?>.name = '<a href="/studio/view/<?php echo $st->user_id; ?>"><?php echo $st->name; ?> </a>';
+        placemark<?php echo $st->id; ?>.description = "<?php echo "Цена:".$st->price." руб/час рейтинг:".round($mark,2); ?>";
+        map.addOverlay(placemark<?php echo $st->id; ?>);
+
+        <?php
+            }
+            }
+         ?>
+
+        map.addControl(new YMaps.ToolBar());
+        map.addControl(new YMaps.Zoom());
+        map.addControl(new YMaps.ScaleLine());
+    });
+</script>

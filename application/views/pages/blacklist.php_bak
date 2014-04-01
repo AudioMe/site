@@ -1,0 +1,61 @@
+<?php
+$studios = new Model_Studios();
+?>
+<h2 class="">Черный список</h2>
+<table width="100%" class="black_finde">
+    <tbody>
+    <tr>
+        <td>
+            Поиск по части слова, телефона или email
+            <form method="post" action="/blacklist">
+                <input class="input_black" type="text" style="width: 250px;"
+                       value="<?php if (isset($search)) echo $search; ?>" name="blsearch">
+                <input class="input_button" type="submit" value="найти">
+            </form>
+        </td>
+        <td>
+            <a class="ui_button" href="/addBlacklist">Добавить/Изменить</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<table class="blacklist" width="100%" cellspacing="0" cellpadding="5" border="0">
+    <tbody>
+    <?php
+    if (isset($blacklists))
+        foreach ($blacklists as $bl) {
+            $st = $studios->where('user_id', '=', $bl->user_id)->find_all();
+            ?>
+            <tr>
+                <td><p class="black_name"><?php echo $bl->name; ?></p>
+
+                    <div class="black_text"><?php echo $bl->text; ?></div>
+                </td>
+                <td class="black_not_fisrt black_phone">
+                    <?php echo $bl->contacts; ?>
+                </td>
+                <td class="black_not_fisrt">
+                    добавлено от:<br/><a href="/studio/view/<?php echo $bl->user_id; ?>"
+                                         class="black_send"><?php echo $st[0]->name; ?></a>
+                    <br>
+                    <small><?php echo $bl->date; ?></small>
+                </td>
+            </tr>
+
+        <?php
+
+        }
+    ?>
+    </tbody>
+</table>
+
+<div class="pagination">
+    <?php if (isset($pagination)) echo $pagination; ?>
+</div>
+
+
+<script type="text/javascript">
+    jQuery(function () {
+        jQuery('#menu_blacklist').addClass("menu_active");
+    })
+</script>

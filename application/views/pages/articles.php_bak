@@ -1,0 +1,106 @@
+<?php
+$auth = Auth::instance();
+$is_premium = false;
+$user_id = -1;
+if ($auth->logged_in() && !$auth->logged_in("admin")) {
+    $user_temp = $auth->get_user();
+    $user_id = $user_temp->id;
+
+    $comments = new Model_Studios();
+    $studio_temp = $comments->where('user_id', '=', $user_id)->find();
+    if (isset($studio_temp->id)) {
+        $is_premium = $studio_temp->premium;
+    }
+}
+$date_end = $date_cur = null;
+
+$difDate = null;
+$user_premium = false;
+if (isset($is_premium) && $is_premium) {
+    $premiums = new Model_Premium();
+
+    $prem = $premiums->where('user_id', '=', $user_id)->find();
+    if (isset($prem->id)) {
+        $date_end = date_create($prem->date_end);
+        $date_cur = date_create(date("Y-m-d"));
+        $difDate = date_diff($date_cur, $date_end);
+
+        if ($date_cur < $date_end) {
+            $user_premium = true;
+        }
+    }
+}
+if ($user_premium) {
+?>
+
+
+    <?php
+    }
+    ?>
+<div class="big_text">
+    Статьи
+</div>
+<?
+    if ($user_premium) {
+    ?>
+
+<a class="a_back add_new_button" href="/addArticles">
+    <div class="button_back">Добавить/Изменить</div>
+</a>
+
+<?php
+}
+?>
+<div class="news all_news">
+
+        <?php
+    $imagesI = new Model_ArticlesPhotos();
+        $studios = new Model_Studios();
+        if (isset($articles))
+            foreach ($articles as $art) {
+                $im = $imagesI->where('articles_id','=', $art->id)->find_all();
+                $st = $studios->where('user_id', '=', $art->user_id)->find_all();
+                ?>
+                <div class="new">
+                <table class="big_table">
+                    <tr>
+                        <td class="vertical_top img_prev_bloc"> <?php if (isset($im) && isset($im[0])){
+                                $img = $im[count($im)-1];
+                                ?>
+                            <a href="/articles/view/<?php echo $art->id; ?>">
+                                <img class="leftimg"
+                                     src="/files/<?php echo $art->user_id . "/articles/prev_" . $img->id . ".png"; ?>"
+                                     width="240"></a>
+                            <?php
+                            }
+                            ?></td>
+                        <td class="vertical_top">
+                            <div class="middle_title"><a href="/articles/view/<?php echo $art->id; ?>"><?php echo $art->title; ?></a></div>
+
+                            <div class="new_short_text">
+                                <?php echo $art->preview; ?>
+                            </div>
+
+                            <div class="more"><a href="/articles/view/<?php echo $art->id; ?>"> читать далее...</a></div>
+                        </td>
+                    </tr>
+                </table>
+
+
+
+                </div>
+            <?php
+            }
+        ?>
+
+    </div>
+
+    <div class="pagination">
+        <?php if (isset($pagination)) echo $pagination; ?>
+    </div>
+
+    <script type="text/javascript">
+        jQuery(function () {
+            jQuery('#menu_articles').addClass("menu_active");
+        })
+    </script>

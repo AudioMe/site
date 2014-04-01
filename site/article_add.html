@@ -1,0 +1,326 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta http-equiv="content-type" content="text/html" />
+    <meta charset="utf-8" />
+	<title>AudioMe</title>
+    <link rel="icon" href="/img/favicon.ico" type="image/x-icon" />
+    <link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon" />
+    <link rel="icon" type="image/png" href="img/favicon.png" />
+    <link type="text/css" rel="stylesheet" href="css/ui.css" />
+    <link type="text/css" rel="stylesheet" href="css/jquery.formstyler.css" />
+    <link type="text/css" rel="stylesheet" href="css/jquery.bxslider.css" />
+    <script type="text/javascript" src="js/jquery-1.9.1.js"></script>
+	<script src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+    <!--script type="text/javascript" src="_xprecise/js/jquery.min.js"></script>
+    <script type="text/javascript" src="_xprecise/js/xprecise.min.js"></script-->
+    <script type="text/javascript" src="js/jquery.formstyler.js"></script>
+    <script type="text/javascript" src="js/jquery.bxslider.js"></script>
+    <script>
+        $(function()
+        {
+            $("input[type='file'], input[type='checkbox'], input[type='radio'], select").styler();
+            
+            // фото галерея
+            $('.bxslider').bxSlider({
+                minSlides: 1,
+                maxSlides: 4,
+                moveSlides: 1,
+                slideWidth: 140,
+                slideMargin: 10,
+                pager: false // скрыть точки
+            });
+			
+			$(".articles-tabs").tabs();
+        });
+    </script>
+</head>
+
+<body>
+    <div id="wrap">
+        <!--HEADER_START-->
+        <header>
+            <div class="header_block width_wrap">
+                <a href="#" class="logo_block"><img src="img/logo.png" /></a>
+                <ul class="menu_top" style="left: 20%;">
+                    <li><a href="#">Главная</a></li>
+                    <li><a href="#">Новости</a></li>
+                    <li><a href="#">Статьи</a></li>
+                    <li><a href="#">Скидки</a></li>
+                    <li><a href="#">Каталог</a></li>
+                    <li><a href="#">Черный список</a></li>
+                </ul>
+                <div class="auth_login_block">
+                    <fieldset>
+                        <legend>SoundWave Studio</legend>
+                        <div class="fieldset_body">
+                            <div class="align_center p_b_5">
+                                <a href="#">редактировать</a>
+                                <span class="sep">|</span>
+                                <a href="#">выйти</a>
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
+        </header>
+        <!--HEADER_END-->
+        
+        <!--CONTENT_START-->
+        <div class="content_wrap">
+            <div class="content_block width_wrap clearfix">
+                <div class="left_side">
+                    <div id="articles" class="articles-tabs">
+						<ul class="tabs">
+							<li><a href="#articles-add">Добавить статью</a></li>
+							<li><a href="#articles-all">Мои статьи</a></li>
+						</ul>
+						
+						<div id="articles-add">
+							<ul class="steps">
+								<li class="active">1</li>
+								<li>2</li>
+								<li>3</li>
+								<li>4</li>
+							</ul>
+							<div class="content">
+								<form>
+									<div class="group">
+										<label>Название статьи:</label>
+										<input type="text" />
+									</div>
+									<div class="group">
+										<label>Краткое описание:</label>
+										<textarea></textarea>
+									</div>
+									<div class="group">
+										<label>Текст статьи:</label>
+										<div class="tinymce">
+										
+										</div>
+									</div>
+									<div class="group">
+										<label>Изображение статьи:</label>
+										<div class="image" style="background: url('img/add-photo.png') #fff no-repeat center center;"></div>
+									</div>
+									<div class="group last">
+										<input type="submit" value="Добавить статью" />
+									</div>
+								</form>
+							</div>
+							<div class="clear"></div>
+						</div>
+						
+						<div id="articles-all">
+							<ul class="articles-all-list">
+								<li>
+									<div class="articles-header">
+										<div class="title">Adobe Audition - решение проблем</div>
+										<div class="date">Добавлена: 2 недели назад</div>
+										<div class="clear"></div>
+									</div>
+									<div class="articles-body">
+										<p>
+											На современном этапе развития техники, компьютерная студия на базе РС, превосходит по своим возможностям профессиональные студии Лондона и Лос-Анжелеса пятнадцатилетней давности. <br/>
+											Производства многоканального и hi-res-звука (аудио высокого разрешения), продуманной акустикой контрольных помещений, сложной мониторинговой системой и наличием специалистов высокого класса.<br />
+											Но, согласитесь, сейчас простой аудио-компакт диск (CDDA) является основным пользовательским стандартом и уйдет он очень не скоро. А это 16 бит, 44.1 КГц… 
+										</p>
+									</div>
+									<ul class="articles-buttons">
+										<li><a href="#" class="edit">Редактировать</a></li>
+										<li><a href="#" class="delete">Удалить</a></li>
+									</ul>
+									<div class="clear"></div>
+								</li>
+								
+								<li>
+									<div class="articles-header">
+										<div class="title">Основы звукозаписи</div>
+										<div class="date">Добавлена: 3 недели назад</div>
+										<div class="clear"></div>
+									</div>
+									<div class="articles-body">
+										<p>
+											На современном этапе развития техники, компьютерная студия на базе РС, превосходит по своим возможностям профессиональные студии Лондона и Лос-Анжелеса пятнадцатилетней давности. <br/>
+											Производства многоканального и hi-res-звука (аудио высокого разрешения), продуманной акустикой контрольных помещений, сложной мониторинговой системой и наличием специалистов высокого класса.<br />
+											Но, согласитесь, сейчас простой аудио-компакт диск (CDDA) является основным пользовательским стандартом и уйдет он очень не скоро. А это 16 бит, 44.1 КГц… 
+										</p>
+									</div>
+									<ul class="articles-buttons">
+										<li><a href="#" class="edit">Редактировать</a></li>
+										<li><a href="#" class="delete">Удалить</a></li>
+									</ul>
+									<div class="clear"></div>
+								</li>
+								
+								<li>
+									<div class="articles-header">
+										<div class="title">Adobe Audition - решение проблем</div>
+										<div class="date">Добавлена: 2 недели назад</div>
+										<div class="clear"></div>
+									</div>
+									<div class="articles-body">
+										<p>
+											На современном этапе развития техники, компьютерная студия на базе РС, превосходит по своим возможностям профессиональные студии Лондона и Лос-Анжелеса пятнадцатилетней давности. <br/>
+											Производства многоканального и hi-res-звука (аудио высокого разрешения), продуманной акустикой контрольных помещений, сложной мониторинговой системой и наличием специалистов высокого класса.<br />
+											Но, согласитесь, сейчас простой аудио-компакт диск (CDDA) является основным пользовательским стандартом и уйдет он очень не скоро. А это 16 бит, 44.1 КГц… 
+										</p>
+									</div>
+									<ul class="articles-buttons">
+										<li><a href="#" class="edit">Редактировать</a></li>
+										<li><a href="#" class="delete">Удалить</a></li>
+									</ul>
+									<div class="clear"></div>
+								</li>
+								
+								<li>
+									<div class="articles-header">
+										<div class="title">Основы звукозаписи</div>
+										<div class="date">Добавлена: 3 недели назад</div>
+										<div class="clear"></div>
+									</div>
+									<div class="articles-body">
+										<p>
+											На современном этапе развития техники, компьютерная студия на базе РС, превосходит по своим возможностям профессиональные студии Лондона и Лос-Анжелеса пятнадцатилетней давности. <br/>
+											Производства многоканального и hi-res-звука (аудио высокого разрешения), продуманной акустикой контрольных помещений, сложной мониторинговой системой и наличием специалистов высокого класса.<br />
+											Но, согласитесь, сейчас простой аудио-компакт диск (CDDA) является основным пользовательским стандартом и уйдет он очень не скоро. А это 16 бит, 44.1 КГц… 
+										</p>
+									</div>
+									<ul class="articles-buttons">
+										<li><a href="#" class="edit">Редактировать</a></li>
+										<li><a href="#" class="delete">Удалить</a></li>
+									</ul>
+									<div class="clear"></div>
+								</li>
+								
+								<li>
+									<div class="articles-header">
+										<div class="title">Adobe Audition - решение проблем</div>
+										<div class="date">Добавлена: 2 недели назад</div>
+										<div class="clear"></div>
+									</div>
+									<div class="articles-body">
+										<p>
+											На современном этапе развития техники, компьютерная студия на базе РС, превосходит по своим возможностям профессиональные студии Лондона и Лос-Анжелеса пятнадцатилетней давности. <br/>
+											Производства многоканального и hi-res-звука (аудио высокого разрешения), продуманной акустикой контрольных помещений, сложной мониторинговой системой и наличием специалистов высокого класса.<br />
+											Но, согласитесь, сейчас простой аудио-компакт диск (CDDA) является основным пользовательским стандартом и уйдет он очень не скоро. А это 16 бит, 44.1 КГц… 
+										</p>
+									</div>
+									<ul class="articles-buttons">
+										<li><a href="#" class="edit">Редактировать</a></li>
+										<li><a href="#" class="delete">Удалить</a></li>
+									</ul>
+									<div class="clear"></div>
+								</li>
+								
+								<li>
+									<div class="articles-header">
+										<div class="title">Основы звукозаписи</div>
+										<div class="date">Добавлена: 3 недели назад</div>
+										<div class="clear"></div>
+									</div>
+									<div class="articles-body">
+										<p>
+											На современном этапе развития техники, компьютерная студия на базе РС, превосходит по своим возможностям профессиональные студии Лондона и Лос-Анжелеса пятнадцатилетней давности. <br/>
+											Производства многоканального и hi-res-звука (аудио высокого разрешения), продуманной акустикой контрольных помещений, сложной мониторинговой системой и наличием специалистов высокого класса.<br />
+											Но, согласитесь, сейчас простой аудио-компакт диск (CDDA) является основным пользовательским стандартом и уйдет он очень не скоро. А это 16 бит, 44.1 КГц… 
+										</p>
+									</div>
+									<ul class="articles-buttons">
+										<li><a href="#" class="edit">Редактировать</a></li>
+										<li><a href="#" class="delete">Удалить</a></li>
+									</ul>
+									<div class="clear"></div>
+								</li>
+							</ul>
+							<ul class="pager">
+								<li><a href="#">« Предыдущая страница</a></li>
+								<li><a href="#">1</a></li>
+								<li><a href="#">...</a></li>
+								<li class="active"><a href="#">4</a></li>
+								<li><a href="#">5</a></li>
+								<li><a href="#">6</a></li>
+								<li><a href="#">Следующая страница »</a></li>
+							</ul>
+						</div>
+					</div>
+                </div>
+                
+                <div class="right_side">
+                    <div class="p_filter_block">
+                        <fieldset>
+                            <legend>Членам ассоциации:</legend>
+                            <div class="fieldset_body">
+                                <ul class="list_with_icon">
+                                    <li class="copy"><a href="#">Написать статью</a></li>
+                                    <li class="attention"><a href="#">Добавить новость</a></li>
+                                    <li class="ticket"><a href="#">Сообщить о скидках</a></li>
+                                    <li class="cash"><a href="#">Куплю-продам</a></li>
+                                    <li class="users"><a href="#">Обсуждения</a></li>
+                                </ul>
+                            </div>
+                        </fieldset>
+                        
+                        <fieldset>
+                            <div class="fieldset_body">
+                                <p class="align_center">Вы так же можете присоединиться к ассоциации студий звукозаписи</p>
+                                <input type="submit" class="ui_button width_full dark" value="Присоединится" style="font-size: 16px;" />
+                            </div>
+                        </fieldset>
+                    </div>
+                    
+                    <div class="p_adv_block">
+                        <h3>Реклама</h3>
+                        <div class="align_center m_b_10"><img src="img/rec_1.png" /></div>
+                        <div class="align_center"><img src="img/rec_1.png" /></div>
+                    </div>
+                    
+                    <div class="p_articles_block">
+                        <div class="list_box">
+                            <h3>Статьи</h3>
+                            <ul>
+                                <li><a href="#">Название статьи Lorem Ipsum</a></li>
+                                <li><a href="#">This is Photoshop's Lorem Ipsum</a></li>
+                                <li><a href="#">Version of Lorem Ipsum</a></li>
+                                <li><a href="#">Proin gravida nibh vel velit auctor</a></li>
+                                <li><a href="#">Aiquet. Aenean sollicitudin</a></li>
+                                <li><a href="#">Lorem quis bibendum auctor</a></li>
+                                <li><a href="#">Risi elit consequat ipsum</a></li>
+                                <li><a href="#">Nec sagittis sem nibh id elit. </a></li>
+                                <li><a href="#">Duis sed odio sit amet nibh</a></li>
+                            </ul>
+                        </div>
+                        
+                        <div class="list_box">
+                            <h3>Последние новости</h3>
+                            <ul>
+                                <li><a href="#">Название статьи Lorem Ipsum</a></li>
+                                <li><a href="#">This is Photoshop's Lorem Ipsum</a></li>
+                                <li><a href="#">Version of Lorem Ipsum</a></li>
+                                <li><a href="#">Proin gravida nibh vel velit auctor</a></li>
+                                <li><a href="#">Aiquet. Aenean sollicitudin</a></li>
+                                <li><a href="#">Lorem quis bibendum auctor</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--CONTENT_END-->
+        
+        <!--FOOTER_START-->
+        <footer>
+            <div class="footer_block width_wrap clearfix">
+                <div class="copyright">Все права защищены.</div>
+                <ul class="menu_bottom">
+                    <li><a href="#">Обратная связь</a></li>
+                    <li><a href="#">Контакты</a></li>
+                    <li><a href="#">О проекте</a></li>
+                </ul>
+                <div class="footer_contatct">По всем вопросам: <strong>8 (800) 890-90-87</strong></div>
+            </div>
+        </footer>
+        <!--FOOTER_END-->
+    </div>
+</body>
+</html>
