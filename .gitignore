@@ -6,4 +6,3 @@ tinymce/
 tmp/
 uploads/
 application/logs
-application/config/database.php

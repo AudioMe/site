@@ -21,7 +21,7 @@ return array
 			'hostname'   => 'localhost',
 			'database'   => 'audiome',
 			'username'   => 'root',
-			'password'   => 'fhxjihsnumfq',
+			'password'   => 'hEY69INAN',
 			'persistent' => FALSE,
 		),
 		'table_prefix' => '',
