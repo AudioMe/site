@@ -5,3 +5,4 @@ plugins/
 tinymce/
 tmp/
 uploads/
+application/logs

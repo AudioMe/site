@@ -8,7 +8,7 @@
 $config = new Model_Configuration();
 ?>
 
-<?php	
+<?php
 if ($next_id) {
 ?>
     <script>
@@ -16,7 +16,7 @@ if ($next_id) {
         $('.buttonscC').append('<a href="/studio/view/' + <?php echo $next_id;?> + '" class="ui_button" id="nextStudio" style="">Следующая<br/> студия</a>');
     });
     </script>
-<?php	
+<?php
 }
 ?>
 
@@ -40,7 +40,7 @@ if (isset($studio)) {
                             <img class="b_round wh170" src="/images/img_cap.png"/>
                             <?php } ?>
                         </div>
-                        
+
                         <div class="center">
                             <h3 class="cherry"><?php echo $studio->name;?></h3>
                             <ul>
@@ -49,10 +49,10 @@ if (isset($studio)) {
                                 <?php if(!empty($metro)) {?>
                                 <li class="metro"><?php echo $metro;?></li>
                                 <?php } ?>
-                                <li class="micro"><?php echo $config->studio_class[$studio->class];?></li>
+                                <!--<li class="micro"><?php echo $config->studio_class[$studio->class];?></li>-->
                                 <li class="phone"><?php echo $studio->phone;?></li>
                             </ul>
-                            
+
                             <div class="rating_block">
                             <?php
                             $cook = Cookie::get('audio_ration_' . $studio_id, '-1');
@@ -104,7 +104,7 @@ if (isset($studio)) {
                             <div id="YMapsID" class="studio_map map_border" style="width:350px;height:200px"></div>
                         </div>
                     </div>
-                    
+
                     <div class="p_param_block clearfix">
                         <div class="left">
                             <ul class="param_list">
@@ -159,7 +159,7 @@ if (isset($studio)) {
                             </div>
                         </div>
                     </div>
-                    
+
                     <?php if ($musics->count() > 0) {?>
                     <div class="p_example_block">
                         <h3 class="p_l_20">Примеры работ студии</h3>
@@ -181,9 +181,9 @@ if (isset($studio)) {
                         ?>
                     </div>
                     <?php } ?>
-                    <?php if ($photos->count() > 0) { ?>                    
+                    <?php if ($photos->count() > 0) { ?>
 
-                        
+
                    <div>
                         <div class="horizontal2">
                             <div class="horizontal">
@@ -237,15 +237,15 @@ if (isset($studio)) {
 
     function print_comment($comment, $other_comments, $left)
     {
-        $com_image = "/images/no_photo.gif";        
+        $com_image = "/images/no_photo.gif";
         if (!empty($comment->add_user_id)){
             $tstudios = new Model_Studios();
             $t_st = $tstudios->where('user_id','=',$comment->add_user_id)->find();
-            
+
             if (isset($t_st->photo)){
                 $com_image = $t_st->photo;
             }
-            
+
         }
         ?>
         <ul class="root_comment comments_list" style="margin-left: <?php echo $left; ?>px;">

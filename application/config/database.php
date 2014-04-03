@@ -19,9 +19,9 @@ return array
 			 * Ports and sockets may be appended to the hostname.
 			 */
 			'hostname'   => 'localhost',
-			'database'   => 'audiome2',
-			'username'   => 'user-audiome',
-			'password'   => 'Cmj6OjDD',
+			'database'   => 'audiome',
+			'username'   => 'root',
+			'password'   => 'root',
 			'persistent' => FALSE,
 		),
 		'table_prefix' => '',
@@ -41,7 +41,7 @@ return array
 			 */
 			'dsn'        => 'mysql:host=localhost;dbname=kohana',
 			'username'   => 'root',
-			'password'   => 'r00tdb',
+			'password'   => 'root',
 			'persistent' => FALSE,
 		),
 		/**
