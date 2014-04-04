@@ -116,7 +116,7 @@ if ($msg != -1) {
                                 </div>
 
                                 <div class="clearfix m_b_10">
-                                    <div class="desc"><label>Муз. оборудование:</label></div>
+                                    <div class="desc"><label>Оборудование:</label></div>
                                     <div class="value"><textarea id="in_musics" name="in_musics" class="ui_textarea"></textarea></div>
                                 </div>
 

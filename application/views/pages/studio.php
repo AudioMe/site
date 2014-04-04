@@ -110,7 +110,7 @@ if (isset($studio)) {
                             <ul class="param_list">
                                 <li>
                                     <div class="wrap">
-                                        <h4>Музыкальное оборудование:</h4>
+                                        <h4>Оборудование:</h4>
                                         <div class="param_desc"><?php echo nl2br($studio->music_tools);?></div>
 </div>
                                 </li>
