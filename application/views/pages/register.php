@@ -49,12 +49,12 @@ if ($msg != -1) {
                                     <div class="desc"><label for="phone">Телефон:</label></div>
                                     <div class="value"><input type="text" id="in_phone" autocomplete="off" name="phone" placeholder="+7(495) 123 45 67" class="ui_input" /></div>
                                 </div>
-                                
+
                                 <div class="clearfix m_b_10">
                                     <div class="desc"><label>E-mail:</label></div>
                                     <div class="value"><input type="text" id="in_email" name="email" class="ui_input" /></div>
                                 </div>
-                                
+
                                 <div class="clearfix m_b_10">
                                     <div class="desc"><label>Название студии:</label></div>
                                     <div class="value"><input type="text" id="in_name" name="name" class="ui_input" /></div>
@@ -63,27 +63,27 @@ if ($msg != -1) {
                                     <div class="desc"><label>Время работы:</label></div>
                                     <div class="value"><input type="text" id="in_time" name="time" class="ui_input" /></div>
                                 </div>
-                                
+
                                 <div class="clearfix m_b_10">
                                     <div class="desc"><label>Сайт:</label></div>
                                     <div class="value"><input type="text" name="url" id="site_url" placeholder="http://site.ru" class="ui_input" /></div>
                                 </div>
-                                
+
                                 <div class="clearfix m_b_10">
                                     <div class="desc"><label>Площадь:</label></div>
                                     <div class="value"><input type="text" maxlength="3" id="in_area" name="area"class="ui_input register_spinner" /></div>
                                 </div>
-                                
+
                                 <div class="clearfix m_b_10">
                                     <div class="desc"><label>Цены от:</label></div>
                                     <div class="value"><input id="in_price" name="price" type="text" class="ui_input" /></div>
                                 </div>
-                                
+
                                 <div class="clearfix m_b_10">
                                     <div class="desc"><label>Контактное лицо:</label></div>
                                     <div class="value"><input type="text" id="in_fio" name="fio" class="ui_input" /></div>
                                 </div>
-                                
+
 
                                 <div class="clearfix m_b_10">
                                     <div class="desc"><label>Аватар:</label></div>
@@ -92,7 +92,7 @@ if ($msg != -1) {
                                                accept="gif|jpg|png|jpeg|bmp" maxlength="1"/>
                                     </div>
                                 </div>
-                                
+
                                 <div class="clearfix m_b_10">
                                     <div class="desc"><label>Фотография:</label></div>
                                     <div class="value">
@@ -101,7 +101,7 @@ if ($msg != -1) {
                                     </div>
                                 </div>
                             </div>
-                            
+
                             <div class="right">
                                 <div class="clearfix m_b_10">
                                     <div class="desc"><label>Количествово каналов одновременной записи:</label></div>
@@ -109,22 +109,22 @@ if ($msg != -1) {
                                         <input type="text" maxlength="3" class="register_spinner ui_input" type="text" id="count_record" name="count_record">
                                     </div>
                                 </div>
-                                
+
                                 <div class="clearfix m_b_10">
                                     <div class="desc"><label>Парк микрофонов:</label></div>
                                     <div class="value"><textarea id="in_park" name="in_park" class="ui_textarea"></textarea></div>
                                 </div>
-                                
+
                                 <div class="clearfix m_b_10">
                                     <div class="desc"><label>Муз. оборудование:</label></div>
                                     <div class="value"><textarea id="in_musics" name="in_musics" class="ui_textarea"></textarea></div>
                                 </div>
-                                
+
                                 <div class="clearfix m_b_10">
                                     <div class="desc"><label>Подробно о студии:</label></div>
                                     <div class="value"><textarea id="in_about" name="in_about" class="ui_textarea"></textarea></div>
                                 </div>
-                                
+
                                 <div class="clearfix p_t_20">
                                     <div class="desc"><label>&nbsp;</label></div>
                                     <div class="value">
@@ -138,7 +138,7 @@ if ($msg != -1) {
                                         <input type="submit" name="sbmbuttonregister" value="Отправить на модерацию" class="ui_button w_100" />
                                     </div>
                                 </div>
-                                
+
                             </div>
                         </form>
                     </div>
@@ -157,7 +157,7 @@ if ($msg != -1) {
         var msg = jQuery('#register_form2').serialize();
         jQuery('#formreg2').val(msg);
         var temp_z = 0;
-        // ltoc 
+        // ltoc
         if (!$('#toc:checked').length) {
             $('#ltoc').css('background', '#ffc0cb');
             console.log('h1');
@@ -169,12 +169,12 @@ if ($msg != -1) {
         temp_z += valid_register_form('region_id');
         temp_z += valid_register_form('city_id');
         temp_z += valid_register_form('in_adres');
-        temp_z += valid_register_form('in_phone');
+        //temp_z += valid_register_form('in_phone');
         // temp_z += valid_register_form('site_url');
-        temp_z += valid_register_form('in_area');
+        //temp_z += valid_register_form('in_area');
         temp_z += valid_register_form('count_record');
         // temp_z += valid_register_form('in_park');
-        temp_z += valid_register_form('in_time');
+        //temp_z += valid_register_form('in_time');
         temp_z += valid_register_form('in_name');
         temp_z += valid_register_form('in_email');
         temp_z += valid_register_form('in_price');
@@ -269,7 +269,7 @@ if ($msg != -1) {
             }
             $('#city_id').attr('disabled', true);
             $('#city_id').html('<option>загрузка...</option>');
-            var url = '/ajax/getCityesByRegion/';      
+            var url = '/ajax/getCityesByRegion/';
             $.get(
                 url,
                 "region_id=" + region_id,
