@@ -17,7 +17,6 @@
                     <a href="/studio/view/<?php echo $stud['user_id']; ?>"><h3><?php echo $stud['name']; ?></h3></a>
                     <div class="clearfix">
                         <dl class="studio_prop_list">
-                            <dt class="micro">Категория:</dt><dd><?php echo $stud['extra']['studio_type']; ?></dd>
                             <dt class="point">Город:</dt><dd><?php echo $stud['extra']['city'] ?></dd>
                             <dt class="map">Адресс:</dt><dd><?php echo  $stud['address']; ?></dd>
                             <?php if(!empty($stud['metro'])) {?>
@@ -48,24 +47,24 @@
 </div>
 <script type="text/javascript">
     var stack_i = 1;
-    function preloadNextStack() {        
+    function preloadNextStack() {
         $.get('/catalog/next/' + stack_i, false,function(data,status){
             if (data.reset_i) {
                 stack_i = -1;
             }
             loadNextStack(data.studios);
         }, 'json');
-        
+
     }
-    function loadNextStack(data) {      
+    function loadNextStack(data) {
         if (data.length) {
             stack_i++;
-            var id = 'studios';        
+            var id = 'studios';
             var next_id = parseInt($('.studio_catalog').length + 1);
             for (var i in data) {
-                var item_id = 'studio_catalog_' + next_id;       
+                var item_id = 'studio_catalog_' + next_id;
                 var item = generateItem(item_id, data[i]);
-                $('#' + id).append(item);                                
+                $('#' + id).append(item);
                 next_id++;
             }
             drawRatings();
@@ -118,7 +117,7 @@
         });
     }
     function initScrollTrack() {
-        jQuery('#menu_catalog').addClass("menu_active");        
+        jQuery('#menu_catalog').addClass("menu_active");
         $('.content_wrap').waypoint(function(direction) {
             preloadNextStack();
         }, {
