@@ -35,7 +35,7 @@ table {border-collapse: collapse; border-spacing: 0;}
     font-family: calibri;
     font-size: 14px;
     line-height: 18px;
-    color: #494e55; 
+    color: #494e55;
 }
 /* = Fonts
 -------------------------------------------------------------- */
@@ -618,7 +618,7 @@ header {
 .p_info_block ul li.micro:before { background: url('/images/sprite.png') no-repeat 0px -391px; }
 .p_info_block ul li.map:before { background: url('/images/sprite.png') no-repeat -16px -391px; }
 .p_info_block ul li.point:before { background: url('/images/sprite.png') no-repeat -32px -391px; }
-.p_info_block ul li.metro:before { background: url('/images/metro.png') no-repeat; } 
+.p_info_block ul li.metro:before { background: url('/images/metro.png') no-repeat; }
 .p_info_block ul li.cost:before { background: url('/images/sprite.png') no-repeat -64px -391px; }
 .p_info_block ul li.world:before { background: url('/images/sprite.png') no-repeat -80px -391px; }
 .p_info_block ul li.phone:before { background: url('/images/sprite.png') no-repeat -96px -391px; }
@@ -1344,7 +1344,7 @@ a.read_all {
 .studio_prop_list dt.micro:before { background: url('/images/sprite.png') no-repeat 0px -391px; }
 .studio_prop_list dt.map:before { background: url('/images/sprite.png') no-repeat -16px -391px; }
 .studio_prop_list dt.point:before { background: url('/images/sprite.png') no-repeat -32px -391px; }
-.studio_prop_list dt.metro:before { background: url('/images/metro.png') no-repeat; } 
+.studio_prop_list dt.metro:before { background: url('/images/metro.png') no-repeat; }
 .studio_prop_list dt.data:before { background: url('/images/sprite.png') no-repeat -64px -391px; }
 .studio_prop_list dd {
     line-height: 16px;
@@ -1800,7 +1800,7 @@ div.tab3 {
 }
 
 a#move_up {
-    background: none repeat scroll 0 0 #CCCCCC;
+    background: none repeat scroll 0 0 rgba(0, 0, 0, 0.3);
     box-shadow: 0 1px 2px #666666;
     color: #FFFFFF;
     display: none;
@@ -1898,7 +1898,7 @@ a#prev:hover{
     vertical-align:top;
 }
 .pt_1 {
-    padding-top:1px; 
+    padding-top:1px;
 }
 .pink {
     color:#f50073;
@@ -2079,7 +2079,7 @@ img.wh140 {
 }
 
 #nextStudio {
-    background: none repeat scroll 0 0 #CCCCCC;
+    background: none repeat scroll 0 0 rgba(0, 0, 0, 0.3);
     box-shadow: 0 1px 2px #666666;
     color: #FFFFFF;
     max-width: 172px;
@@ -2657,7 +2657,7 @@ img.wh140 {
 	font-size: 0;
 	height: 12px;
 	line-height: 12px;
-	
+
 }
 #articles-all .articles-buttons li {
 	display: inline-block;
